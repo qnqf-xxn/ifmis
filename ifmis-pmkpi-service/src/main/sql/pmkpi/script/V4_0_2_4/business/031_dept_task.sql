@@ -1,0 +1,6 @@
+begin
+--bug:监控任务布置 -- 部门任务 业务科室字段数据源不翻译
+delete from bus_t_diccolumn where TABLECODE ='PERF_T_DEPTPERFDECLARE' and COLUMNCODE ='FININTORGGUID';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, '099003', null, '1', 'FININTORGGUID', '1', '2016', '87', 'bf9e23c3c6db4827a7521ce73977bce6', 'FININTORGGUID', 'PERF_T_DEPTPERFDECLARE', '处室', 'S', '40', null, 1, 1, null, sysdate);
+

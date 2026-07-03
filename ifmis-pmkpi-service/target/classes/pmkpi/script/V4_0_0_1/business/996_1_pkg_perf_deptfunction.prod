@@ -1,0 +1,7 @@
+create or replace package pkg_perf_deptfunction is
+
+  TYPE CS IS REF CURSOR;
+  --校验项目指标     
+  procedure   checkDeptFunction(o_cs out CS);
+  
+end pkg_perf_deptfunction;

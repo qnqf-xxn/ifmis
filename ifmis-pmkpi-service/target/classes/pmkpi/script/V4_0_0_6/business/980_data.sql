@@ -1,0 +1,386 @@
+begin
+
+delete from p#busfw_t_dcworkflowplan t where t.guid in('BBC128805C506A0AE053B11FA8C04258','B9A12B5D94761164E053B11FA8C0460E',
+'B7279B405D487EB4E0530100007FD738','BBC491112EDB3877E053B11FA8C041AA','B9C7D80EC0188933E053B11FA8C0A5D6','BC1379AA6FE2BE4AE053480A050AB64C',
+'80E9F449FD83DFE96FBD178C7E848DFE');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('BBC128805C506A0AE053B11FA8C04258', 'PERF_DEPTADJUST', 'PERF_T_ADJUST', '部门绩效目标调整', '1', '2016', '87', null, null, null, null, '20200829172956946', 'B876713347C31372A297A0234F30FFB8');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('B9A12B5D94761164E053B11FA8C0460E', 'PERF_PROADJUST', 'PERF_T_ADJUST', '项目绩效目标调整', '1', '2016', '87', null, null, null, null, '20200829172956946', 'B876713347C31372A297A0234F30FFB8');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('B7279B405D487EB4E0530100007FD738', 'PERF_PROTRACETASK', 'PERF_T_PROMONITOR', '项目绩效监控', '1', '2016', '87', null, null, null, null, '20200826143402197', 'B876713347C31372A297A0234F30FFB8');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('BBC491112EDB3877E053B11FA8C041AA', 'PERF_DEPTTRACETASK', 'PERF_T_PROMONITOR', '部门绩效监控', '1', '2016', '87', null, null, null, null, '20200826143402197', 'B876713347C31372A297A0234F30FFB8');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('B9C7D80EC0188933E053B11FA8C0A5D6', 'PERF_T_REVIEW', 'PERF_T_REVIEW', '绩效项目评审_项目', '1', '2016', '87', null, null, null, null, '20200826143402197', 'B876713347C31372A297A0234F30FFB8');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('BC1379AA6FE2BE4AE053480A050AB64C', 'PERF_T_REVIEW_DEPT', 'PERF_T_REVIEW', '绩效项目评审_部门', '1', '2016', '87', null, null, null, null, '20200826143402197', 'B876713347C31372A297A0234F30FFB8');
+
+insert into busfw_t_dcworkflowplan (GUID, CODE, TABLECODE, NAME, STATUS, YEAR, PROVINCE, VERSION, DBVERSION, REMARK, CREATER, CREATETIME, TYPE)
+values ('80E9F449FD83DFE96FBD178C7E848DFE', 'PERF_T_PROJREVIEW', 'PERF_T_REVIEW', '绩效项目评估', '1', '2016', '87', null, null, null, null, '20210127104438376', 'B876713347C31372A297A0234F30FFB8');
+
+
+--项目监控预算执行
+delete from perf_t_fundtemp t where t.year='2016' and t.province='87';
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('B73C570FE6D745C3E0530100007F63AC', 'totalamt', '预计全年资金结余', null, null, null, '20160826165404066', 2016, '87', null, null, '合计', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('B73C570FE6D845C3E0530100007F63AC', 'amt1', '预计全年资金结余', null, null, null, '20160826165404069', 2016, '87', null, null, '小计', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('B73C570FE6D945C3E0530100007F63AC', 'amt2', '预计全年资金结余', null, null, null, '20160826165404071', 2016, '87', null, null, '中央级', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('7AB7D63F956A49D39ED0C8A2DCE7F6CD', 'amt3', '预计全年资金结余', null, null, null, '20160826165404052', 2016, '87', null, null, '省级', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('063156D6D71A4144A8DFCF52076F15DD', 'amt4', '预计全年资金结余', null, null, null, '20160826165404055', 2016, '87', null, null, '地市级', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('593FBA5A75084ED29BF7347EC8098540', 'amt5', '预计全年资金结余', null, null, null, '20160826165404058', 2016, '87', null, null, '小计', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('399E138B58E44874905CD24EC938C024', 'amt6', '预计全年资金结余', null, null, null, '20160826165404060', 2016, '87', null, null, '单位自筹', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('0A4C132AE5B44BE0B488106484EE5A92', 'amt7', '预计全年资金结余', null, null, null, '20160826165404063', 2016, '87', null, null, '银行贷款', 5, '1');
+
+insert into perf_t_fundtemp (GUID, CODE, NAME, QUERYSQL, SUMCOL, UPDATETIME, CREATETIME, YEAR, PROVINCE, AMT, FUNDTYPE, FUNDNAME, ORDERNUM, ISEDIT)
+values ('BC9A94862FEF4D4BA82CD37D3B5E9449', 'amt8', '预计全年资金结余', null, null, null, '20160826165404066', 2016, '87', null, null, '社会资金', 5, '1');
+
+--审核定义菜单
+delete from perf_t_auditdefinemenu t where t.guid in('B7279B405D6C7EB4E0530100007FD738','B74D29A870344446E0530100007F1A5A','B760B51D6FA06B86E0530100007F27AE','B760B51D6F9E6B86E0530100007F27AE');
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B7279B405D6C7EB4E0530100007FD738', '007003001', '基本信息', null, 'B5A085C812D00888E0535164A8C0487E', 3, 1, 1, 1, '1', '20201230042115', null, '87', 2020);
+
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B74D29A870344446E0530100007F1A5A', '007003002', '预算执行情况', null, 'B5A085C812D00888E0535164A8C0487E', 3, 1, 2, 1, '1', '20201230042115', null, '87', 2020);
+
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B760B51D6F9E6B86E0530100007F27AE', '007003004', '监控分析', null, 'B5A085C812D00888E0535164A8C0487E', 3, 1, 4, 1, '1', '20201230042116', null, '87', 2020);
+
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B760B51D6FA06B86E0530100007F27AE', '007003003', '绩效目标完成情况', null, 'B5A085C812D00888E0535164A8C0487E', 3, 1, 3, 1, '1', '20201230042116', null, '87', 2020);
+
+--预警规则
+delete from perf_t_warnset t where 1 = 1;
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('BA5BCAA67FF70D8BE053B11FA8C07179', 'depttracewarn', '合肥部门监控预警', 'depttracewarn', 'select case when a.value1 = ''yes'' and a.value2=''1'' then ''green'' when a.value1 = ''yes'' and a.value2=''0'' then ''yellow'' when a.value1 = ''no'' and a.value2=''1'' then ''red'' when a.value1 = ''no'' and a.value2=''0'' then ''red'' end value from (select ''#isexpfunc# '' value1, ''#isperfgoal#'' value2 from dual) a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('434BA1A7F44A47DAB115B85F9E40DED1', 'positiveindex01', '正向指标', 'positiveindex', 'select case when value < 60 then ''red'' when 60 <= value and value < 80 then ''yellow'' when 80 <= value and value < 120 then ''green'' when value > =120 then ''blue'' end value from (select #indexval#/(#targetvalue#/12*#month#)*100 value from dual) a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('88A1F226D98E4ACD924B7F59B65620A1', 'reverseindex02', '反向指标小于等于', 'reverseindex', 'select case when value<=#targetvalue# then ''green'' else ''red'' end value from (select #indexval# value from dual) a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('563FD5339CE04035BB2BA9F120F2241C', 'qualitativeindex03', '定性指标', 'qualitativeindex', 'select case when value=''达成目标'' then ''green'' when value=''部分达成目标并具有一定效果'' then ''yellow'' when value=''未达成目标且效果较差'' then ''red'' end value from (select ''#indexval# ''value from dual) a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('DB8540E3EF9A46E0B82BC415F11CD0AD', 'bgttracewarn', '预算执行预警', 'bgttracewarn', 'select case when value < 60 then ''red'' when 60 <= value and value < 80 then ''yellow'' when 80 <= value then ''green'' end value from (select (select replace(bgtget,''%'','''')bgtget from v_perf_fund_project where  proguid=''#proguid#'')/((#month#/12)*100)*100 value from dual) a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('9C45001EBE3446649D719D6569905860', 'goalwarn', '目标执行预警', 'goalwarn', 'select case when instr(WM_CONCAT(warn), ''red'') > 0 then ''red'' when instr(WM_CONCAT(warn), ''yellow'') > 0 then ''yellow'' when instr(WM_CONCAT(warn), ''green'') > 0 then ''green'' when instr(WM_CONCAT(warn), ''blue'') > 0 then  ''blue'' end value from (select warn from v_perf_t_proindextrace t group by mainguid, warn having t.mainguid = ''#mainguid#'') a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('2EC5F43B3EAE4F9787798DF770B3C97B', 'reverseindex02', '反向指标小于', 'reverselessindex', 'select case when value<#targetvalue# then ''green'' else ''red'' end value from (select #indexval# value from dual) a', null, null, '2016', '87');
+
+insert into perf_t_warnset (GUID, CODE, NAME, TYPE, WARNSQL, UPDATETIME, CREATETIME, YEAR, PROVINCE)
+values ('BA6668DFDFB61167E053B11FA8C08965', 'protracewarn', '合肥部门监控预警', 'protracewarn', 'select case when a.value1 = ''yes'' and a.value2=''1'' then ''green'' when a.value1 = ''yes'' and a.value2=''0'' then ''yellow'' when a.value1 = ''no'' and a.value2=''1'' then ''red'' when a.value1 = ''no'' and a.value2=''0'' then ''red'' end value from (select ''#isexpfunc# '' value1, ''#isperfgoal#'' value2 from dual) a', null, null, '2016', '87');
+
+--绩效枚举表
+DELETE FROM perf_enum t where t.elementcode in ('INSTITUTIONAL','CREDITNO','SCOPEBUSINESS','POLITICAL',
+'NATION','EDUCATION','PROFESSIONAL','WORKEXPERIE','CATEGORY','TYPE',
+'RELEASESTATUS','PROBLEMTYPE','ISIMPORTANT','FILETYPE');
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('F68C9854B20144379F3E8F21B4A8B21E', '003', 'INSTITUTIONAL', '造价咨询服务机构', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('90A2B74BA24B42809DF10DECB3E322B3', '004', 'INSTITUTIONAL', '税务师事务所', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '5');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('CDFD56C2EC614E9E96F72682542B2127', '005', 'INSTITUTIONAL', '咨询公司', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '6');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('454C55241EB54FF984E14075251A946C', '001', 'CREDITNO', '优秀', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('0F840EEB43AD4C70BF42154A5DF97B66', '002', 'CREDITNO', '良好', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BCCB4739355C4399A7FAC55EC013E788', '003', 'CREDITNO', '中等', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('CFEA7B98EDF04170A6BE32D6D69ACD26', '004', 'CREDITNO', '及格', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('E47801A345CF41AB8B0E103B422D9264', '005', 'CREDITNO', '较差', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '5');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('DCCFFB25A8A444148DEE1900978945C5', '001', 'SCOPEBUSINESS', '绩效类', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('83364EFB30434D459ED9D8FCC41AA3D5', '002', 'SCOPEBUSINESS', '管理类', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('DE1DBC1B54554E42BFB1A3D1DEC743CF', '003', 'SCOPEBUSINESS', '行业类', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('2D6FD57584BA4E26B7CFE5A7DE196F00', '004', 'SCOPEBUSINESS', '其他', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('93D7FA394DA140859E975DA1BCBEB235', '001', 'POLITICAL', '党员', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('1BFBE6681ED949DC8A173D9110A08130', '002', 'POLITICAL', '团员', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('73C28C04332D4DF5BEE2CC007C69741B', '003', 'POLITICAL', '无党派人士', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('669A9F8CA45445D3AD0C6A5F28B49B21', '001', 'NATION', '汉族', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('C79007F6CD934019A283590D22F853DA', '002', 'NATION', '少数民族', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('5836FAA2593241EB94F6D2308C168ACF', '001', 'EDUCATION', '专科', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('E13011708E40482C80E776C8C31C8C62', '002', 'EDUCATION', '本科', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('6FC524EC9477400AA3D6FC7817C1F944', '003', 'EDUCATION', '硕士研究生', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('FC2FB150E88B4028B05C567991EEC872', '004', 'EDUCATION', '博士研究生', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('71B63BC4A8B34BA7A8752F1DB66258A1', '001', 'PROFESSIONAL', '正高', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('17C142099B9142A9A5980341BE834964', '002', 'PROFESSIONAL', '副高', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('53ACF5E10ABE49718BD548D78FE42885', '003', 'PROFESSIONAL', '中级', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('7812C1E1761A4F658371C056C008CF43', '004', 'PROFESSIONAL', '初级', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('80C871060D784D6281F26C93BE0AA6A6', '001', 'WORKEXPERIE', '1-5年', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('C4A44BFF628A4C85952EBAB84C694D1E', '002', 'WORKEXPERIE', '5-10年', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('1395AE9205D74569B874CB95C70D07BE', '003', 'WORKEXPERIE', '10年以上', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('96488B33EB3142BAA37A39F5353DC32F', '003', 'CATEGORY', '行业类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('702B530BE66F4EB5B49B0D4A76DD5181', '004', 'CATEGORY', '综合类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('35569506F70D4813AF40C326B785F06C', '005', 'CATEGORY', '会计类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '5');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('EC42C9C01D19497D8D9EA98502F8EE0C', '006', 'CATEGORY', '工程类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '6');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('0F61C6EE7B184549B08E506677C81120', '007', 'CATEGORY', '科技类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '7');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('222D0843C3C14B1CA17C76D4098D74B3', '008', 'CATEGORY', '农林类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '8');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('126AF1F433824302868CCA5FD13AFA97', '009', 'CATEGORY', '经济类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '9');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('46AE55AF3E704DF490C3B5D57ACF8AE5', '010', 'CATEGORY', '医药类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '10');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('28E19C3AB0FB4FDEB645ACB238AB66BF', '011', 'CATEGORY', '计算机类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '11');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('B91CC64F4C7F4B2AA9D9CE7AB4B482FF', '01', 'TYPE', '国家标准', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('676592298F5946B78695A8AED38C19B5', '02', 'TYPE', '地区标准', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('DB412237271F4548BDB2F384E2357163', '03', 'TYPE', '行业标准', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('15CDC672619746828E26F6F57BD40C79', '001', 'RELEASESTATUS', '未发布', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('DBC5613C0E304F258FF2EC884211C3C4', '002', 'RELEASESTATUS', '适用', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('AD39BE084A264D10A1196F2F8B2CB39A', '003', 'RELEASESTATUS', '过期', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('B78DB977F83A44C590651B935047235D', '001', 'PROBLEMTYPE', '基本题', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('2C7CD7A2B95149FD9058055F9AB481CD', '002', 'PROBLEMTYPE', '满意题', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('922E9C72C9E04828A8FF44570D6F642B', '003', 'PROBLEMTYPE', '多选题', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('E133D73899414AF8BEE640657E869458', '004', 'PROBLEMTYPE', '主观题', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '4');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('670438BED853433C9BDC4B63D6F6FBEE', '01', 'FILETYPE', '政策类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('FCDA3072B73C4B5C8526743420270579', '02', 'FILETYPE', '实施类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('75EADDFBECA046B2BC048058607DF7A9', '03', 'FILETYPE', '评价类', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('F8BE31AAD94C44478E700C8D8745C1F1', '1', 'ISIMPORTANT', '是', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '1');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('1D0D2AA57E4D42ADA019E18E1EE62ABB', '2', 'ISIMPORTANT', '否', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('367C29F45EFF43DB999FB7B49DBA4E7D', '001', 'INSTITUTIONAL', '会计事务所', '1', null, null, '2016', '87', null, 'pmkpi', 'ABD43F3A161F4F4B9095CEF30B150AB5', 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('2167C3F1E6654F30A13FA4D71424CD42', '002', 'INSTITUTIONAL', '资产评估事务所', '1', null, null, '2016', '87', null, 'pmkpi', 'ABD43F3A161F4F4B9095CEF30B150AB5', 2, 1, null, null, '3');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('AF74CDF76B44408EBD1AA4E8FB08FE8F', '001', 'CATEGORY', '绩效类', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '2');
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('ACFC2016E0CE409CA085EDB28A7054BF', '002', 'CATEGORY', '管理类', '1', null, null, '2016', '87', null, 'pmkpi', '0', 2, 1, null, null, '3');
+
+
+--审核定义菜单
+delete from perf_t_auditdefinemenu t where guid in('B9B1886CA7A600A1E053B11FA8C0DBA4','B9B1886CA7A700A1E053B11FA8C0DBA4','B9D8BDAA8B2FDDAEE053B11FA8C04101','B9D8BDAA8B30DDAEE053B11FA8C04101');
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9B1886CA7A600A1E053B11FA8C0DBA4', '008001001', '项目调整目标', null, 'B99067F619D5E2E2E053B11FA8C09FEF', 3, 1, 1, 1, '1', '20210129115939', null, '87', 2021);
+
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9B1886CA7A700A1E053B11FA8C0DBA4', '008001002', '项目调整指标', null, 'B99067F619D5E2E2E053B11FA8C09FEF', 3, 1, 2, 1, '1', '20210129115939', null, '87', 2021);
+
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9D8BDAA8B2FDDAEE053B11FA8C04101', '008001003', '部门调整目标', null, 'B99067F619D5E2E2E053B11FA8C09FEF', 3, 1, 3, 1, '1', '20210129115939', null, '87', 2021);
+
+insert into perf_t_auditdefinemenu (GUID, CODE, NAME, REMARK, SUPERID, LEVELNO, ISLEAF, ORDERNUM, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9D8BDAA8B30DDAEE053B11FA8C04101', '008001004', '部门调整指标', null, 'B99067F619D5E2E2E053B11FA8C09FEF', 3, 1, 4, 1, '1', '20210129115939', null, '87', 2021);
+
+
+--系统配置
+delete from perf_t_systemset t where t.guid in('B9DD48E616D24744E053B11FA8C01BA3','B9ED1F7009C72EC2E053B11FA8C00E35','B2172C9A2E795C4FE0539E1E380A5987','BC763EBA1671FC3BE053B11FA8C02423');
+insert into perf_t_systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('B9DD48E616D24744E053B11FA8C01BA3', 'isadjust', '绩效目标调整是否替换项目目标/指标', '1', '1替换2不替换', null, 10, 2016, '87', 1);
+
+insert into perf_t_systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('B9ED1F7009C72EC2E053B11FA8C00E35', 'adjusthide', '绩效目标调整填报页隐藏主键，填写组件id多个用逗号隔开', ',', '页签组件名称：tabpage', null, 11, 2016, '87', 1);
+
+insert into perf_t_systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('B2172C9A2E795C4FE0539E1E380A5987', 'PERFREVIEISFILEDIV', '第三方评审推送是否显示文件', '1', '0不显示1显示', null, 12, 2016, '87', 1);
+
+insert into Perf_t_Systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('BC763EBA1671FC3BE053B11FA8C02423', 'REVIEWSHOWTAB', '目标评审指标显示', '1', '1显示总和年度2显示年度', null, 13, 2016, '87', 1);
+
+
+--评审模板
+delete from PERF_T_REVIEWTEMP t ;
+insert into PERF_T_REVIEWTEMP (GUID, NAME, CONTEXT, ORDERNUM, AGENCYGUID, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9C7D80EC0258933E053B11FA8C0A5D6', '完整性审核', '①绩效目标内容是否完整，是否无缺项、错项；②绩效目标是否明确，内容是否具体，层次是否分明，表述是否准确；③绩效目标是否清晰，是否能够反映项目的主要内容，是否对项目预期产出和效果进行了充分、恰当的描述。', 1, null, 1, '20210126', null, '20210126', '87', 2016);
+
+insert into PERF_T_REVIEWTEMP (GUID, NAME, CONTEXT, ORDERNUM, AGENCYGUID, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9C7D80EC0268933E053B11FA8C0A5D6', '适当性审核', '①总体目标与部门职能、事业发展规划和工作计划是否密切相关；②是否选取了最能体现总体目标实现程度的关键指标并明确了具体指标值；③绩效指标是否细化、量化，便于监控和评价；难以量化的，定性描述是否充分、具体。', 2, null, 1, '20210126', null, '20210126', '87', 2016);
+
+insert into PERF_T_REVIEWTEMP (GUID, NAME, CONTEXT, ORDERNUM, AGENCYGUID, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9C7D80EC0278933E053B11FA8C0A5D6', '相关性审核', '①绩效目标与项目资金量是否匹配，在既定资金规模下，绩效目标是否过高或过低；或者要完成既定绩效目标，资金规模是否过大或过小；②绩效目标与相应的支出内容、范围、方向、效果等是否匹配', 3, null, 1, '20210126', null, '20210126', '87', 2016);
+
+insert into PERF_T_REVIEWTEMP (GUID, NAME, CONTEXT, ORDERNUM, AGENCYGUID, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9C7D80EC0288933E053B11FA8C0A5D6', '可行性审核', '①绩效目标是否经过充分论证和合理测算；②项目实施单位的组织实施能力和条件是否充分；③是否综合考虑成本效益，是否能确保绩效目标如期实现。', 4, null, 1, '20210126', null, '20210126', '87', 2016);
+
+insert into PERF_T_REVIEWTEMP (GUID, NAME, CONTEXT, ORDERNUM, AGENCYGUID, STATUS, CREATETIME, UPDATETIME, CREATER, PROVINCE, YEAR)
+values ('B9C7D80EC0298933E053B11FA8C0A5D6', '综合评定', null, 5, null, 1, '20210126', null, '20210126', '87', 2016);
+
+
+
+DELETE FROM PERF_ENUM t where t.elementcode='REVIEWOPINION';
+insert into PERF_ENUM (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('B9C7D80EC03A8933E053B11FA8C0A5D6', null, 'REVIEWOPINION', '优', '1', '20210118162733', '20210118162733', '2016', '87', 1, null, '#', 1, 1, null, null, '1');
+
+insert into PERF_ENUM (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('B9C7D80EC03B8933E053B11FA8C0A5D6', null, 'REVIEWOPINION', '良', '1', '20210118162733', '20210118162733', '2016', '87', 1, null, '#', 1, 1, null, null, '2');
+
+insert into PERF_ENUM (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('B9C7D80EC03C8933E053B11FA8C0A5D6', null, 'REVIEWOPINION', '中', '1', '20210118162733', '20210118162733', '2016', '87', 1, null, '#', 1, 1, null, null, '3');
+
+insert into PERF_ENUM (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('B9C7D80EC03D8933E053B11FA8C0A5D6', null, 'REVIEWOPINION', '差', '1', '20210118162733', '20210118162733', '2016', '87', 1, null, '#', 1, 1, null, null, '4');
+
+
+--数据权限
+DELETE FROM pmkpi_t_datarule t where t.guid in ('jgps','zjcj');
+insert into pmkpi_t_datarule (GUID, NAME, APPID, WHERESQL, CREATETIME, UPDATETIME, STATUS, ISPRIVATE, PROVINCE, YEAR)
+values ('zjcj', '专家创建', 'pub', ' guid in (SELECT t.MAINGUID FROM v_PERF_EXPERTREVIEW t  where t.MAINGUID is not null and t.expertguid= ''#curruser#'' )', '20180531172208210', '20180531172208210', 1, 0, '87', 0);
+
+insert into pmkpi_t_datarule (GUID, NAME, APPID, WHERESQL, CREATETIME, UPDATETIME, STATUS, ISPRIVATE, PROVINCE, YEAR)
+values ('jgps', '机构评审', 'pub', ' guid in (SELECT t.review FROM V_PERF_REVIEWINTERMEDIARY t  where t.intermediary = ''#curruser#'' )', '20180531172208210', '20180531172208210', 1, 0, '87', 0);
+
+
+
+DELETE FROM PERF_ENUM t where t.elementcode in('OLDOPINION', 'AUDITTYPE', 'ISAUDIT');
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BA6A7366C647CC81E053B11FA8C0FE04', '001', 'OLDOPINION', '同意', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 1);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BA6A7366C648CC81E053B11FA8C0FE04', '002', 'OLDOPINION', '不同意', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 2);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BA521F68FFD5C4E0E053B11FA8C0D063', '001', 'AUDITTYPE', '通过', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 1);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BA65A5E8BB555704E053B11FA8C096F3', '002', 'AUDITTYPE', '不通过', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 2);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BA65A5E8BB565704E053B11FA8C096F3', '003', 'AUDITTYPE', '需要第三方评估', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 3);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BC4E595CCE4511C7E053B11FA8C0AD52', '004', 'AUDITTYPE', '需要第三方评估(待审核)', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 4);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BC4E595CCE4611C7E053B11FA8C0AD52', '005', 'AUDITTYPE', '需要第三方评估(被退回)', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 5);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BCB5B04419F20765E053480A050ABEE5', '006', 'AUDITTYPE', '需要第三方评估(已确认)', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, '6', 6);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('1', '001', 'ISAUDIT', '是', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 1);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('0', '002', 'ISAUDIT', '否', '1', null, null, '2016', '87', 1, 'pmkpi', null, 1, 1, null, null, 2);
+
+
+delete from perf_t_systemset t where t.guid='BCC749CFE993EAF2E053480A050A3A41';
+insert into perf_t_systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('BCC749CFE993EAF2E053480A050A3A41', 'isProview', '是否项目库绩效目标评审', '1', '1是其他否', null, 10, 2016, '87', 1);
+
+delete from perf_t_datasource t  where t.elementcode='perftask' and code like '02%';
+
+--预警规则表内置为刷新分区同步
+delete from bus_t_settmp t where t.tablecode='perf_t_warnset';
+
+insert into bus_t_settmp (TABLECODE, ONEKEY, SECKEY, THRKEY, SQLFILTER, FILTERTYPE)
+values ('perf_t_warnset', 'guid', '', '', '', 1);

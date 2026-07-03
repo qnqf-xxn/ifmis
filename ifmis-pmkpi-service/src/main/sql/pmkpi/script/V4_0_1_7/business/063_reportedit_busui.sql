@@ -1,0 +1,7 @@
+begin
+--绩效监控填报-项目支出-重点监控（指标目标页签组件）
+delete from p#busfw_t_uitabpage t where  key ='/pmkpi/program/trace/report/edit' and GUID in('BA44382851FE1B71E053B11FA8C02F8C','BA44382851FF1B71E053B11FA8C02F8C');
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BA44382851FE1B71E053B11FA8C02F8C', 'pmkpi', '/pmkpi/program/trace/report/edit', '绩效目标调整', 'progoal', 1, 7, 'nomal', 'tabfreamedit.clickTabpage', null, '绩效目标调整', null, null, '{busguid:''B9B1886CA7A600A1E053B11FA8C0DBA4'',url:''/pmkpi/adjust/report/proedit/goal.page?istrace=1'',action:''adjustgoal.save''}', null, '0', 'adjustgoaliframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BA44382851FF1B71E053B11FA8C02F8C', 'pmkpi', '/pmkpi/program/trace/report/edit', '绩效指标调整', 'proindex', 1, 8, 'nomal', 'tabfreamedit.clickTabpage', null, '绩效指标调整', null, null, '{busguid:''B9B1886CA7A700A1E053B11FA8C0DBA4'',url:''/pmkpi/adjust/report/proedit/index.page?istrace=1'',action:''adjustindex.save''}', null, '0', 'adjustindexiframe', null, null, null, null, null, null);

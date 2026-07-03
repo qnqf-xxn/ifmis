@@ -1,0 +1,47 @@
+create or replace package body PERF_FUNDPAY_VIEW is
+  function Secu_f_GLOBAL_SetPARM(tprocode varchar2,tproguid varchar2,tagencyguid varchar2,tmonth varchar2)  Return varchar2 is
+      begin
+        v_procode := tprocode;
+        v_proguid := tproguid;
+        v_agencyguid := tagencyguid;
+        v_month:= tmonth;
+        return '1';
+      end Secu_f_GLOBAL_SetPARM;
+  function set_procode(procodes varchar2) RETURN varchar2 is
+    begin
+      v_procode := procodes;
+      return v_procode;
+    end;
+  function get_procode RETURN varchar2 is
+    begin
+       return v_procode;
+      end;
+  function set_proguid(proguid varchar2) RETURN varchar2 is
+    begin
+      v_proguid := proguid;
+      return v_proguid;
+    end;
+  function get_proguid RETURN varchar2 is
+    begin
+       return v_proguid;
+      end;
+  function set_agencyguid(agencyguids varchar2) RETURN varchar2 is
+    begin
+      v_agencyguid := agencyguids;
+      return v_agencyguid;
+    end;
+  function get_agencyguid RETURN varchar2 is
+    begin
+       return v_agencyguid;
+      end;
+  function set_month(months varchar2) RETURN varchar2 is
+    begin
+      v_month := months;
+      return v_month;
+    end;
+  function get_month RETURN varchar2 is
+    begin
+       return v_month;
+      end;
+
+  end PERF_FUNDPAY_VIEW;

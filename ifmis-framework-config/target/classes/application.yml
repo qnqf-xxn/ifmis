@@ -1,0 +1,3 @@
+spring:
+  profiles:
+    active: native  # 配置使用本地储存 测试：http://config:8880/common/dev http://config:8880/client/dev

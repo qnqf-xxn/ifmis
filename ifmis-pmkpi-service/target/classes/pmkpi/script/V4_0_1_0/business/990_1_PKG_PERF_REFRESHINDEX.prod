@@ -1,0 +1,9 @@
+create or replace package pkg_perf_refreshindex is
+
+    type CS is REF CURSOR;
+
+    procedure refreshindex(pyear varchar2,ptablecode varchar2);
+    
+    procedure refreshbasindex(ptablecode varchar2);
+    
+end pkg_perf_refreshindex;

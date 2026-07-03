@@ -1,0 +1,16 @@
+
+spring:
+  profiles: git
+  cloud:
+    config:
+      bus:
+        trace:
+          enabled: true
+      server:
+        git:
+          basedir: /tmp/data
+          search-paths: '{application}'
+          uri: https://github.com/qiudehe/cloud-config-repo
+          username: qiudehe #账号密码写真实的快一些我觉得，不使用也能访问有点慢
+          password: '{cipher}AIAC6nB/V+0UxnIrBj4pv0xUEdPog9GxklYpMtp3K7dLflI+u64aFv60xG37LyiqYjEQ6yXaNni9IvxNKUdLlUV7k8FwGLaarc9EF+uPhVewcZ1JnIXBXhDsyj4A9BKl0DbmwZX1issCvnoerTv5Ee4Va03zm6esVgN+pvqqG84DnXpUHzJUZ8IamWK7/H2hAsm4XAqMUQTgOxFZU+TWZ75i'
+

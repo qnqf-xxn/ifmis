@@ -1,0 +1,74 @@
+begin
+delete from p#busfw_t_uitabpage where key in('/pmkpi/rectification/program/add','/pmkpi/rectification/dept/add');
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('25CCFA09C578C553CB3C77D945891EBD', 'pmkpi', '/pmkpi/rectification/program/add', '基本信息', 'proinfo', 1, 1, 'nomal', 'addprogram.clickTabpage', null, '基本信息', null, '保存,保存并送审', '{url:''/pmkpi/rectification/program/proinfo.page?viewtype=query''}', null, '0', 'proinfoiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD19AA0879E10A55E053B11FA8C0A366', 'pmkpi', '/pmkpi/rectification/program/add', '整改通知附件', 'file', 1, 3, 'nomal', 'addprogram.clickTabpage', null, '整改通知附件', null, null, '{filebustype:''rectification'',url:''/pmkpi/rectification/file.page'',action:''reftifyfile.save''}', null, '0', 'manceiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('C41829802E023DE6FA95330E4525637A', 'pmkpi', '/pmkpi/rectification/program/add', '整改通知详情', 'rectification', 1, 2, 'nomal', 'addprogram.clickTabpage', null, '整改通知详情', null, '保存,保存并送审', '{url:''/pmkpi/rectification/add/rectification.page''}', null, '0', 'rectifyiframe', null, null, null, null, null, null);
+
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD534043016C4449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/add', '基本信息', 'proinfo', 1, 1, 'choosed', 'addprogram.clickTabpage', null, '基本信息', null, '保存,保存并送审', '{url:''/pmkpi/rectification/program/deptinfo.page?viewtype=query''}', null, '0', 'proinfoiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD534043016D4449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/add', '整改通知详情', 'rectification', 1, 2, 'nomal', 'addprogram.clickTabpage', null, '整改通知详情', null, '保存,保存并送审', '{url:''/pmkpi/rectification/add/rectification.page''}', null, '0', 'rectifyiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD534043016B4449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/add', '整改通知附件', 'file', 1, 3, 'nomal', 'addprogram.clickTabpage', null, '整改通知附件', null, null, '{filebustype:''rectification'',url:''/pmkpi/rectification/file.page'',action:''reftifyfile.save''}', null, '0', 'manceiframe', null, null, null, null, null, null);
+
+
+delete from p#busfw_t_uitabpage where key in('/pmkpi/rectification/program/edit','/pmkpi/rectification/dept/edit');
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('25CCFA09C578C553CB3C77D945891EBD', 'pmkpi', '/pmkpi/rectification/program/edit', '基本信息', 'proinfo', 1, 1, 'nomal', 'addprogram.clickTabpage', null, '基本信息', null, '保存,保存并送审', '{url:''/pmkpi/rectification/program/proinfo.page?viewtype=query''}', null, '0', 'proinfoiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD19AA0879E10A55E053B11FA8C0A366', 'pmkpi', '/pmkpi/rectification/program/edit', '整改通知附件', 'rectifyfile', 1, 3, 'nomal', 'addprogram.clickTabpage', null, '整改通知附件', null, '保存,保存并送审', '{filebustype:''rectification'',url:''/pmkpi/rectification/file.page'',viewtype:''query''}', null, '0', 'rectifymanceiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('B6A93ACFAEEFDFF75CCCBAEC5B3AA467', 'pmkpi', '/pmkpi/rectification/program/edit', '整改反馈附件', 'file', 1, 5, 'nomal', 'addprogram.clickTabpage', null, '整改反馈附件', null, null, '{filebustype:''feedback'',url:''/pmkpi/rectification/feedbackfile.page'',action:''reftifyfile.save''}', null, '0', 'manceiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('FF950D27D2E61F4117846BF2F0CE5C49', 'pmkpi', '/pmkpi/rectification/program/edit', '反馈信息详情', 'feedbackInfo', 1, 4, 'nomal', 'addprogram.clickTabpage', null, '反馈信息详情', null, '保存并送审', '{url:''/pmkpi/rectification/feedback/info.page'',action:''feedbackinfo.save''}', null, '0', 'feedbackiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('87661BD514DC20D8B6C39A0461794B17', 'pmkpi', '/pmkpi/rectification/program/edit', '整改通知详情', 'rectification', 1, 2, 'nomal', 'addprogram.clickTabpage', null, '整改通知详情', null, '保存,保存并送审', '{url:''/pmkpi/rectification/add/rectification.page''}', null, '0', 'rectifyiframe', null, null, null, null, null, null);
+
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD534043016E4449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/edit', '基本信息', 'proinfo', 1, 1, 'nomal', 'addprogram.clickTabpage', null, '基本信息', null, '保存,保存并送审', '{url:''/pmkpi/rectification/program/deptinfo.page?viewtype=query''}', null, '0', 'proinfoiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD534043016F4449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/edit', '整改通知附件', 'rectifyfile', 1, 3, 'nomal', 'addprogram.clickTabpage', null, '整改通知附件', null, '保存,保存并送审', '{filebustype:''rectification'',url:''/pmkpi/rectification/file.page'',viewtype:''query''}', null, '0', 'rectifymanceiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD53404301704449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/edit', '整改反馈附件', 'file', 1, 5, 'nomal', 'addprogram.clickTabpage', null, '整改反馈附件', null, null, '{filebustype:''feedback'',url:''/pmkpi/rectification/feedbackfile.page'',action:''reftifyfile.save''}', null, '0', 'manceiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD53404301714449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/edit', '反馈信息详情', 'feedbackInfo', 1, 4, 'nomal', 'addprogram.clickTabpage', null, '反馈信息详情', null, '保存并送审', '{url:''/pmkpi/rectification/feedback/info.page'',action:''feedbackinfo.save''}', null, '0', 'feedbackiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('BD53404301724449E053B11FA8C0DF9A', 'pmkpi', '/pmkpi/rectification/dept/edit', '整改通知详情', 'rectification', 1, 2, 'nomal', 'addprogram.clickTabpage', null, '整改通知详情', null, '保存,保存并送审', '{url:''/pmkpi/rectification/add/rectification.page''}', null, '0', 'rectifyiframe', null, null, null, null, null, null);
+
+delete from p#busfw_t_uitabpage where key ='/pmkpi/rectification/programAdd';
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('05CCFA09C578C553CB3C77D945891EBD', 'pmkpi', '/pmkpi/rectification/programAdd', '基本信息', 'proinfo', 1, 1, 'nomal', 'addprogram.clickTabpage', null, '基本信息', null, '保存,保存并送审', '{url:''/pmkpi/rectification/program/proinfo.page?viewtype=query''}', null, '0', 'proinfoiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('0D19AA0879E10A55E053B11FA8C0A366', 'pmkpi', '/pmkpi/rectification/programAdd', '整改通知附件', 'file', 1, 3, 'nomal', 'addprogram.clickTabpage', null, '整改通知附件', null, null, '{filebustype:''rectification'',url:''/pmkpi/rectification/file.page'',action:''reftifyfile.save''}', null, '0', 'manceiframe', null, null, null, null, null, null);
+insert into busfw_t_uitabpage (GUID, APPID, KEY, NAME, CODE, ISVISIABLE, ORDERNUM, CLASSNAME, CLICK, DISABLED, TITLE, FILTER, HIDEBTNS, CONFIG, WFSTATUS, WAITFLAG, COMPONENTID, COMPONENTCONFIG, COMPONENTKEY, COMPONENTDRAW, COMPONENTSERVICEID, COMPONENTCALLBACKFN, DEFAULTFILTER)
+values ('041829802E023DE6FA95330E4525637A', 'pmkpi', '/pmkpi/rectification/programAdd', '整改通知详情', 'rectification', 1, 2, 'nomal', 'addprogram.clickTabpage', null, '整改通知详情', null, '保存,保存并送审', '{url:''/pmkpi/rectification/add/rectification.page''}', null, '0', 'rectifyiframe', null, null, null, null, null, null);
+
+
+delete from bus_t_pageconsole where url in('/pmkpi/rectification/file','/pmkpi/rectification/feedbackfile');
+insert into bus_t_pageconsole (URL, TEMPLATE, PAGE, JSLIB, CSSLIB, OBJLIB, APPID, CONSOLESERVICE, METHOD, CONFIG, SUPCONSOLE, REGION, ISEXPAND)
+values ('/pmkpi/rectification/file', 'template8', '/pmkpi/common/template/template_defautl.jsp', '/pmkpi/common/template/template_default.js', null, null, 'pmkpi', 'gov.mof.fasp2.pmkpi.rectification.page.RectificationFilePage', 'index', '{main:[editform,datatable]}', null, null, 0);
+insert into bus_t_pageconsole (URL, TEMPLATE, PAGE, JSLIB, CSSLIB, OBJLIB, APPID, CONSOLESERVICE, METHOD, CONFIG, SUPCONSOLE, REGION, ISEXPAND)
+values ('/pmkpi/rectification/feedbackfile', 'template8', '/pmkpi/common/template/template_defautl.jsp', '/pmkpi/common/template/template_default.js', null, null, 'pmkpi', 'gov.mof.fasp2.pmkpi.rectification.page.RectificationFilePage', 'index', '{main:[editform,datatable]}', null, null, 0);
+
+delete from bus_t_pageconsolecomconfig where url in('/pmkpi/rectification/file','/pmkpi/rectification/feedbackfile');
+insert into bus_t_pageconsolecomconfig (URL, COMPONENTID, CONFIG, ID, APPID, REGION)
+values ('/pmkpi/rectification/file', 'pmkpi_reftifyfile', '{}', 'reftifyfile', 'pmkpi', null);
+insert into bus_t_pageconsolecomconfig (URL, COMPONENTID, CONFIG, ID, APPID, REGION)
+values ('/pmkpi/rectification/file', 'busuidatatable', '{name:''整改附件'',title:''整改附件'',key:''/pmkpi/upload/file/index''}', 'datatable', 'pmkpi', null);
+insert into bus_t_pageconsolecomconfig (URL, COMPONENTID, CONFIG, ID, APPID, REGION)
+values ('/pmkpi/rectification/file', 'buseditform', '{}', 'editform', 'pmkpi', null);
+
+insert into bus_t_pageconsolecomconfig (URL, COMPONENTID, CONFIG, ID, APPID, REGION)
+values ('/pmkpi/rectification/feedbackfile', 'pmkpi_reftifyfile', '{}', 'reftifyfile', 'pmkpi', null);
+insert into bus_t_pageconsolecomconfig (URL, COMPONENTID, CONFIG, ID, APPID, REGION)
+values ('/pmkpi/rectification/feedbackfile', 'buseditform', '{}', 'editform', 'pmkpi', null);
+insert into bus_t_pageconsolecomconfig (URL, COMPONENTID, CONFIG, ID, APPID, REGION)
+values ('/pmkpi/rectification/feedbackfile', 'busuidatatable', '{name:''整改反馈附件'',title:''整改反馈附件'',key:''/pmkpi/upload/file/index''}', 'datatable', 'pmkpi', null);
+
+delete from bus_t_pagecomponent where id ='pmkpi_reftifyfile';
+insert into bus_t_pagecomponent (ID, NAME, TYPE, REMARK, JSLIB, JSOBJECTNAME, APPID, SERVICE)
+values ('pmkpi_reftifyfile', '整改通知附件', null, '整改通知附件', '/busfw/common/bill/billmanage.js,/pmkpi/rectification/rectificationfile.js', 'Ext.lt.pmkpi.rectification.rectificationfile', 'pmkpi', 'pmkpi.rectification.RectificationFileService');
+

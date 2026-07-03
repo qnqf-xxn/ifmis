@@ -1,0 +1,300 @@
+BEGIN
+
+delete from bus_t_diccolumn t where t.tablecode = 'GD_PERF_INDICATOR';
+insert into bus_t_dictable (YEAR, PROVINCE, TABLECODE, NAME, REMARK, TABLETYPE, VERSION, DBTABNAME, APPID, EXP, TABLEPART, ISSHOW, DBIMPFLAG, ISSYS, ISUSES, VIEWTABLENAME, DBVERSION, DATASYNC, HASTRIGGER, SYNCCLASSNAME, STATUS)
+values ('2016', '87', 'GD_PERF_INDICATOR', '债券绩效指标表', '债券绩效指标表', 2, 1, 'GD_PERF_INDICATOR', 'pmkpi', null, '0', 1, '0', 0, 1, 'V_GD_PERF_INDICATOR', sysdate, 1, 1, null, '1');
+
+delete FROM bus_t_diccolumn t where t.tablecode = 'GD_PERF_INDICATOR';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PROVINCE', '1', '2016', '87', sys_guid(), 'PROVINCE', 'GD_PERF_INDICATOR', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FISCAL_YEAR', '1', '2016', '87', sys_guid(), 'FISCAL_YEAR', 'GD_PERF_INDICATOR', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_CODE', '1', '2016', '87', sys_guid(), 'MOF_DIV_CODE', 'GD_PERF_INDICATOR', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_NAME', '1', '2016', '87', sys_guid(), 'MOF_DIV_NAME', 'GD_PERF_INDICATOR', '区划名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'YEAR', '1', '2016', '87', sys_guid(), 'YEAR', 'GD_PERF_INDICATOR', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'INDICATOR_ID', '1', '2016', '87', sys_guid(), 'INDICATOR_ID', 'GD_PERF_INDICATOR', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GUID', '1', '2016', '87', sys_guid(), 'GUID', 'GD_PERF_INDICATOR', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIFRAME', null, '1', 'FINDEX', '1', '2016', '87', sys_guid(), 'FINDEX', 'GD_PERF_INDICATOR', '一级指标', 'S', '30', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIFRAME', null, '1', 'SINDEX', '1', '2016', '87', sys_guid(), 'SINDEX', 'GD_PERF_INDICATOR', '二级指标', 'S', '30', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PERF_IND_NAME', '1', '2016', '87', sys_guid(), 'PERF_IND_NAME', 'GD_PERF_INDICATOR', '名称', 'S', '60', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PERF_IND_CODE', '1', '2016', '87', sys_guid(), 'PERF_IND_CODE', 'GD_PERF_INDICATOR', '编码', 'S', '21', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'VALUE_DESC', '1', '2016', '87', sys_guid(), 'VALUE_DESC', 'GD_PERF_INDICATOR', '指标值说明', 'S', '30', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IND_TYPE_NAME', '1', '2016', '87', sys_guid(), 'IND_TYPE_NAME', 'GD_PERF_INDICATOR', '债务绩效指标类型名称', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IND_TYPE_CODE', '1', '2016', '87', sys_guid(), 'IND_TYPE_CODE', 'GD_PERF_INDICATOR', '债务绩效指标类型代码', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FULL_VALUE', '1', '2016', '87', sys_guid(), 'FULL_VALUE', 'GD_PERF_INDICATOR', '指标满分值', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UNIT', '1', '2016', '87', sys_guid(), 'UNIT', 'GD_PERF_INDICATOR', '计量单位', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIZBXS', null, '1', 'COMPUTESIGN', '1', '2016', '87', sys_guid(), 'COMPUTESIGN', 'GD_PERF_INDICATOR', '计算符号', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCYGUID', '1', '2016', '87', sys_guid(), 'AGENCYGUID', 'GD_PERF_INDICATOR', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCY_CODE', '1', '2016', '87', sys_guid(), 'AGENCY_CODE', 'GD_PERF_INDICATOR', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCY_NAME', '1', '2016', '87', sys_guid(), 'AGENCY_NAME', 'GD_PERF_INDICATOR', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_COMMON_IND', '1', '2016', '87', sys_guid(), 'IS_COMMON_IND', 'GD_PERF_INDICATOR', '是否共性指标', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PARENT_ID', '1', '2016', '87', sys_guid(), 'PARENT_ID', 'GD_PERF_INDICATOR', '父级节点ID', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LEVEL_NO', '1', '2016', '87', sys_guid(), 'LEVEL_NO', 'GD_PERF_INDICATOR', '级次', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_LEAF', '1', '2016', '87', sys_guid(), 'IS_LEAF', 'GD_PERF_INDICATOR', '是否末级', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_LAST_INST', '1', '2016', '87', sys_guid(), 'IS_LAST_INST', 'GD_PERF_INDICATOR', '是否终审', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'START_DATE', '1', '2016', '87', sys_guid(), 'START_DATE', 'GD_PERF_INDICATOR', '启用日期', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'END_DATE', '1', '2016', '87', sys_guid(), 'END_DATE', 'GD_PERF_INDICATOR', '停用日期', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_ENABLED', '1', '2016', '87', sys_guid(), 'IS_ENABLED', 'GD_PERF_INDICATOR', '是否启用', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATE_TIME', '1', '2016', '87', sys_guid(), 'UPDATE_TIME', 'GD_PERF_INDICATOR', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIDEL', null, '1', 'IS_DELETED', '1', '2016', '87', sys_guid(), 'IS_DELETED', 'GD_PERF_INDICATOR', '是否删除', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATE_TIME', '1', '2016', '87', sys_guid(), 'CREATE_TIME', 'GD_PERF_INDICATOR', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'BIZ_KEY', '1', '2016', '87', sys_guid(), 'BIZ_KEY', 'GD_PERF_INDICATOR', '业务唯一标识', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFID', '1', '2016', '87', sys_guid(), 'WFID', 'GD_PERF_INDICATOR', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFSTATUS', '1', '2016', '87', sys_guid(), 'WFSTATUS', 'GD_PERF_INDICATOR', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AUDITOR', '1', '2016', '87', sys_guid(), 'AUDITOR', 'GD_PERF_INDICATOR', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LASTUPDATETIME', '1', '2016', '87', sys_guid(), 'LASTUPDATETIME', 'GD_PERF_INDICATOR', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATETIME', '1', '2016', '87', sys_guid(), 'UPDATETIME', 'GD_PERF_INDICATOR', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATER', '1', '2016', '87', sys_guid(), 'CREATER', 'GD_PERF_INDICATOR', '创建人', 'S', '40', null, 1, 1, null, sysdate);
+
+delete FROM bus_t_diccolumn t where t.tablecode = 'GD_PERF_SELF_EVAL';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_ID', '1', '2016', '87', sys_guid(), 'EVAL_ID', 'GD_PERF_SELF_EVAL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GUID', '1', '2016', '87', sys_guid(), 'GUID', 'GD_PERF_SELF_EVAL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FISCAL_YEAR', '1', '2016', '87', sys_guid(), 'FISCAL_YEAR', 'GD_PERF_SELF_EVAL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_CODE', '1', '2016', '87', sys_guid(), 'MOF_DIV_CODE', 'GD_PERF_SELF_EVAL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_NAME', '1', '2016', '87', sys_guid(), 'MOF_DIV_NAME', 'GD_PERF_SELF_EVAL', '区划名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCY_CODE', '1', '2016', '87', sys_guid(), 'AGENCY_CODE', 'GD_PERF_SELF_EVAL', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCY_NAME', '1', '2016', '87', sys_guid(), 'AGENCY_NAME', 'GD_PERF_SELF_EVAL', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PRO_CODE', '1', '2016', '87', sys_guid(), 'PRO_CODE', 'GD_PERF_SELF_EVAL', '项目编码', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PRO_NAME', '1', '2016', '87', sys_guid(), 'PRO_NAME', 'GD_PERF_SELF_EVAL', '项目名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'TOTAL_EVAL_VALUE', '1', '2016', '87', sys_guid(), 'TOTAL_EVAL_VALUE', 'GD_PERF_SELF_EVAL', '自评总得分', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GOAL_COMP', '1', '2016', '87', sys_guid(), 'GOAL_COMP', 'GD_PERF_SELF_EVAL', '绩效总体目标完成情况', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_LAST_INST', '1', '2016', '87', sys_guid(), 'IS_LAST_INST', 'GD_PERF_SELF_EVAL', '是否终审', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATE_TIME', '1', '2016', '87', sys_guid(), 'UPDATE_TIME', 'GD_PERF_SELF_EVAL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIDEL', null, '1', 'IS_DELETED', '1', '2016', '87', sys_guid(), 'IS_DELETED', 'GD_PERF_SELF_EVAL', '是否删除', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATE_TIME', '1', '2016', '87', sys_guid(), 'CREATE_TIME', 'GD_PERF_SELF_EVAL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PROVINCE', '1', '2016', '87', sys_guid(), 'PROVINCE', 'GD_PERF_SELF_EVAL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'YEAR', '1', '2016', '87', sys_guid(), 'YEAR', 'GD_PERF_SELF_EVAL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFID', '1', '2016', '87', sys_guid(), 'WFID', 'GD_PERF_SELF_EVAL', '流程', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFSTATUS', '1', '2016', '87', sys_guid(), 'WFSTATUS', 'GD_PERF_SELF_EVAL', '流程状态', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AUDITOR', '1', '2016', '87', sys_guid(), 'AUDITOR', 'GD_PERF_SELF_EVAL', '审核人', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LASTUPDATETIME', '1', '2016', '87', sys_guid(), 'LASTUPDATETIME', 'GD_PERF_SELF_EVAL', '审核时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATETIME', '1', '2016', '87', sys_guid(), 'CREATETIME', 'GD_PERF_SELF_EVAL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATETIME', '1', '2016', '87', sys_guid(), 'UPDATETIME', 'GD_PERF_SELF_EVAL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATER', '1', '2016', '87', sys_guid(), 'CREATER', 'GD_PERF_SELF_EVAL', '创建人', 'S', '40', null, 1, 1, null, sysdate);
+
+delete FROM bus_t_diccolumn t where t.tablecode = 'GD_PERF_SELF_EVAL_DTL';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_DTL_ID', '1', '2016', '87', sys_guid(), 'EVAL_DTL_ID', 'GD_PERF_SELF_EVAL_DTL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_ID', '1', '2016', '87', sys_guid(), 'EVAL_ID', 'GD_PERF_SELF_EVAL_DTL', '自评主表外键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GUID', '1', '2016', '87', sys_guid(), 'GUID', 'GD_PERF_SELF_EVAL_DTL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'KPI_ID', '1', '2016', '87', sys_guid(), 'KPI_ID', 'GD_PERF_SELF_EVAL_DTL', '指标外键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PRO_CODE', '1', '2016', '87', sys_guid(), 'PRO_CODE', 'GD_PERF_SELF_EVAL_DTL', '项目编码', 'S', '40', null, 1, 1, null, sysdate);
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FISCAL_YEAR', '1', '2016', '87', sys_guid(), 'FISCAL_YEAR', 'GD_PERF_SELF_EVAL_DTL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_CODE', '1', '2016', '87', sys_guid(), 'MOF_DIV_CODE', 'GD_PERF_SELF_EVAL_DTL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_NAME', '1', '2016', '87', sys_guid(), 'MOF_DIV_NAME', 'GD_PERF_SELF_EVAL_DTL', '区划名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IND_WEIGHT', '1', '2016', '87', sys_guid(), 'IND_WEIGHT', 'GD_PERF_SELF_EVAL_DTL', '权重', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_VALUE', '1', '2016', '87', sys_guid(), 'EVAL_VALUE', 'GD_PERF_SELF_EVAL_DTL', '自评分', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'DEVI_ANALY', '1', '2016', '87', sys_guid(), 'DEVI_ANALY', 'GD_PERF_SELF_EVAL_DTL', '偏差分析及整改措施', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GOAL_COMP', '1', '2016', '87', sys_guid(), 'GOAL_COMP', 'GD_PERF_SELF_EVAL_DTL', '绩效指标完成情况', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_LAST_INST', '1', '2016', '87', sys_guid(), 'IS_LAST_INST', 'GD_PERF_SELF_EVAL_DTL', '是否终审', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATE_TIME', '1', '2016', '87', sys_guid(), 'UPDATE_TIME', 'GD_PERF_SELF_EVAL_DTL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIDEL', null, '1', 'IS_DELETED', '1', '2016', '87', sys_guid(), 'IS_DELETED', 'GD_PERF_SELF_EVAL_DTL', '是否删除', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATE_TIME', '1', '2016', '87', sys_guid(), 'CREATE_TIME', 'GD_PERF_SELF_EVAL_DTL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PROVINCE', '1', '2016', '87', sys_guid(), 'PROVINCE', 'GD_PERF_SELF_EVAL_DTL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'YEAR', '1', '2016', '87', sys_guid(), 'YEAR', 'GD_PERF_SELF_EVAL_DTL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFID', '1', '2016', '87', sys_guid(), 'WFID', 'GD_PERF_SELF_EVAL_DTL', '流程', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFSTATUS', '1', '2016', '87', sys_guid(), 'WFSTATUS', 'GD_PERF_SELF_EVAL_DTL', '流程状态', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AUDITOR', '1', '2016', '87', sys_guid(), 'AUDITOR', 'GD_PERF_SELF_EVAL_DTL', '审核人', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LASTUPDATETIME', '1', '2016', '87', sys_guid(), 'LASTUPDATETIME', 'GD_PERF_SELF_EVAL_DTL', '审核时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATETIME', '1', '2016', '87', sys_guid(), 'CREATETIME', 'GD_PERF_SELF_EVAL_DTL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATETIME', '1', '2016', '87', sys_guid(), 'UPDATETIME', 'GD_PERF_SELF_EVAL_DTL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATER', '1', '2016', '87', sys_guid(), 'CREATER', 'GD_PERF_SELF_EVAL_DTL', '创建人', 'S', '40', null, 1, 1, null, sysdate);
+
+
+delete FROM bus_t_diccolumn t where t.tablecode = 'GD_PERF_EVAL';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_ID', '1', '2016', '87', sys_guid(), 'EVAL_ID', 'GD_PERF_EVAL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GUID', '1', '2016', '87', sys_guid(), 'GUID', 'GD_PERF_EVAL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FISCAL_YEAR', '1', '2016', '87', sys_guid(), 'FISCAL_YEAR', 'GD_PERF_EVAL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_CODE', '1', '2016', '87', sys_guid(), 'MOF_DIV_CODE', 'GD_PERF_EVAL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_NAME', '1', '2016', '87', sys_guid(), 'MOF_DIV_NAME', 'GD_PERF_EVAL', '区划名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCY_CODE', '1', '2016', '87', sys_guid(), 'AGENCY_CODE', 'GD_PERF_EVAL', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AGENCY_NAME', '1', '2016', '87', sys_guid(), 'AGENCY_NAME', 'GD_PERF_EVAL', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PRO_CODE', '1', '2016', '87', sys_guid(), 'PRO_CODE', 'GD_PERF_EVAL', '项目编码', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PRO_NAME', '1', '2016', '87', sys_guid(), 'PRO_NAME', 'GD_PERF_EVAL', '项目名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'TOTAL_EVAL_VAL', '1', '2016', '87', sys_guid(), 'TOTAL_EVAL_VAL', 'GD_PERF_EVAL', '评价总得分', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_FILE', '1', '2016', '87', sys_guid(), 'EVAL_FILE', 'GD_PERF_EVAL', '评价报告', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FILE_NAME', '1', '2016', '87', sys_guid(), 'FILE_NAME', 'GD_PERF_EVAL', '附件名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FULL_PATH', '1', '2016', '87', sys_guid(), 'FULL_PATH', 'GD_PERF_EVAL', '附件路径', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_LAST_INST', '1', '2016', '87', sys_guid(), 'IS_LAST_INST', 'GD_PERF_EVAL', '是否终审', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATE_TIME', '1', '2016', '87', sys_guid(), 'UPDATE_TIME', 'GD_PERF_EVAL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIDEL', null, '1', 'IS_DELETED', '1', '2016', '87', sys_guid(), 'IS_DELETED', 'GD_PERF_EVAL', '是否删除', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATE_TIME', '1', '2016', '87', sys_guid(), 'CREATE_TIME', 'GD_PERF_EVAL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PROVINCE', '1', '2016', '87', sys_guid(), 'PROVINCE', 'GD_PERF_EVAL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'YEAR', '1', '2016', '87', sys_guid(), 'YEAR', 'GD_PERF_EVAL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFID', '1', '2016', '87', sys_guid(), 'WFID', 'GD_PERF_EVAL', '流程', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFSTATUS', '1', '2016', '87', sys_guid(), 'WFSTATUS', 'GD_PERF_EVAL', '流程状态', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AUDITOR', '1', '2016', '87', sys_guid(), 'AUDITOR', 'GD_PERF_EVAL', '审核人', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LASTUPDATETIME', '1', '2016', '87', sys_guid(), 'LASTUPDATETIME', 'GD_PERF_EVAL', '审核时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATETIME', '1', '2016', '87', sys_guid(), 'CREATETIME', 'GD_PERF_EVAL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATETIME', '1', '2016', '87', sys_guid(), 'UPDATETIME', 'GD_PERF_EVAL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATER', '1', '2016', '87', sys_guid(), 'CREATER', 'GD_PERF_EVAL', '创建人', 'S', '40', null, 1, 1, null, sysdate);
+
+
+
+delete FROM bus_t_diccolumn t where t.tablecode = 'GD_PERF_EVAL_DTL';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_DTL_ID', '1', '2016', '87', sys_guid(), 'EVAL_DTL_ID', 'GD_PERF_EVAL_DTL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_ID', '1', '2016', '87', sys_guid(), 'EVAL_ID', 'GD_PERF_EVAL_DTL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'GUID', '1', '2016', '87', sys_guid(), 'GUID', 'GD_PERF_EVAL_DTL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'KPI_ID', '1', '2016', '87', sys_guid(), 'KPI_ID', 'GD_PERF_EVAL_DTL', '主键', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FISCAL_YEAR', '1', '2016', '87', sys_guid(), 'FISCAL_YEAR', 'GD_PERF_EVAL_DTL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_CODE', '1', '2016', '87', sys_guid(), 'MOF_DIV_CODE', 'GD_PERF_EVAL_DTL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'MOF_DIV_NAME', '1', '2016', '87', sys_guid(), 'MOF_DIV_NAME', 'GD_PERF_EVAL_DTL', '区划名称', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IND_WEIGHT', '1', '2016', '87', sys_guid(), 'IND_WEIGHT', 'GD_PERF_EVAL_DTL', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EVAL_VALUE', '1', '2016', '87', sys_guid(), 'EVAL_VALUE', 'GD_PERF_EVAL_DTL', '单位id', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'DEVI_ANALY', '1', '2016', '87', sys_guid(), 'DEVI_ANALY', 'GD_PERF_EVAL_DTL', '项目编码', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'IS_LAST_INST', '1', '2016', '87', sys_guid(), 'IS_LAST_INST', 'GD_PERF_EVAL_DTL', '是否终审', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATE_TIME', '1', '2016', '87', sys_guid(), 'UPDATE_TIME', 'GD_PERF_EVAL_DTL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIDEL', null, '1', 'IS_DELETED', '1', '2016', '87', sys_guid(), 'IS_DELETED', 'GD_PERF_EVAL_DTL', '是否删除', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATE_TIME', '1', '2016', '87', sys_guid(), 'CREATE_TIME', 'GD_PERF_EVAL_DTL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PROVINCE', '1', '2016', '87', sys_guid(), 'PROVINCE', 'GD_PERF_EVAL_DTL', '区划', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'YEAR', '1', '2016', '87', sys_guid(), 'YEAR', 'GD_PERF_EVAL_DTL', '年度', 'S', '4', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFID', '1', '2016', '87', sys_guid(), 'WFID', 'GD_PERF_EVAL_DTL', '流程', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WFSTATUS', '1', '2016', '87', sys_guid(), 'WFSTATUS', 'GD_PERF_EVAL_DTL', '流程状态', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'AUDITOR', '1', '2016', '87', sys_guid(), 'AUDITOR', 'GD_PERF_EVAL_DTL', '审核人', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LASTUPDATETIME', '1', '2016', '87', sys_guid(), 'LASTUPDATETIME', 'GD_PERF_EVAL_DTL', '审核时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATETIME', '1', '2016', '87', sys_guid(), 'CREATETIME', 'GD_PERF_EVAL_DTL', '创建时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'UPDATETIME', '1', '2016', '87', sys_guid(), 'UPDATETIME', 'GD_PERF_EVAL_DTL', '修改时间', 'S', '17', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'CREATER', '1', '2016', '87', sys_guid(), 'CREATER', 'GD_PERF_EVAL_DTL', '创建人', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'PRO_CODE', '1', '2016', '87', sys_guid(), 'PRO_CODE', 'GD_PERF_EVAL_DTL', '项目编码', 'S', '40', null, 1, 1, null, sysdate);
+
+
+
+delete from fasp_t_dicdssource where code = 'PMKPIDEL';
+
+insert into fasp_t_dicdssource (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, STARTTIME, ENDTIME, YEAR, PROVINCE, CRC, TYPEGUID, SHOWSTRUCT, SOURCETYPE, DATASOURCE, VERSION, APPID)
+values ('PMKPIDEL', 'PMKPIDEL', 'PMKPIDEL', '数据状态', '1', '20180424221721795', '20180424', null, '2019', '653100', null, null, null, '1', '[{guid:"1",code:"1",name:"删除"},{guid:"2",code:"2",name:"启用"}]', 1, 'pmkpi');

@@ -1,0 +1,6 @@
+create or replace package PERF_AUTHPROVINCE_VIEW is
+  function set_province(provinces varchar2) RETURN varchar2;
+  function get_province RETURN varchar2;
+  function set_year(years varchar2) RETURN varchar2;
+  function get_year RETURN varchar2;
+  end PERF_AUTHPROVINCE_VIEW;

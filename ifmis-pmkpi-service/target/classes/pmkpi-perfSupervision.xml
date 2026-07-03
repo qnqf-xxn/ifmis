@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+    <bean id="pmkpi.perfSupervision.PerfSupervisionPage" class="gov.mof.fasp2.pmkpi.perfSupervision.PerfSupervisionPage"></bean>
+    <bean id="pmkpi.perfSupervision.PerfSupervisionService" class="gov.mof.fasp2.pmkpi.perfSupervision.PerfSupervisionService">
+        <property name="perfSupervisionBO" ref="pmkpi.perfSupervision.PerfSupervisionBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfSupervision.PerfSupervisionBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfSupervision.PerfSupervisionBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfSupervision.PerfSupervisionBO" class="gov.mof.fasp2.pmkpi.perfSupervision.PerfSupervisionBO">
+        <property name="perfSupervisionDAO" ref="pmkpi.perfSupervision.PerfSupervisionDAO"></property>
+    </bean>
+    <bean id="pmkpi.perfSupervision.PerfSupervisionDAO" class="gov.mof.fasp2.pmkpi.perfSupervision.PerfSupervisionDAO"></bean>
+
+    <bean id="pmkpi.perfSupervision.PerfSupervisionUpdateService" class="gov.mof.fasp2.pmkpi.perfSupervision.PerfSupervisionUpdateService">
+        <property name="perfSupervisionUpdateBO" ref="pmkpi.perfSupervision.PerfSupervisionUpdateBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfSupervision.PerfSupervisionUpdateBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfSupervision.PerfSupervisionUpdateBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfSupervision.PerfSupervisionUpdateBO" class="gov.mof.fasp2.pmkpi.perfSupervision.PerfSupervisionUpdateBo">
+        <property name="perfSupervisionDAO" ref="pmkpi.perfSupervision.PerfSupervisionDAO"></property>
+    </bean>
+</beans>

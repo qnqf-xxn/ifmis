@@ -1,0 +1,35 @@
+create or replace package body PKG_PERF_PROINDEXEXPDOC is
+  /**
+  * 校验语句是否正确.
+  **/
+    procedure getProindex(p_busguid varchar2, o_cs out cs) is
+    t_sql   varchar2(3000);
+    
+    begin
+            --select global_multyear_cz.Secu_f_Global_Setparm('','430000','2021','') into t_sql from dual;
+             --循环数据插入name,
+             t_sql :='select cc.*,ss.findexnum findexnum, dd.sindexnum sindexnum from (select a.*,b.name findexname,s.name tindexname,s.targetvalue zqindexval,
+             s.indexval indexval,:1 busguid from (select
+                         t.superid findex,
+                         t.guid sindex,
+                         t.name sindexname,
+                         t.guid frame,
+                         t.ordernum
+                    from PERF_T_FRAME t
+                   where t.frametype = ''PM001''
+                     and t.isleaf = 1) a
+                     left join perf_t_prjindex s on s.FINDEX=a.findex and s.SINDEX=a.sindex and s.mainguid=:2
+                     left join perf_t_frame b on b.guid=a.findex)cc
+                     left join
+(select findex,count(findex) findexnum from (select aa.* from (select t.superid findex,t.guid sindex from PERF_T_FRAME t
+                   where t.frametype = ''PM001'' and t.isleaf = 1) aa
+                     left join perf_t_prjindex s on s.FINDEX=aa.findex and s.SINDEX=aa.sindex and s.mainguid=:3) group by findex)ss on ss.findex=cc.findex
+
+                     left join
+(select sindex,count(sindex) sindexnum from (select aa.* from (select t.superid findex,t.guid sindex from PERF_T_FRAME t
+                   where t.frametype = ''PM001'' and t.isleaf = 1) aa
+                     left join perf_t_prjindex s on s.FINDEX=aa.findex and s.SINDEX=aa.sindex and s.mainguid=:4) group by sindex)dd on dd.sindex=cc.sindex
+                     order by cc.ordernum';
+              open o_cs for t_sql using p_busguid,p_busguid,p_busguid,p_busguid;
+    end;
+end PKG_PERF_PROINDEXEXPDOC;

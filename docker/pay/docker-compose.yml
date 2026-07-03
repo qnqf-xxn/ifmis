@@ -1,0 +1,49 @@
+version: "2"
+services:
+ pay:
+  image: cloud/ifmis-pay-service:1.0.0-SNAPSHOT
+  hostname: ifmis-pay-service
+  networks:
+   - eureka-net
+#  env_file:
+#   - ../api.env
+  ports:
+   - "8002:8002"
+  environment:
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+   - spring.profiles.active=dev-nacos
+   - RABBITMQ_SERVER=192.168.7.6
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - NACOS_NAMESPACE=ifmis
+   - NACOS_GROUP=DEFAULT_GROUP
+   - CONFIG_SERVER=192.168.7.6
+   - CONFIG_SERVER_PORT=8848
+  volumes:
+   - "/root/logs:/root/logs"
+ pay-webapp:
+  image: cloud/ifmis-pay-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-pay-webapp
+  networks:
+   - eureka-net
+#  env_file:
+#   - ../api.env
+  ports:
+   - "7002:7002"
+  environment:
+   - spring.profiles.active=dev-nacos
+   - RABBITMQ_SERVER=192.168.7.6
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - NACOS_NAMESPACE=ifmis
+   - NACOS_GROUP=DEFAULT_GROUP
+   - CONFIG_SERVER=192.168.7.6
+   - CONFIG_SERVER_PORT=8848
+  volumes:
+   - "/root/logs:/root/logs"
+networks:
+ eureka-net:
+  external: true
+#docker network create eureka-net

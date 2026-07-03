@@ -1,0 +1,7 @@
+create or replace package pkg_perf_checkTransfer is
+
+  TYPE CS IS REF CURSOR;
+  --校验结转指标目标
+  procedure   checkTransIndex(o_cs out CS);
+
+end pkg_perf_checkTransfer;

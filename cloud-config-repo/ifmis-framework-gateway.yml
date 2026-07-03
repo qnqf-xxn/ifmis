@@ -1,0 +1,6 @@
+#通用配置:网关配置
+#测试：http://config:8880/gateway/dev
+server:
+  port: 8080
+
+zone.name: zone-2

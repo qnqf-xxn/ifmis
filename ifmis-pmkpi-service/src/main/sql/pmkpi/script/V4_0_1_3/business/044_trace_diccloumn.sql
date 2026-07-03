@@ -1,0 +1,5 @@
+begin
+
+delete from bus_t_diccolumn t where t.tablecode='PERF_T_PROINDEXTRACE' and t.columncode ='COMPUTESIGN';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIZBXS', null, '1', 'COMPUTESIGN', '1', '2020', '87', 'B785109A5BAD0EC1E0530100007FD5F2', 'COMPUTESIGN', 'PERF_T_PROINDEXTRACE', '¼ÆËã·ûºÅ', 'S', '40', null, 1, 1, null, sysdate);

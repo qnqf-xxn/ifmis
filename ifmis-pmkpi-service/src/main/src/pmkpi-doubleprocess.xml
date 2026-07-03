@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+    <!--双流程-->
+    <bean id="pmkpi.doubleprocess.DoubleProcessPage"
+          class="gov.mof.fasp2.pmkpi.doubleprocess.dpaudit.DoubleProcessPage"></bean>
+    <!--和 bus_t_pagecomponent 表service字段保持一致-->
+    <bean id="pmkpi.doubleprocess.dpaudit.DoubleProcessService"
+          class="gov.mof.fasp2.pmkpi.doubleprocess.dpaudit.DoubleProcessService"></bean>
+
+    <bean id="pmkpi.doubleprocess.TlpProgramAuditPage" class="gov.mof.fasp2.pmkpi.doubleprocess.audit.TlpProgramAuditPage"></bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramAuditService" class="gov.mof.fasp2.pmkpi.doubleprocess.audit.TlpProgramAuditService">
+        <property name="tlpProgramAuditBO" ref="pmkpi.doubleprocess.TlpProgramAuditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramAuditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.doubleprocess.TlpProgramAuditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramAuditBO" class="gov.mof.fasp2.pmkpi.doubleprocess.audit.TlpDoublepressAuditBO">
+        <property name="tlpProgramAuditDAO" ref="pmkpi.doubleprocess.TlpProgramAuditDAO"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramAuditDAO" class="gov.mof.fasp2.pmkpi.doubleprocess.audit.TlpProgramAuditDAO"></bean>
+
+    <!--绩效处有关岗位的审核-->
+    <bean id="pmkpi.doubleprocess.TlpJxAuditPage" class="gov.mof.fasp2.pmkpi.doubleprocess.jxaudit.TlpJxAuditPage"></bean>
+    <bean id="pmkpi.doubleprocess.TlpJxAuditService" class="gov.mof.fasp2.pmkpi.doubleprocess.jxaudit.TlpJxAuditService">
+        <property name="tlpJxAuditBO" ref="pmkpi.doubleprocess.TlpJxAuditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpJxAuditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.doubleprocess.TlpJxAuditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpJxAuditBO" class="gov.mof.fasp2.pmkpi.doubleprocess.jxaudit.TlpJxAuditBO">
+        <property name="tlpJxAuditDAO" ref="pmkpi.doubleprocess.TlpJxAuditDAO"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpJxAuditDAO" class="gov.mof.fasp2.pmkpi.doubleprocess.jxaudit.TlpJxAuditDAO"></bean>
+    <!-- end;-->
+
+    <bean id="pmkpi.doubleprocess.TlpProgramPage" class="gov.mof.fasp2.pmkpi.doubleprocess.report.TlpProgramPage"></bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramEdit" class="gov.mof.fasp2.pmkpi.doubleprocess.report.TlpProgramEdit">
+        <property name="tlpProgramBO" ref="pmkpi.doubleprocess.TlpProgramBOTX"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramService" class="gov.mof.fasp2.pmkpi.doubleprocess.report.TlpProgramService">
+        <property name="tlpProgramBO" ref="pmkpi.doubleprocess.TlpProgramBOTX"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.doubleprocess.TlpProgramBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramBO" class="gov.mof.fasp2.pmkpi.doubleprocess.report.TlpDoublepressBO">
+        <property name="tlpProgramDAO" ref="pmkpi.doubleprocess.TlpProgramDAO"></property>
+    </bean>
+    <bean id="pmkpi.doubleprocess.TlpProgramDAO" class="gov.mof.fasp2.pmkpi.doubleprocess.report.TlpProgramDAO"></bean>
+
+</beans>

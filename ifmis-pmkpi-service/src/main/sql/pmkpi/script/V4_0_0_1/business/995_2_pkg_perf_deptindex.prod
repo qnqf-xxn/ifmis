@@ -1,0 +1,75 @@
+create or replace package body pkg_perf_deptindex is
+
+  procedure checkDeptIndex(o_cs out CS)
+    is
+       tmainsql      varchar(4000);
+       tinsertsql    varchar(4000);
+       tsql          varchar(4000);
+       tcs           cs;
+       tguid         varchar(40);
+       tmainguid     varchar(40);
+       tname         varchar(200);--三级指标
+       tcomputesign  varchar(40);--计算符号
+       tindexval     varchar(100);--指标值
+       tweight       number(9,2);-- 权重
+       tramark       varchar(4000);--备注
+       tmeterunit    varchar2(60); --计量单位
+       tsumweight    number(9,2); --权重
+       tordernum     number(3);
+    begin
+      --select Global_Multyear_Cz.Secu_f_Global_Setparm('', '430000', '2021', '') into tordernum from dual;
+      --获取校验数据
+      tmainsql := 'select t.guid,t.mainguid,t.name,t.computesign,t.indexval,t.ordernum,t.weight,t.meterunit from Perf_t_Deptperfindex t where exists(select * from PERF_TMP_AUDITDEFINE a where a.guid = t.guid) order by t.ordernum';
+
+      open tcs for tmainsql;
+       loop
+            fetch tcs into tguid,tmainguid,tname,tcomputesign,tindexval,tordernum,tweight,tmeterunit;
+            EXIT WHEN tcs%NOTFOUND;
+            --判断计算符号是否定性/定量
+              --校验三级指标不能为空
+               if tname is null then 
+                 tramark := '第'||tordernum||'行指标名称不能为空';
+                 tinsertsql := 'insert into PERF_TMP_AUDITERRORINFO(guid,busguid,remark) values(:1,:2,:3)';
+                 execute immediate tinsertsql using tguid,tmainguid,tramark;
+                 exit;
+               end if;
+               --校验指标值不能为空
+               if tindexval is null then 
+                 tramark := '第'||tordernum||'行指标值不能为空';
+                 tinsertsql := 'insert into PERF_TMP_AUDITERRORINFO(guid,busguid,remark) values(:1,:2,:3)';
+                 execute immediate tinsertsql using tguid,tmainguid,tramark;
+                 exit;
+               end if;
+               if tcomputesign is null then 
+                 tramark := '第'||tordernum||'行计算符号不能为空';
+                 tinsertsql := 'insert into PERF_TMP_AUDITERRORINFO(guid,busguid,remark) values(:1,:2,:3)';
+                 execute immediate tinsertsql using tguid,tmainguid,tramark;
+                 exit;
+               end if; 
+               if tmeterunit is null and tcomputesign != '6' then 
+                 tramark := '第'||tordernum||'行计量单位不能为空';
+                 tinsertsql := 'insert into PERF_TMP_AUDITERRORINFO(guid,busguid,remark) values(:1,:2,:3)';
+                 execute immediate tinsertsql using tguid,tmainguid,tramark;
+                 exit;
+               end if;  
+               if tweight is null then 
+                 tramark := '第'||tordernum||'行权重不能为空';
+                 tinsertsql := 'insert into PERF_TMP_AUDITERRORINFO(guid,busguid,remark) values(:1,:2,:3)';
+                 execute immediate tinsertsql using tguid,tmainguid,tramark;
+                 exit;
+               end if; 
+       end loop;
+       close tcs;
+       ---处理权重
+       tmainsql := 'SELECT sum(t.weight) FROM Perf_t_Deptperfindex t where exists(select 1 from PERF_TMP_AUDITDEFINE a where a.guid = t.guid)';
+       execute immediate tmainsql into tsumweight;
+       if tsumweight != 100 then
+         tramark := '合计权重不等于100';
+         tinsertsql := 'insert into PERF_TMP_AUDITERRORINFO(remark) values(:1)';
+         execute immediate tinsertsql using tramark;
+       end if;
+       
+       tmainsql := 'select * from PERF_TMP_AUDITERRORINFO';
+      open o_cs for tmainsql;
+    end;
+end pkg_perf_deptindex;

@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+    nacos:
+      config:
+        enabled: true
+        #DEFAULT_GROUP
+        #shared-dataids: common.yml,environment.yml,common-admin.yml,common-redis.yml,fasp2datasource.yml,ifmis-framework-zuul.yml
+        #refreshable-dataids: common.yml,environment.yml,common-admin.yml,common-redis.yml,fasp2datasource.yml,ifmis-framework-zuul.yml
+        server-addr: ${CONFIG_SERVER:config}:${CONFIG_SERVER_PORT:8848}
+        namespace: ${NACOS_NAMESPACE:ifmis}
+        #
+        ext-config[0]:
+          data-id: common.yml
+          group: ${NACOS_GROUP:DEFAULT_GROUP}
+        ext-config[1]:
+          data-id: environment.yml
+          group: ${NACOS_GROUP:DEFAULT_GROUP}
+        ext-config[2]:
+          data-id: common-admin.yml
+          group: ${NACOS_GROUP:DEFAULT_GROUP}
+        ext-config[3]:
+          data-id: common-redis${ifmis.config.file:}.yml
+          group: ${NACOS_GROUP:DEFAULT_GROUP}
+        ext-config[4]:
+          data-id: ${spring.application.name}${ifmis.config.file:}.yml
+          group: ${NACOS_GROUP:DEFAULT_GROUP}
+      discovery:
+        enable: true
+        server-addr: ${CONFIG_SERVER:config}:${CONFIG_SERVER_PORT:8848}

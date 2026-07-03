@@ -1,0 +1,74 @@
+
+  i number;
+  v_sql varchar2(2000);
+  ln_i integer;
+begin
+
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='ISSUESNUM';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add ISSUESNUM number(9)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='RECTIFIEDNUM';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add RECTIFIEDNUM number(9)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='COMPAREDBDGAMT';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add COMPAREDBDGAMT number(16,4)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='RECOVEREDAMT';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add RECOVEREDAMT number(16,4)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='CANCELEDPRONUM';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add CANCELEDPRONUM number(9)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='ADJUSTPRONUM';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add ADJUSTPRONUM number(9)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='FUNDSNUM';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add FUNDSNUM number(9)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='OTHERLINKED';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add OTHERLINKED varchar2(4000)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='MEASURESTOIMPROVE';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add MEASURESTOIMPROVE varchar2(4000)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='IMPACTREMARK';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add IMPACTREMARK varchar2(4000)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='RESPONSIBLEPERSON';
+  if i=0 then
+    execute immediate 'alter table PERF_T_RECTIFY add RESPONSIBLEPERSON varchar2(100)';
+  end if;
+  
+  select count(1) into i from user_tab_columns t where t.table_name='PERF_T_RECTIFY' and t.column_name='ADJUSTADVICE';
+  if i=1 then
+	execute immediate 'select fn_altertablecol(''PERF_T_RECTIFY'', ''ADJUSTADVICE'', ''VARCHAR2'', 4000)';
+  end if;
+  
+v_sql :='
+create or replace view v_perf_t_rectify as
+select * from PERF_T_RECTIFY t 
+where year = global_multyear_cz.v_pmyear and province = global_multyear_cz.v_pmdivid';
+select fn_alterview('v_perf_t_rectify',v_sql) into ln_i;
+if ln_i = 0 then
+	return;
+end if;

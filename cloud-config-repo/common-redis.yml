@@ -1,0 +1,26 @@
+spring:
+  redis:
+    database: 3   # Redis数据库索引（默认为0）
+    host: ${REDIS_SERVER:127.0.0.1}  # Redis服务器地址
+    jedis:
+      pool:
+        max-active: 10000  # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 50 # 连接池中的最大空闲连接
+        max-wait: -1s # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 0 # 连接池中的最小空闲连接
+    password: ${REDIS_SERVER_PASSWORD:} # Redis服务器连接密码（默认为空）
+    port: ${REDIS_SERVER_PORT:6379}  # Redis服务器连接端口
+    timeout: 5000s # 连接超时时间（毫秒）
+#    sentinel:
+#     master: mymaster   #哨兵监控主redis节点名称，必选
+#      nodes: ${REDIS_SERVER:127.0.0.1}:26379 #哨兵节点
+  session:
+    store-type: redis
+    timeout: 3600s
+    redis:
+      flush-mode: immediate
+      namespace: spring:session
+server:
+  servlet:
+    session:
+      timeout: 3600s

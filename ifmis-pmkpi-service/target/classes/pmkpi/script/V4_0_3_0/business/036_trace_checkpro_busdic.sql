@@ -1,0 +1,5 @@
+begin
+  
+delete from bus_t_diccolumn where tablecode = 'V_PERF_PERFSELFPROJECT_INFO' and columncode = 'PRO_CAT_CODE';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PDMVD09001', null, '0', 'PRO_CAT_CODE', '1', null, null, 'E324176E51BA9FDEC7ED94F53CC0E1BF', 'PRO_CAT_CODE', 'V_PERF_PERFSELFPROJECT_INFO', '项目类别', 'S', '32', null, 1, 1, null, sysdate);

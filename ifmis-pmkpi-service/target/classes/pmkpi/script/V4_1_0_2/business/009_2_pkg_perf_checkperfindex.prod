@@ -1,0 +1,335 @@
+create or replace package body pkg_perf_checkperfindex is
+    
+	/**
+   ** 校验预算调整调剂保存/送审
+   **@o_cs 输出内容
+   */
+   procedure checkBdmYearAdjperf(o_cs out CS)
+     is
+      procs           cs;
+      in_proguid varchar2(40); --项目id
+      procode varchar2(30); --项目编码
+      tmainsql varchar2(1000);
+      tinsertsql varchar2(400);
+      num number(3);
+      num1 number(3);
+      tramark varchar2(400);
+      tsql varchar2(1000);
+      p_province varchar2(9);
+      p_year number(4);
+      loopnum number(3):=0;
+     begin
+    tsql :='select global_multyear_cz.Secu_f_GLOBAL_PARM(''YEAR''),global_multyear_cz.Secu_f_GLOBAL_PARM(''DIVID'') from dual'; 
+    execute immediate tsql into p_year,p_province;   
+    tmainsql := 'select guid from PERF_TMP_GUIDS';
+		open procs for tmainsql;
+    loop
+			  fetch procs into procode;
+        EXIT WHEN procs%NOTFOUND;
+        tmainsql := 'SELECT count(*) FROM v_perf_t_adjust a where islast =1 and a.pro_code = :1';
+        execute immediate tmainsql into num using procode;
+        if num =0 then
+           tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+           execute immediate tinsertsql using '','项目年度绩效未填报',0,procode;
+        end if;
+    end loop;    
+    close procs;      
+		tmainsql := 'SELECT a.pro_code,a.guid FROM v_perf_t_adjust a where islast =1 and exists(select 1 from PERF_TMP_GUIDS k
+		 where k.guid = a.pro_code)';
+		open procs for tmainsql;
+		 loop
+			  fetch procs into procode,in_proguid;
+			  EXIT WHEN procs%NOTFOUND;
+				tmainsql := 'select count(*) from PERF_T_ADJUSTGOAL where province = :1 and year= :2 and mainguid = :3 and nvl(yearflag,''0'') = 0 and is_deleted = 2';
+				execute immediate tmainsql into num using p_province,p_year,in_proguid;
+				if num =0 then
+				   tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				   execute immediate tinsertsql using '','项目年度绩效目标未填报',0,procode;
+				end if;
+				tmainsql := 'select count(*) from PERF_T_ADJUSTINDEX where province = :1 and year= :2 and mainguid = :3 and nvl(yearflag,''0'') = 0  and is_deleted = 2';
+				execute immediate tmainsql into num using p_province,p_year,in_proguid;
+				if num =0 then
+				   tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				   execute immediate tinsertsql using '','项目年度绩效指标未填报',0,procode;
+				end if;
+				---处理绩效指标 WHERE p.STATUS in (''2'',''3'') or p.status is null) t
+				num := 0;
+				num1 := 0;
+				delete from PERF_TMP_INDICATOR t where t.mainguid = in_proguid;
+				tmainsql := 'insert into PERF_TMP_INDICATOR(FGUID,FCODE,FNAME,SUPERID,GUID,SINDEX,NAME,MAINGUID) ';
+				tmainsql := tmainsql || 'select a.ele_id as fguid,a.ele_code as fcode,a.ele_name as fname,a.parent_id as superid,b.guid,b.sindex,b.name,b.mainguid from
+					 perf_t_frame a left join (select t.sindex,t.guid,t.mainguid,t.name from PERF_T_ADJUSTINDEX t where (t.status in (''2'',''3'') or t.status is null) and is_deleted = 2 and t.mainguid = '''||in_proguid||'''
+					 and nvl(t.yearflag,0) = 0 and t.province = '''||p_province||''' and t.year = '''||p_year||''') b on a.ele_id = b.sindex where a.frametype=''PM001'' and a.level_no =2
+					 and a.province = '''||p_province||''' and a.year = '''||p_year||'''';
+				execute immediate tmainsql;
+				FOR c_per IN (select * from PERF_TMP_INDICATOR c where c.mainguid = in_proguid)
+				LOOP
+					if c_per.superid = '1' then
+					  if c_per.name is null then
+						 tramark := c_per.fname||'下至少填报一条三级指标';
+						 tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+						 execute immediate tinsertsql using in_proguid,tramark,0,procode;
+						 exit;
+					  end if;
+					end if;
+
+					--效益指标任意二级下有一条三级指标
+					if c_per.superid = '2' then
+					  if c_per.name is not null then
+						 num := num + 1;
+					  end if;
+					end if;
+					--- 满意度指标下必须有一条三级指标
+					if c_per.superid = '3' then
+					  if c_per.name is not null then
+						 num1 := num1 + 1;
+					  end if;
+					end if;
+				END LOOP;
+
+				 if num = 0 then
+					tramark := '效益指标下至少一条三级指标';
+					tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+					execute immediate tinsertsql using in_proguid,tramark,0,procode;
+				 end if;
+				 if num1 = 0 then
+					tramark := '满意度指标下至少一条三级指标';
+					tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+					execute immediate tinsertsql using in_proguid,tramark,0,procode;
+				 end if;
+				 -- 临时表没有值就返回
+				 tmainsql := 'select count(*) from PERF_TMP_AUDIT where proguid = '''||in_proguid||'''';
+				 execute immediate tmainsql into num;
+
+			 end loop;
+
+		close procs;
+
+        -- 返回校验信息
+        open o_cs for select * from PERF_TMP_AUDIT t;
+     end;
+     
+     
+   /**
+   ** 校验天津部门整体申报保存/送审
+   **@o_cs 输出内容
+   */
+   procedure checkTJdeptPerf(o_cs out CS)
+     is
+      deptcs           cs;
+      deptguid      varchar(40);
+      deptcode      varchar(50);--编码
+      deptname      varchar(500);--名称
+      fguid         varchar(40);
+      fcode         varchar(50);--编码
+      fname         varchar(500);--名称
+      tsuperid      varchar(40);--模板父级
+      tsindex       varchar(40);--二级指标
+      tguid         varchar(40);
+      tname         varchar(400);--三级指标
+      tmainguid     varchar(40);
+      tmainsql varchar2(1000);
+      tinsertsql varchar2(400);
+      num number(3);
+      tramark varchar2(4000);
+      tsql varchar2(1000);
+      p_province varchar2(9);
+      p_year number(4);
+      taskcs           cs;
+      indextcs         cs;
+      tcontext      varchar2(4000);
+      goalguid      varchar(40);
+     begin
+    tsql :='select global_multyear_cz.Secu_f_GLOBAL_PARM(''YEAR''),global_multyear_cz.Secu_f_GLOBAL_PARM(''DIVID'') from dual'; 
+    execute immediate tsql into p_year,p_province;   
+       
+    tsql :='delete from PERF_TMP_AUDIT'; 
+    execute immediate tsql; 
+    
+		tmainsql := 'SELECT a.guid,a.code,a.name FROM V_PERF_T_DEPTPERFDECLARE a where exists(select 1 from PERF_TMP_GUIDS k
+		 where k.guid = a.guid)';
+		open deptcs for tmainsql;
+		 loop
+			  fetch deptcs into deptguid,deptcode,deptname;
+			  EXIT WHEN deptcs%NOTFOUND;
+        
+        --1.1，任务未填报
+				tmainsql := 'select count(1) from V_PERF_T_DEPTTASK t where mainguid = :1 and t.name =''detail'' ';
+        execute immediate tmainsql into num using deptguid;
+				if num = 0 then
+            tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				    execute immediate tinsertsql using deptguid,deptname||'工作任务未填报',0,deptcode;
+        end if;
+        
+        --1.2，每个任务最少对应一条目标
+				tmainsql := 'select t.context from V_PERF_T_DEPTTASK t where mainguid = :1 and t.name =''detail'' and not exists(select 1 from PERF_T_DEPTGOALTASK a where a.taskguid = t.guid)';
+        open taskcs for tmainsql using deptguid;
+        LOOP
+            fetch taskcs into tcontext;
+            EXIT WHEN taskcs%NOTFOUND;
+            tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				    execute immediate tinsertsql using deptguid,deptname||'任务['||tcontext||']最少对应一条目标',0,deptcode;
+        END LOOP;
+        close taskcs;
+        
+        --2，每个目标下必须有指标
+				tmainsql := 'select t.kpi_target from V_BGT_PERF_GOAL_INFO t where mainguid = :1  and nvl(t.yearflag,0) = 0 and not exists(select 1 from V_BGT_PERF_INDICATOR b where t.guid = b.kpi_dep_id)';
+        open taskcs for tmainsql using deptguid;
+        LOOP
+            fetch taskcs into tcontext;
+            EXIT WHEN taskcs%NOTFOUND;
+            tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				    execute immediate tinsertsql using deptguid,deptname||'年度绩效目标['||tcontext||']必须有指标',0,deptcode;
+        END LOOP;
+        close taskcs;
+        --3.分别校验每个目标的指标
+        tmainsql := 'select t.guid,t.kpi_target from V_BGT_PERF_GOAL_INFO t where mainguid = :1 and nvl(t.yearflag,0) = 0 ';
+        open taskcs for tmainsql using deptguid;
+        LOOP
+            fetch taskcs into goalguid,tcontext;
+            EXIT WHEN taskcs%NOTFOUND;
+            num := 0;
+            tmainsql := 'select a.ele_id as fguid,a.ele_code as fcode,a.ele_name as fname,a.parent_id as superid,b.guid,b.sindex,b.name,b.mainguid from
+               perf_t_frame a left join (select t.sindex,t.guid,t.mainguid,t.name from V_BGT_PERF_INDICATOR t where t.mainguid = '''||deptguid||''' and t.kpi_dep_id = '''||goalguid||'''
+               and nvl(t.yearflag,0) = 0 and t.province = '''||p_province||''' and t.year = '''||p_year||''') b on a.ele_id = b.sindex where a.frametype=''DEPT'' and a.level_no =2
+               and a.province = '''||p_province||''' and a.year = '''||p_year||'''';
+
+           open indextcs for tmainsql;
+           loop
+                fetch indextcs into fguid,fcode,fname,tsuperid,tguid,tsindex,tname,tmainguid;
+                EXIT WHEN indextcs%NOTFOUND;
+                --3.1，产出下的二级至少有一条三级指标t
+              if tsuperid = '4' then
+                if tname is null then
+                 tramark := deptname||'年度绩效目标['||tcontext||']的'||fname||'下至少填报一条三级指标';
+                 tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+                 execute immediate tinsertsql using fguid,tramark,0,fcode;
+                end if;
+              end if;
+
+              if tsuperid = '5' then
+                if tname is not null then
+                 num := num + 1;
+                end if;
+              end if;
+           end loop;
+           --3.2，效益下至少有一条三级指标   
+             if num = 0 then
+              tramark := deptname||'年度绩效目标['||tcontext||']的效益指标下至少一条三级指标';
+              tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+              execute immediate tinsertsql using fguid,tramark,0,fcode;
+             end if;
+           close indextcs;
+        END LOOP;
+        close taskcs;
+        
+			 end loop;
+		 close deptcs;
+
+        -- 返回校验信息
+        open o_cs for select * from PERF_TMP_AUDIT t;
+     end;
+     
+   /**
+   ** 校验天津部门整体申报资金处室审阅完成校验
+   **@o_cs 输出内容
+   */
+   procedure checkTJdeptPerfReview(o_cs out CS)
+     is
+      deptcs           cs;
+      mainguid         varchar(40);
+      isreview         number(1);
+      deptcode         varchar(40);
+      deptname         varchar(500);--名称
+      tmainsql varchar2(1000);
+      tinsertsql varchar2(400);
+      fnum    number(3);
+      finitorg       varchar2(40);
+      tsql varchar2(1000);
+      p_province varchar2(9);
+      p_year number(4);
+     begin
+    tsql :='select global_multyear_cz.Secu_f_GLOBAL_PARM(''YEAR''),global_multyear_cz.Secu_f_GLOBAL_PARM(''DIVID'') from dual'; 
+    execute immediate tsql into p_year,p_province;  
+    tsql :='delete from PERF_TMP_AUDIT'; 
+    execute immediate tsql;  
+    --1，校验是否分发处室
+    tmainsql := 'select a.guid,nvl(b.c,0) from V_PERF_T_DEPTPERFDECLARE a left join(
+     select mainguid,count(1) c from PERF_T_DEPTTOFININTORG t group by mainguid )b on a.guid =b.mainguid where exists(select 1 from PERF_TMP_GUIDS k where k.guid = a.guid)';
+    execute immediate tmainsql into mainguid,fnum;
+    if fnum =0 then
+        tsql :='select t.code,t.name from V_PERF_T_DEPTPERFDECLARE t where guid = :1'; 
+        execute immediate tsql into deptcode,deptname using mainguid;   
+        tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				execute immediate tinsertsql using mainguid,deptname||'未分发处室审阅',0,deptcode;
+    end if; 
+    --2，校验分发处室是否全部审阅完成 
+		tmainsql := 'select a.guid,b.name as finitorgname,a.code,a.name,t.isreview from PERF_T_DEPTTOFININTORG t right join V_PERF_T_DEPTPERFDECLARE a on t.mainguid =a.guid
+     left join FASP_T_PUBDEPARTMENT b on t.finitorg =b.code
+     where exists(select 1 from PERF_TMP_GUIDS k
+		 where k.guid = t.mainguid)';
+		open deptcs for tmainsql;
+		 loop
+			  fetch deptcs into mainguid,finitorg,deptcode,deptname,isreview;
+			  EXIT WHEN deptcs%NOTFOUND;
+        if isreview =0 then  
+            tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+            execute immediate tinsertsql using mainguid,deptname||'['||finitorg||']未完成审阅',0,deptcode;
+        end if;        
+		 end loop;
+		 close deptcs;
+
+        -- 返回校验信息
+        open o_cs for select * from PERF_TMP_AUDIT t;
+     end;
+     
+     /**
+   ** 校验天津部门整体任务资金申报保存/送审
+   **@o_cs 输出内容
+   */
+   procedure checkTJdeptPerfBgt(o_cs out CS)
+     is
+      deptcs           cs;
+      deptguid      varchar(40);
+      deptcode      varchar(50);--编码
+      deptname      varchar(500);--名称
+      tmainsql varchar2(1000);
+      tinsertsql varchar2(400);
+      num number(3);
+      tsql varchar2(1000);
+      p_province varchar2(9);
+      p_year number(4);
+
+     begin
+    tsql :='select global_multyear_cz.Secu_f_GLOBAL_PARM(''YEAR''),global_multyear_cz.Secu_f_GLOBAL_PARM(''DIVID'') from dual'; 
+    execute immediate tsql into p_year,p_province;   
+       
+    tsql :='delete from PERF_TMP_AUDIT'; 
+    execute immediate tsql; 
+    
+		tmainsql := 'SELECT a.guid,a.code,a.name FROM V_PERF_T_DEPTPERFDECLARE a where exists(select 1 from PERF_TMP_GUIDS k
+		 where k.guid = a.guid)';
+		open deptcs for tmainsql;
+		 loop
+			  fetch deptcs into deptguid,deptcode,deptname;
+			  EXIT WHEN deptcs%NOTFOUND;
+        
+        --1.工作任务金额合计与预算金额不一致
+				tmainsql := 'select count(1) from V_PERF_T_DEPTTASK where mainguid = :1 and context=''合计''
+                 and basicfund = (select basicfund from V_PERF_T_DEPTTASK where mainguid = :2 and context=''工作任务金额合计'')
+                 and projectfund = (select projectfund from V_PERF_T_DEPTTASK where mainguid = :3 and context=''工作任务金额合计'')
+                 and otherfund = (select otherfund from V_PERF_T_DEPTTASK where mainguid = :4 and context=''工作任务金额合计'') ';
+        execute immediate tmainsql into num using deptguid,deptguid,deptguid,deptguid;
+				if num = 0 then
+            tinsertsql := 'insert into PERF_TMP_AUDIT(proguid,remark,flag,procode) values(:1,:2,:3,:4)';
+				    execute immediate tinsertsql using deptguid,deptname||'工作任务金额合计与预算金额不一致',0,deptcode;
+        end if;
+        
+			 end loop;
+		 close deptcs;
+
+        -- 返回校验信息
+        open o_cs for select * from PERF_TMP_AUDIT t;
+     end;
+     
+end pkg_perf_checkperfindex;

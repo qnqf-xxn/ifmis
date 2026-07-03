@@ -1,0 +1,51 @@
+version: "2"
+services:
+ bdg:
+  image: cloud/ifmis-bdg-service:1.0.0-SNAPSHOT
+  hostname: ifmis-bdg-service
+  networks:
+   - eureka-net
+#  env_file:
+#   - ../api.env
+  ports:
+   - "8007:8007"
+   - "5005:5005"
+  environment:
+   - spring.profiles.active=dev-nacos
+   - JAVA_TOOL_OPTIONS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+   - RABBITMQ_SERVER=192.168.7.6
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - NACOS_NAMESPACE=ifmis
+   - NACOS_GROUP=DEFAULT_GROUP
+   - CONFIG_SERVER=192.168.7.6
+   - CONFIG_SERVER_PORT=8848
+  volumes:
+   - "/root/logs:/root/logs"
+ bdg-webapp:
+  image: cloud/ifmis-bdg-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-bdg-webapp
+  networks:
+   - eureka-net
+#  env_file:
+#   - ../api.env
+  ports:
+   - "7007:7007"
+  environment:
+   - spring.profiles.active=dev-nacos
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+   - RABBITMQ_SERVER=192.168.7.6
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - NACOS_NAMESPACE=ifmis
+   - NACOS_GROUP=DEFAULT_GROUP
+   - CONFIG_SERVER=192.168.7.6
+   - CONFIG_SERVER_PORT=8848
+  volumes:
+   - "/root/logs:/root/logs"
+networks:
+ eureka-net:
+  external: true
+#docker network create eureka-net

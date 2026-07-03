@@ -1,0 +1,17 @@
+CREATE OR REPLACE PACKAGE "PKG_PMKPI_DATARULE" is
+
+  type pub_cursor is REF CURSOR;
+
+  /**
+  * 返回页面数据权限wheresql
+  **/
+  procedure getwheresql(p_menuguid    in varchar2,
+                        p_userguid    in varchar2,
+                        p_province    in varchar2,
+                        p_usertype   in varchar2,
+                        p_curragency  in varchar2,
+                        p_tablealias  in varchar2,
+                        o_wheresql   out varchar2);
+
+
+end PKG_PMKPI_DATARULE;

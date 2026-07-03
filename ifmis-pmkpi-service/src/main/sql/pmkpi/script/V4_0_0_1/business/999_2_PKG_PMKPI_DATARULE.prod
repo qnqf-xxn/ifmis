@@ -1,0 +1,210 @@
+CREATE OR REPLACE PACKAGE BODY "PKG_PMKPI_DATARULE" is
+
+
+  /**
+  *  返回页面数据权限wheresql
+  */
+  procedure getwheresql(p_menuguid    in varchar2,
+                        p_userguid    in varchar2,
+                        p_province    in varchar2,
+                        p_usertype   in varchar2,
+                        p_curragency  in varchar2,
+                        p_tablealias  in varchar2,
+                        o_wheresql   out varchar2) is
+    v_wheresql varchar2(4000);
+    v_wheresql_role clob;
+    v_roleguid varchar2(40);
+    v_roleguid_old varchar2(40);
+    v_curragency varchar2(40);
+    v_levelno varchar2(40);
+    v_tablealias  varchar2(40);
+    v_exesql  varchar2(2500);
+    v_menuguid varchar2(40);
+    v_cs pub_cursor;
+    v_num integer;
+    p_busoffice varchar2(40);
+    v_year number(2);
+  begin
+    --SELECT global_multyear_cz.Secu_f_Global_Setparm('','3300','2020','') into v_year FROM dual;
+    /*用户所对应的角色已存入sp_tmp_guids临时表中*/
+    if p_tablealias is null then
+      v_tablealias:='';
+    else
+      v_tablealias:=p_tablealias||'.';
+    end if;
+    v_exesql:='select count(t1.wheresql) from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                      and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                      and t.menuguid = '''||p_menuguid||''' order by t.roleguid';
+    execute immediate v_exesql into v_num;
+    if v_num > 0 then
+      /*本菜单*/
+      v_exesql:='select replace(t1.wheresql,'','','',''),t.roleguid from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                        and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                        and t.menuguid = '''||p_menuguid||''' order by t.roleguid';
+      open v_cs for v_exesql;
+      loop
+        fetch v_cs into v_wheresql,v_roleguid;
+        exit when v_cs%notfound;
+          /* 用户所属角色涉及到的页面数据权限 */
+          if v_roleguid_old is null then
+            /*每个角色首次*/
+            v_wheresql_role:= '('||v_wheresql||')';
+          elsif v_roleguid_old = v_roleguid then
+            /*角色未切换*/
+            v_wheresql_role:= v_wheresql_role||' and ('||v_wheresql||')';
+          elsif v_roleguid_old != v_roleguid then
+            /*角色切换*/
+            if o_wheresql is null then
+              o_wheresql:= '('||v_wheresql_role||')';
+            else
+              o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+            end if;
+            v_wheresql_role := '('||v_wheresql||')';
+          end if;
+          v_roleguid_old := v_roleguid;
+      end loop;
+    else
+      v_exesql:='select count(t1.wheresql) from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                        and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                        and t.menuguid = (select parentid from fasp_t_pubmenu where guid = '''||p_menuguid||''') order by t.roleguid';
+      execute immediate v_exesql into v_num;
+      if v_num > 0 then
+          /*查不到数据，查父级菜单的权限*/
+          v_exesql:='select replace(t1.wheresql,'','','',''),t.roleguid,t.menuguid from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                        and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                        and t.menuguid = (select parentid from fasp_t_pubmenu where guid = '''||p_menuguid||''') order by t.roleguid';
+          open v_cs for v_exesql;
+          loop
+            fetch v_cs into v_wheresql,v_roleguid,v_menuguid;
+            exit when v_cs%notfound;
+              /* 用户所属角色涉及到的页面数据权限 */
+              if v_roleguid_old is null then
+                /*每个角色首次*/
+                v_wheresql_role:= '('||v_wheresql||')';
+              elsif v_roleguid_old = v_roleguid then
+                /*角色未切换*/
+                v_wheresql_role:= v_wheresql_role||' and ('||v_wheresql||')';
+              elsif v_roleguid_old != v_roleguid then
+                /*角色切换*/
+                if o_wheresql is null then
+                  o_wheresql:= '('||v_wheresql_role||')';
+                else
+                  o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+                end if;
+                v_wheresql_role := '('||v_wheresql||')';
+              end if;
+              v_roleguid_old := v_roleguid;
+          end loop;
+      else
+          v_exesql:='select count(t1.wheresql) from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                            and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                            and t.menuguid = (select parentid from fasp_t_pubmenu where guid = (select parentid from fasp_t_pubmenu where guid = '''||p_menuguid||''') ) order by t.roleguid';
+          execute immediate v_exesql into v_num;
+          if v_num > 0 then
+              /*查不到数据，查父级-父级菜单的权限*/
+              v_exesql:='select replace(t1.wheresql,'','','',''),t.roleguid,t.menuguid from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                            and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                            and t.menuguid = (select parentid from fasp_t_pubmenu where guid = (select parentid from fasp_t_pubmenu where guid = '''||p_menuguid||''') ) order by t.roleguid';
+              open v_cs for v_exesql;
+              loop
+                fetch v_cs into v_wheresql,v_roleguid,v_menuguid;
+                exit when v_cs%notfound;
+                  /* 用户所属角色涉及到的页面数据权限 */
+                  if v_roleguid_old is null then
+                    /*每个角色首次*/
+                    v_wheresql_role:= '('||v_wheresql||')';
+                  elsif v_roleguid_old = v_roleguid then
+                    /*角色未切换*/
+                    v_wheresql_role:= v_wheresql_role||' and ('||v_wheresql||')';
+                  elsif v_roleguid_old != v_roleguid then
+                    /*角色切换*/
+                    if o_wheresql is null then
+                      o_wheresql:= '('||v_wheresql_role||')';
+                    else
+                      o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+                    end if;
+                    v_wheresql_role := '('||v_wheresql||')';
+                  end if;
+                  v_roleguid_old := v_roleguid;
+              end loop;
+          else
+              /*查不到数据，查父级-父级-父级菜单的权限*/
+              v_exesql:='select replace(t1.wheresql,''，'','',''),t.roleguid,t.menuguid from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                            and exists(select 1 from perf_tmp_ruleguids a where a.guid = t.roleguid)
+                            and t.menuguid = (select parentid from fasp_t_pubmenu where guid = (select parentid from fasp_t_pubmenu where guid = (select parentid from fasp_t_pubmenu where guid = '''||p_menuguid||''') ) ) order by t.roleguid';
+              open v_cs for v_exesql;
+              loop
+                fetch v_cs into v_wheresql,v_roleguid,v_menuguid;
+                exit when v_cs%notfound;
+                  /* 用户所属角色涉及到的页面数据权限 */
+                  if v_roleguid_old is null then
+                    /*每个角色首次*/
+                    v_wheresql_role:= '('||v_wheresql||')';
+                  elsif v_roleguid_old = v_roleguid then
+                    /*角色未切换*/
+                    v_wheresql_role:= v_wheresql_role||' and ('||v_wheresql||')';
+                  elsif v_roleguid_old != v_roleguid then
+                    /*角色切换*/
+                    if o_wheresql is null then
+                      o_wheresql:= '('||v_wheresql_role||')';
+                    else
+                      o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+                    end if;
+                    v_wheresql_role := '('||v_wheresql||')';
+                  end if;
+                  v_roleguid_old := v_roleguid;
+              end loop;
+          end if;
+      end if;
+    end if;
+    if v_roleguid_old is not null then
+      /*最后一次循环的角色*/
+      if o_wheresql is null then
+        o_wheresql:= '('||v_wheresql_role||')';
+      else
+        o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+      end if;
+    end if;
+    /**用户类型为财政,查询处室用户**/
+    if p_usertype is not null and p_usertype = '1' then
+      p_busoffice := p_curragency;
+    end if;
+    /*替换表别名*/
+    o_wheresql:= replace(o_wheresql,'ruletable.',v_tablealias);
+    /*替换#curruser# */
+    if p_userguid is not null and instr(o_wheresql,'#curruser#')>0 then
+      o_wheresql:= replace(o_wheresql,'#curruser#', p_userguid);
+    end if;
+    /*替换#province# */
+    if p_province is not null and instr(o_wheresql,'#province#')>0 then
+      o_wheresql:= replace(o_wheresql,'#province#', p_province);
+    end if;
+    /*替换#busoffice# */
+    if p_busoffice is not null and instr(o_wheresql,'#busoffice#')>0 then
+      o_wheresql:= replace(o_wheresql,'#busoffice#', p_busoffice);
+    end if;
+    /*替换#curragency# */
+    if instr(o_wheresql,'#curragency#')>0 then
+      if p_curragency is not null then
+        v_curragency := p_curragency;
+      elsif p_busoffice is not null then
+          v_curragency := p_busoffice;
+      end if;
+      o_wheresql:= replace(o_wheresql,'#curragency#', v_curragency);
+      if instr(o_wheresql,'#guid#')>0 then
+        /* #guid#替换，guid1-10占位符，查询部门下级单位时用*/
+        v_exesql := 'select count(levelno) from pub_t_agency where guid in (select case when superguid =''00'' then guid else superguid end superguid from pub_t_agency where guid = '''||v_curragency||''') ';
+        execute immediate v_exesql into v_num;
+        if v_num > 0 then
+          v_exesql := 'select levelno from pub_t_agency where guid in (select case when superguid =''00'' then guid else superguid end superguid from pub_t_agency where guid = '''||v_curragency||''') ';
+          execute immediate v_exesql into v_levelno;
+        end if;
+        o_wheresql:= replace(o_wheresql,'#guid#', 'guid'||v_levelno);
+      end if;
+    end if;
+    if o_wheresql is not null then
+      o_wheresql := '('||o_wheresql||')';
+    end if;
+  end;
+
+end PKG_PMKPI_DATARULE;

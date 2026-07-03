@@ -1,0 +1,27 @@
+begin
+
+--1-1.导出模板配置-新增/修改按钮-业务表信息注册  
+delete from bus_t_dictable where tablecode = 'PERF_T_IMPEXPMAIN';
+insert into bus_t_dictable (YEAR, PROVINCE, TABLECODE, NAME, REMARK, TABLETYPE, VERSION, DBTABNAME, APPID, EXP, TABLEPART, ISSHOW, DBIMPFLAG, ISSYS, ISUSES, VIEWTABLENAME, DBVERSION, DATASYNC, HASTRIGGER, SYNCCLASSNAME, STATUS)
+values ('2016', '87', 'PERF_T_IMPEXPMAIN', '导出模板表', '导出模板表', 2, 1, 'PERF_T_IMPEXPMAIN', 'pmkpi', null, '0', 1, null, 1, 1, 'V_PERF_T_IMPEXPMAIN', sysdate, 1, 1, null, '1');
+
+--1-2.导出模板配置-新增/修改按钮-业务表字段注册(tablecode加入数据源)    
+delete from Bus_t_Diccolumn where tablecode = 'PERF_T_IMPEXPMAIN' and columncode = 'TABLECODE';
+insert into Bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPIDICTABLE', null, '1', 'TABLECODE', '1', '2016', '87', 'C464EFC06E1DCC0BE053B11FA8C01F5F', 'TABLECODE', 'PERF_T_IMPEXPMAIN', '表名', 's', '100', null, 1, 1, null, sysdate);
+
+--2-1.导出模板配置-列配置-业务表信息注册  
+delete from bus_t_dictable where tablecode ='PERF_T_IMPEXPSUB';
+insert into bus_t_dictable (YEAR, PROVINCE, TABLECODE, NAME, REMARK, TABLETYPE, VERSION, DBTABNAME, APPID, EXP, TABLEPART, ISSHOW, DBIMPFLAG, ISSYS, ISUSES, VIEWTABLENAME, DBVERSION, DATASYNC, HASTRIGGER, SYNCCLASSNAME, STATUS)
+values ('2016', '87', 'PERF_T_IMPEXPSUB', '导出模板配置表', '导出模板配置表', 2, 1, 'PERF_T_IMPEXPSUB', 'pmkpi', null, '0', 1, null, 1, 1, 'V_PERF_T_IMPEXPSUB', sysdate, 1, 1, null, '1');
+
+--2-2.导出模板配置-列配置-业务表字段注册      
+delete from Bus_t_Diccolumn where tablecode = 'PERF_T_IMPEXPSUB' and columncode in('COLUMNCODE','TYPE','CSID');
+insert into Bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPICOLUMNCODES', null, '0', 'COLUMNCODE', '1', '2016', '87', 'C450B6D0DD740554E053B11FA8C044F7', 'COLUMNCODE', 'PERF_T_IMPEXPSUB', null, 's', '50', null, 1, 0, null, sysdate);
+insert into Bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPICSIDS', null, '0', 'CSID', '1', '2016', '87', 'C450B6D0DD750554E053B11FA8C044F7', 'CSID', 'PERF_T_IMPEXPSUB', null, 's', '100', null, 1, 0, null, sysdate);
+insert into Bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPICOLUMNTYPES', null, '0', 'TYPE', '1', '2016', '87', 'C450B6D0DD7A0554E053B11FA8C044F7', 'TYPE', 'PERF_T_IMPEXPSUB', null, 'S', '50', null, 1, 0, null, sysdate);
+
+

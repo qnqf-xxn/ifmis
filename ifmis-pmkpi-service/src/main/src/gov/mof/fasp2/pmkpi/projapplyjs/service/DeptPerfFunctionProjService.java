@@ -1,0 +1,51 @@
+package gov.mof.fasp2.pmkpi.projapplyjs.service;
+
+import gov.mof.fasp2.buscore.framework.exception.AppException;
+import gov.mof.fasp2.pmkpi.common.PmkpiService;
+import gov.mof.fasp2.pmkpi.projapplyjs.bo.DeptPerfFunctionProjBO;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+
+public class DeptPerfFunctionProjService extends PmkpiService {
+    private DeptPerfFunctionProjBO deptPerfFunctionProjBO;
+
+    public void setDeptPerfFunctionProjBO(DeptPerfFunctionProjBO deptPerfFunctionProjBO) {
+        this.deptPerfFunctionProjBO = deptPerfFunctionProjBO;
+    }
+
+    @Override
+    public Map loadComponent(HttpServletRequest request, HttpServletResponse response, Map config) throws Exception {
+        super.loadComponent(request, response, config);
+        String mainguid = request.getParameter("mainguid");
+        String projguid = request.getParameter("projguid");
+        String viewtype = request.getParameter("viewtype");
+        String saveAgency = request.getParameter("saveAgency");
+        config.put("mainguid", mainguid);
+        config.put("projguid", projguid);
+        config.put("viewtype", viewtype);
+        config.put("saveAgency", saveAgency);
+        return config;
+    }
+
+    /**
+     * 查询数据.
+     * @param parms --
+     * @return --
+     */
+    public Map<String, Object> getDatas(HashMap<String,Object> parms) throws AppException {
+        return deptPerfFunctionProjBO.getData(parms);
+    }
+
+    /**
+     * 保存对应项目.
+     * @param parms --
+     * @return --
+     */
+    public Map<String, Object> save(HashMap<String,Object> parms) throws AppException {
+        return deptPerfFunctionProjBO.save(parms);
+    }
+
+}

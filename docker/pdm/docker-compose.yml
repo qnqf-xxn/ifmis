@@ -1,0 +1,29 @@
+version: "2"
+services:
+ pdm:
+  image: cloud/ifmis-pdm-service:1.0.0-SNAPSHOT
+  hostname: ifmis-pdm-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8005:8005"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ pdm-webapp:
+  image: cloud/ifmis-pdm-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-pdm-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7005:7005"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

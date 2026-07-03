@@ -1,0 +1,143 @@
+create or replace package body pkg_perf_refreshindex is
+  /**
+  * 更新全部指标编码.
+  **/
+    procedure refreshindex(pyear varchar2,ptablecode varchar2) is
+    tmainsql   varchar2(3000);
+    tcs          cs;
+    tfcs          cs;
+    tscs          cs;
+    t_tcs          cs;
+    tprovince    varchar2(9);
+    tnum         number(9);
+    tfindex      varchar2(40);
+    tsindex      varchar2(40);
+    t_tindex     varchar2(40);
+    tfindexcode varchar2(40);
+    tsindexcode varchar2(40);
+    tmaxcode     varchar(30);
+    tcode        number(30);
+    begin
+      --获取数据表区划，循环区划刷新指标
+      tmainsql := 'select province from ' || ptablecode || ' group by province';
+      open tcs for tmainsql;
+       loop
+            fetch tcs into tprovince;
+            EXIT WHEN tcs%NOTFOUND;
+            select global_multyear_cz.Secu_f_Global_Setparm('',''||tprovince||'',''||pyear||'','') into tnum from dual;
+            
+            --获取一级指标
+            tmainsql := 'select guid,code from v_perf_t_frame t where t.levelno=1';
+            open tfcs for tmainsql;
+            loop
+              fetch tfcs into tfindex,tfindexcode;
+              EXIT WHEN tfcs%NOTFOUND;
+                  --获取二级指标
+                  tmainsql := 'select guid,code from v_perf_t_frame t where t.levelno=2 and superid=:1';
+                  open tscs for tmainsql using tfindex;
+                  loop
+                    fetch tscs into tsindex,tsindexcode;
+                    EXIT WHEN tscs%NOTFOUND;
+                         --查询一二级指标下最大的编码
+                         tmainsql := 'select to_number(max(code)) code from perf_v_queryallindex where findex=:1 and sindex =:2';
+                         execute immediate tmainsql into tmaxcode using tfindex,tsindex;
+                         if tmaxcode is not null then
+                            tcode := substr(tmaxcode,3);
+                         else
+                            tcode := 0;
+                         end if;
+                         --查询所有编码
+                         tmainsql := 'select guid from '||ptablecode||' t where t.findex=:1 and sindex=:2';
+                          open t_tcs for tmainsql using tfindex,tsindex;
+                          loop
+                            fetch t_tcs into t_tindex;
+                            EXIT WHEN t_tcs%NOTFOUND;
+                                 tcode := tcode + 1;
+                                 tmainsql := 'update ' || ptablecode || ' t set t.code=''' || tsindex || lpad(tcode,4,0) || ''' where t.guid=:1';
+                                 execute immediate tmainsql using t_tindex;    
+                          end loop;
+                          close t_tcs;
+                  end loop;
+                  close tscs;
+            end loop;
+            close tfcs;
+       end loop;
+       close tcs;
+       
+       --同步数据
+       if ptablecode = 'pm_perf_indicator' then
+            tmainsql := 'update pm_perf_indicator t set t.code=(select code from bas_perf_indicator i where i.guid=t.tindex) where t.tindex is not null';
+            execute immediate tmainsql;
+            tmainsql := 'update pm_perf_indicator t set t.kpi_lv3=t.code';
+            execute immediate tmainsql;
+       end if;
+       if ptablecode = 'bgt_perf_indicator' then
+            tmainsql := 'update bgt_perf_indicator t set t.kpi_lv3=t.code';
+            execute immediate tmainsql;
+       end if;
+       if ptablecode = 'bas_perf_indicator' then
+            tmainsql := 'update bas_perf_indicator t set t.perf_ind_code=t.code';
+            execute immediate tmainsql;
+       end if;
+    end;
+
+    /**
+    * 更新导入指标表编码.
+    **/
+    procedure refreshbasindex(ptablecode varchar2) is
+    tmainsql   varchar2(3000);
+    tfcs          cs;
+    tscs          cs;
+    t_tcs          cs;
+    tfindex      varchar2(40);
+    tsindex      varchar2(40);
+    t_tindex     varchar2(40);
+    tfindexcode varchar2(40);
+    tsindexcode varchar2(40);
+    tmaxcode     varchar(30);
+    tcode        number(30);
+    begin
+       --select global_multyear_cz.Secu_f_Global_Setparm('','340100000','2021','') into tcode from dual;
+
+       --获取一级指标
+       tmainsql := 'select guid,code from v_perf_t_frame t where t.levelno=1 and frametype=''PM001''';
+            open tfcs for tmainsql;
+            loop
+              fetch tfcs into tfindex,tfindexcode;
+              EXIT WHEN tfcs%NOTFOUND;
+                  --获取二级指标
+                  tmainsql := 'select guid,code from v_perf_t_frame t where t.levelno=2 and superid=:1';
+                  open tscs for tmainsql using tfindex;
+                  loop
+                    fetch tscs into tsindex,tsindexcode;
+                    EXIT WHEN tscs%NOTFOUND;
+                         --查询一二级指标下最大的编码
+                         tmainsql := 'select to_number(max(code)) code from perf_v_queryallindex where findex=:1 and sindex =:2';
+                         execute immediate tmainsql into tmaxcode using tfindex,tsindex;
+                         if tmaxcode is not null and tmaxcode <> 0 then
+                            tcode := substr(tmaxcode,3);
+                         else
+                            tcode := 0;
+                         end if;
+                         --查询所有编码
+                         tmainsql := 'select guid from '||ptablecode||' t where t.findex=:1 and sindex=:2 and t.code=''000000''';
+                          open t_tcs for tmainsql using tfindex,tsindex;
+                          loop
+                            fetch t_tcs into t_tindex;
+                            EXIT WHEN t_tcs%NOTFOUND;
+                                 tcode := tcode + 1;
+                                 tmainsql := 'update ' || ptablecode || ' t set t.code=''' || tsindex || lpad(tcode,4,0) || ''' where t.guid=:1';
+                                 execute immediate tmainsql using t_tindex;    
+                          end loop;
+                          close t_tcs;
+                  end loop;
+                  close tscs;
+            end loop;
+            close tfcs;          
+       if ptablecode = 'v_bas_perf_indicator' then
+            tmainsql := 'update v_bas_perf_indicator t set t.perf_ind_code=t.code';
+            execute immediate tmainsql;
+       end if;
+    end;
+
+end pkg_perf_refreshindex;

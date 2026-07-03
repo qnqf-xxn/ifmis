@@ -1,0 +1,21 @@
+
+v_sql varchar2(2000);
+ln_i integer;
+begin
+	v_sql :='CREATE OR REPLACE VIEW V_PM_PERF_INDICATOR AS
+SELECT *
+FROM PM_PERF_INDICATOR WHERE YEAR = GLOBAL_MULTYEAR_CZ.V_PMYEAR AND
+     PROVINCE = GLOBAL_MULTYEAR_CZ.V_PMDIVID AND IS_DELETED = 2 AND IS_BACKUP =2';
+	select fn_alterview('V_PM_PERF_INDICATOR',v_sql) into ln_i;
+	if ln_i = 0 then
+	    return;
+	end if;
+	
+	v_sql :='CREATE OR REPLACE VIEW V_PM_PERF_INDICATOR_TEMP AS
+SELECT *
+FROM PM_PERF_INDICATOR_TEMP 
+WHERE PROVINCE = GLOBAL_MULTYEAR_CZ.V_PMDIVID AND IS_DELETED = 2';
+	select fn_alterview('V_PM_PERF_INDICATOR_TEMP',v_sql) into ln_i;
+	if ln_i = 0 then
+	    return;
+	end if;

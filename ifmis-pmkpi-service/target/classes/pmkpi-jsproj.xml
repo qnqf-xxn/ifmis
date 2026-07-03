@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+    <bean id="pmkpi.projApplyJs.ProjPage" class="gov.mof.fasp2.pmkpi.projapplyjs.page.ProjPage"></bean>
+    <bean id="pmkpi.projApplyJs.PerfAdvEvalService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.PerfAdvEvalService">
+        <property name="perfAdvEvalBO" ref="pmkpi.projapplyjs.PerfAdvEvalBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.PerfAdvEvalBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.PerfAdvEvalBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.PerfAdvEvalBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.PerfAdvEvalBO">
+        <property name="perfAdvEvalDAO" ref="pmkpi.projapplyjs.PerfAdvEvalDAO"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.PerfAdvEvalDAO" class="gov.mof.fasp2.pmkpi.projapplyjs.dao.PerfAdvEvalDAO"></bean>
+
+
+    <bean id="pmkpi.projApplyJs.PerfProjAuditService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.PerfProjAuditService">
+        <property name="perfProjAuditBO" ref="pmkpi.projapplyjs.PerfProjAuditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.PerfProjAuditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.PerfProjAuditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.PerfProjAuditBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.PerfProjAuditBO">
+        <property name="perfProjAuditDAO" ref="pmkpi.projapplyjs.PerfProjAuditDAO"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.PerfProjAuditDAO" class="gov.mof.fasp2.pmkpi.projapplyjs.dao.PerfProjAuditDAO"></bean>
+
+
+    <bean id="pmkpi.projApplyJs.DeptPage" class="gov.mof.fasp2.pmkpi.projapplyjs.page.DeptPage"></bean>
+    <bean id="pmkpi.projApplyJs.DeptPerfInfoService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.DeptPerfInfoService">
+        <property name="deptPerfInfoBO" ref="pmkpi.projapplyjs.DeptPerfInfoBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfInfoBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.DeptPerfInfoBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfInfoBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.DeptPerfInfoBO">
+        <property name="deptPerfInfoDAO" ref="pmkpi.projapplyjs.DeptPerfInfoDAO"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfInfoDAO" class="gov.mof.fasp2.pmkpi.projapplyjs.dao.DeptPerfInfoDAO"></bean>
+
+    <bean id="pmkpi.projApplyJs.DeptPerfBudgetService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.DeptPerfBudgetService">
+        <property name="deptPerfBudgetBO" ref="pmkpi.projapplyjs.DeptPerfBudgetBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfBudgetBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.DeptPerfBudgetBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfBudgetBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.DeptPerfBudgetBO">
+        <property name="deptPerfInfoDAO" ref="pmkpi.projapplyjs.DeptPerfInfoDAO"></property>
+    </bean>
+
+    <bean id="pmkpi.projApplyJs.DeptPerfFunctionService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.DeptPerfFunctionService">
+        <property name="deptPerfFunctionBO" ref="pmkpi.projapplyjs.DeptPerfFunctionBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfFunctionBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.DeptPerfFunctionBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfFunctionBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.DeptPerfFunctionBO">
+        <property name="deptPerfInfoDAO" ref="pmkpi.projapplyjs.DeptPerfInfoDAO"></property>
+    </bean>
+
+    <bean id="pmkpi.projApplyJs.DeptPerfFunctionProjService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.DeptPerfFunctionProjService">
+        <property name="deptPerfFunctionProjBO" ref="pmkpi.projapplyjs.DeptPerfFunctionProjBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfFunctionProjBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.DeptPerfFunctionProjBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfFunctionProjBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.DeptPerfFunctionProjBO">
+        <property name="deptPerfInfoDAO" ref="pmkpi.projapplyjs.DeptPerfInfoDAO"></property>
+    </bean>
+
+    <bean id="pmkpi.projApplyJs.DeptPerfIndexService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.DeptPerfIndexService">
+        <property name="deptPerfIndexBO" ref="pmkpi.projapplyjs.DeptPerfIndexBOTX"></property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfIndexBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.projapplyjs.DeptPerfIndexBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.projapplyjs.DeptPerfIndexBO" class="gov.mof.fasp2.pmkpi.projapplyjs.bo.DeptPerfIndexBO">
+        <property name="deptPerfInfoDAO" ref="pmkpi.projapplyjs.DeptPerfInfoDAO"></property>
+    </bean>
+
+    <bean id="pmkpi.projApplyJs.DeptPerfIndexEditService" class="gov.mof.fasp2.pmkpi.projapplyjs.service.DeptPerfIndexEditService">
+    </bean>
+</beans>

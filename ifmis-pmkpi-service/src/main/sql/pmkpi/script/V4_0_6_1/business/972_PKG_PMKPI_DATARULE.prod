@@ -1,0 +1,124 @@
+CREATE OR REPLACE PACKAGE BODY PKG_PMKPI_DATARULE is
+
+
+  /**
+  *  返回页面数据权限wheresql
+  */
+  procedure getwheresql(p_menuguid    in varchar2,
+                        p_userguid    in varchar2,
+                        p_province    in varchar2,
+                        p_usertype   in varchar2,
+                        p_curragency  in varchar2,
+                        p_tablealias  in varchar2,
+                        o_wheresql   out varchar2) is
+    v_wheresql varchar2(4000);
+    v_wheresql_role clob;
+    v_roleguid varchar2(40);
+    v_roleguid_old varchar2(40);
+    v_curragency varchar2(40);
+    v_levelno varchar2(40);
+    v_tablealias  varchar2(40);
+    v_exesql  varchar2(4000);
+    v_cs pub_cursor;
+    v_num integer;
+    p_busoffice varchar2(40);
+    v_year varchar2(4);
+    v_province  varchar2(9);
+    v_roles    varchar2(4000);
+  begin
+    --SELECT global_multyear_cz.Secu_f_Global_Setparm('','340000000','2021','') into v_year FROM dual;
+    ---处理用户对应的角色
+    v_exesql := 'select wm_concat(''''''''||t1.roleguid||'''''''') from FASP_T_CAUSERROLE  t1,FASP_T_CAROLE t2 where t1.USERGUID = :1
+     and t1.ROLEGUID = t2.GUID and t2.status <> 3 and exists (SELECT 1 FROM v_pmkpi_t_roledatarule k where k.menuguid = :2 and k.roleguid = t1.roleguid)';
+    execute immediate v_exesql into v_roles using p_userguid,p_menuguid;
+    /*用户所对应的角色已存入sp_tmp_guids临时表中*/
+    select global_multyear_cz.v_pmYear into v_year from dual;
+    select global_multyear_cz.v_pmDivID into v_province from dual;
+    if p_tablealias is null then
+      v_tablealias:='';
+    else
+      v_tablealias:=p_tablealias||'.';
+    end if;
+    v_exesql:='select count(t1.wheresql) from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                      and t.roleguid in ('||v_roles||')
+                      and t.menuguid = :1 and t.year=:2 and t.province=:3 order by t.roleguid';
+    execute immediate v_exesql into v_num using p_menuguid, v_year, v_province;
+    if v_num > 0 then
+      /*本菜单*/
+      v_exesql:='select replace(t1.wheresql,'','','',''),t.roleguid from pmkpi_t_roledatarule t, pmkpi_t_datarule t1 where t1.guid = t.dataruleguid
+                        and t.roleguid in ('||v_roles||')
+                        and t.menuguid = :1 and t.year=:2 and t.province=:3 order by t.roleguid';
+      open v_cs for v_exesql using p_menuguid, v_year, v_province;
+      loop
+        fetch v_cs into v_wheresql,v_roleguid;
+        exit when v_cs%notfound;
+          /* 用户所属角色涉及到的页面数据权限 */
+          if v_roleguid_old is null then
+            /*每个角色首次*/
+            v_wheresql_role:= '('||v_wheresql||')';
+          elsif v_roleguid_old = v_roleguid then
+            /*角色未切换*/
+            v_wheresql_role:= v_wheresql_role||' and ('||v_wheresql||')';
+          elsif v_roleguid_old != v_roleguid then
+            /*角色切换*/
+            if o_wheresql is null then
+              o_wheresql:= '('||v_wheresql_role||')';
+            else
+              o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+            end if;
+            v_wheresql_role := '('||v_wheresql||')';
+          end if;
+          v_roleguid_old := v_roleguid;
+      end loop;
+    end if;
+    if v_roleguid_old is not null then
+      /*最后一次循环的角色*/
+      if o_wheresql is null then
+        o_wheresql:= '('||v_wheresql_role||')';
+      else
+        o_wheresql:= o_wheresql ||' or ('||v_wheresql_role||')';
+      end if;
+    end if;
+    /**用户类型为财政,查询处室用户**/
+    if p_usertype is not null and p_usertype = '1' then
+      p_busoffice := p_curragency;
+    end if;
+    /*替换表别名*/
+    o_wheresql:= replace(o_wheresql,'ruletable.',v_tablealias);
+    /*替换#curruser# */
+    if p_userguid is not null and instr(o_wheresql,'#curruser#')>0 then
+      o_wheresql:= replace(o_wheresql,'#curruser#', p_userguid);
+    end if;
+    /*替换#province# */
+    if p_province is not null and instr(o_wheresql,'#province#')>0 then
+      o_wheresql:= replace(o_wheresql,'#province#', p_province);
+    end if;
+    /*替换#busoffice# */
+    if p_busoffice is not null and instr(o_wheresql,'#busoffice#')>0 then
+      o_wheresql:= replace(o_wheresql,'#busoffice#', p_busoffice);
+    end if;
+    /*替换#curragency# */
+    if instr(o_wheresql,'#curragency#')>0 then
+      if p_curragency is not null then
+        v_curragency := p_curragency;
+      elsif p_busoffice is not null then
+          v_curragency := p_busoffice;
+      end if;
+      o_wheresql:= replace(o_wheresql,'#curragency#', v_curragency);
+      if instr(o_wheresql,'#guid#')>0 then
+        /* #guid#替换，guid1-10占位符，查询部门下级单位时用*/
+        v_exesql := 'select count(levelno) from pub_t_agency where guid in (select case when superguid =''00'' then guid else superguid end superguid from pub_t_agency where guid = '''||v_curragency||''') ';
+        execute immediate v_exesql into v_num;
+        if v_num > 0 then
+          v_exesql := 'select levelno from pub_t_agency where guid in (select case when superguid =''00'' then guid else superguid end superguid from pub_t_agency where guid = '''||v_curragency||''') ';
+          execute immediate v_exesql into v_levelno;
+        end if;
+        o_wheresql:= replace(o_wheresql,'#guid#', 'guid'||v_levelno);
+      end if;
+    end if;
+    if o_wheresql is not null then
+      o_wheresql := '('||o_wheresql||')';
+    end if;
+  end;
+
+end PKG_PMKPI_DATARULE;

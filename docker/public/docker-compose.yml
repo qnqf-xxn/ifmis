@@ -1,0 +1,29 @@
+version: "2"
+services:
+ public:
+  image: cloud/ifmis-framework-public-service:1.0.0-SNAPSHOT
+  hostname: ifmis-framework-public-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8003:8003"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ public-webapp:
+  image: cloud/ifmis-framework-public-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-framework-public-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7003:7003"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

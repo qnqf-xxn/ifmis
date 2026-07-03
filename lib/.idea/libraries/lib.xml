@@ -1,0 +1,41 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/spring-cloud-stream-binder-rocketmq-0.2.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/p6spy-master-3.9.2-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis3-bdg-extexd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hqbpmn-database-localization.jar!/" />
+      <root url="jar://$PROJECT_DIR$/security-tool.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ltreport-3.0.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jodd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/polardb-jdbc18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javadbf.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bcprov-jdk16-1.45.jar!/" />
+      <root url="jar://$PROJECT_DIR$/json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-inspect-service-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/druid-1.1.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-bdg-service-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-inspect-common-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ltreport-jasper-3.0.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/fasp3-gl-jsclient-2.4.0.08X-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hqbpmn.jar!/" />
+      <root url="jar://$PROJECT_DIR$/otldb-1.0-SNAPSHOT-otl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/configuration-client-2.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/fasp3-gl-zfclient-2.4.0.08X-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/transfer-api-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-card-service-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-pay-service-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bankservice.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis3-bdm-extexd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-gl-4.0.1.9-RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Jcrontab-1.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis3-pdm-extexd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/sign.jar!/" />
+      <root url="jar://$PROJECT_DIR$/fasp2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/xxpt.gateway.shared.client-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ifmis-gl-4.0.0.2-RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

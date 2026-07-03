@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--事前绩效评估查询-->
+    <bean id="pmkpi.assessQuery.AssessQueryPage" class="gov.mof.fasp2.pmkpi.assessQuery.AssessQueryPage"></bean>
+    <bean id="pmkpi.assessQuery.AssessQueryService" class="gov.mof.fasp2.pmkpi.assessQuery.AssessQueryService">
+        <property name="assessQueryBO" ref="pmkpi.assessQuery.AssessQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.assessQuery.AssessQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.assessQuery.AssessQueryBO"/>
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.assessQuery.AssessQueryBO" class="gov.mof.fasp2.pmkpi.assessQuery.AssessQueryBO">
+        <property name="assessQueryDAO" ref="pmkpi.assessQuery.AssessQueryDAO"></property>
+    </bean>
+    <bean id="pmkpi.assessQuery.AssessQueryDAO" class="gov.mof.fasp2.pmkpi.assessQuery.AssessQueryDAO"></bean>
+
+</beans>

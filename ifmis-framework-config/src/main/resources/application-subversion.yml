@@ -1,0 +1,17 @@
+
+spring:
+  profiles: subversion
+  cloud:
+    config:
+      bus:
+        trace:
+          enabled: true
+      server:
+        svn:
+          basedir: /tmp/data
+          default-label:
+          password: '{cipher}AICZ22ragF2cVLaYaPOXXMz2uCQ3e++5sLTRI6eokUi3HPAQE6+HjxeMvavBjwlnUcrH5t+Q/0IC7kwMnxqxHvdPENsziEl+cCfjXug+/5cjbmqcwYY+YbRwIzQIKBEliSPgfCEg23VbBzYNR0N/uDAAY2fmWlNHO/K6XMQ6aBUnc9AnIXIJ4Zo6ZZ6ZztqAa8b8ZyMMauklsHp0zegtYXZB'
+          search-paths: '{application}'
+          uri: http://111.204.186.246/svn/YFB-CODE/DL/product/ifmis3.0/ifmis-spring-cloud/cloud-config-repo
+          username: qiudehe
+

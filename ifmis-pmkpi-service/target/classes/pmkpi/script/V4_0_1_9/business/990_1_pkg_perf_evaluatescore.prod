@@ -1,0 +1,9 @@
+create or replace package pkg_perf_evaluatescore is
+
+  TYPE CS IS REF CURSOR;
+  --绩效工作管理考核评分计算（填报）
+  procedure   workevaluatescore(o_cs out CS);
+  --绩效工作管理考核评分计算（查询）
+  procedure   getAchievequery(pbustype varchar2,o_cs out CS);
+
+end pkg_perf_evaluatescore;

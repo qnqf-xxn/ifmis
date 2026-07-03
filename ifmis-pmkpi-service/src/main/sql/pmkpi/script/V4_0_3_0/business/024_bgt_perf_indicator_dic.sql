@@ -1,0 +1,22 @@
+begin
+
+--字段注册
+delete from bus_t_diccolumn where tablecode = 'BGT_PERF_INDICATOR' and columncode in('INDEXCATLEV','LV1_PERF_IND_NAME','LV2_PERF_IND_NAME');
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'INDEXCATLEVSOURCE', null, '1', 'INDEXCATLEV', '1', '2016', '87', 'E8FF2A5B877330A4E0533315A8C04512', 'INDEXCATLEV', 'BGT_PERF_INDICATOR', '指标分级', 'S', '40', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LV1_PERF_IND_NAME', '1', '2016', '87', 'E8FF2A5B877430A4E0533315A8C04512', 'LV1_PERF_IND_NAME', 'BGT_PERF_INDICATOR', '一级指标名称', 'S', '200', null, 1, 1, null, sysdate);
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'LV2_PERF_IND_NAME', '1', '2016', '87', 'E8FF2A5B877530A4E0533315A8C04512', 'LV2_PERF_IND_NAME', 'BGT_PERF_INDICATOR', '二级指标名称', 'S', '200', null, 1, 1, null, sysdate);
+--数据源关联
+delete from fasp_t_dicdssource where elementcode = 'INDEXCATLEVSOURCE';
+insert into fasp_t_dicdssource (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, STARTTIME, ENDTIME, YEAR, PROVINCE, CRC, TYPEGUID, SHOWSTRUCT, SOURCETYPE, DATASOURCE, DBVERSION, VERSION, APPID)
+values ('INDEXCATLEVSOURCE', 'INDEXCATLEVSOURCE', 'INDEXCATLEVSOURCE', '指标分级', '1', null, null, null, '2016', '87', null, null, null, '2', 'select t.* from perf_t_datasource t where t.elementcode = ''INDEXCATLEVSOURCE'' order by ordernum', null, 1, 'pmkpi');
+delete from perf_t_datasource where elementcode = 'INDEXCATLEVSOURCE';
+insert into perf_t_datasource (GUID, CODE, NAME, REMARK, SUPERGUID, LEVELNO, ISLEAF, ORDERNUM, ELEMENTCODE, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE)
+values ('维持型', '1', '维持型', null, null, null, null, 1, 'INDEXCATLEVSOURCE', 1, '20220919', '20220919', 2016, '87');
+insert into perf_t_datasource (GUID, CODE, NAME, REMARK, SUPERGUID, LEVELNO, ISLEAF, ORDERNUM, ELEMENTCODE, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE)
+values ('提升型', '2', '提升型', null, null, null, null, 2, 'INDEXCATLEVSOURCE', 1, '20220919', '20220919', 2016, '87');
+insert into perf_t_datasource (GUID, CODE, NAME, REMARK, SUPERGUID, LEVELNO, ISLEAF, ORDERNUM, ELEMENTCODE, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE)
+values ('创新型', '3', '创新型', null, null, null, null, 3, 'INDEXCATLEVSOURCE', 1, '20220919', '20220919', 2016, '87');
+

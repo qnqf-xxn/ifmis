@@ -1,0 +1,111 @@
+i number;
+begin
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('ENDVALTYPE') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+values (null, ''PERFENDVALTYPE'', null, ''1'', ''ENDVALTYPE'', ''1'', ''2016'', ''87'', ''DD0E65893A3B3B87E0533315A8C02648'', ''ENDVALTYPE'', ''BAS_PERF_INDICATOR'', ''完成值取值方式'', ''S'', ''40'', null, 1, 1, null)';
+  end if;
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('ENDVALSOURCE') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+     values (null, ''PERFENDVALSOURCE'', null, ''1'', ''ENDVALSOURCE'', ''1'', ''2016'', ''87'', ''DD0E65893A3C3B87E0533315A8C02648'', ''ENDVALSOURCE'', ''BAS_PERF_INDICATOR'', ''指标完成值数据来源'', ''S'', ''40'', null, 1, 1, null)';
+  end if;
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('VALRULE') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+values (null, ''PERFVALRULE'', null, ''1'', ''VALRULE'', ''1'', ''2016'', ''87'', ''DD0E65893A3D3B87E0533315A8C02648'', ''VALRULE'', ''BAS_PERF_INDICATOR'', ''赋值规则'', ''S'', ''40'', null, 1, 1, null)';
+  end if;
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('EVIDENCEFILE') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+values (null, ''PERFEVIDENCEFILE'', null, ''1'', ''EVIDENCEFILE'', ''1'', ''2016'', ''87'', ''DD0E65893A3E3B87E0533315A8C02648'', ''EVIDENCEFILE'', ''BAS_PERF_INDICATOR'', ''佐证资料要求'', ''S'', ''40'', null, 1, 1, null)';
+  end if;
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('ISSTANDPUSH') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+values (null, ''VD00001'', null, ''1'', ''ISSTANDPUSH'', ''1'', ''2016'', ''87'', ''DD0E65893A3F3B87E0533315A8C02648'', ''ISSTANDPUSH'', ''BAS_PERF_INDICATOR'', ''是否为标准化工作组发布'', ''S'', ''40'', null, 1, 1, null)';
+  end if;
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('COMPUTETYPE') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+     values (null, null, null, ''1'', ''COMPUTETYPE'', ''1'', ''2016'', ''87'', ''DD0E65893A3G3B87E0533315A8C02648'', ''COMPUTETYPE'', ''BAS_PERF_INDICATOR'', ''计算方式'', ''S'', ''2000'', null, 1, 1, null)';
+  end if;
+  SELECT count(*) into i FROM bus_t_Diccolumn t where t.columncode in ('REMARK') and t.tablecode = 'BAS_PERF_INDICATOR';
+  if i=0 then
+     execute immediate 'insert into bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE)
+values (null, null, null, ''1'', ''REMARK'', ''1'', ''2016'', ''87'', ''DD0E65893A3H3B87E0533315A8C02648'', ''REMARK'', ''BAS_PERF_INDICATOR'', ''备注'', ''S'', ''2000'', null, 1, 1, null)';
+  end if;
+  
+  Delete FROM Fasp_t_Dicdssource t where t.appid = 'pmkpi' and t.guid in ('PERFENDVALSOURCE','PERFENDVALTYPE','PERFEVIDENCEFILE','PERFVALRULE');
+  insert into Fasp_t_Dicdssource (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, STARTTIME, ENDTIME, YEAR, PROVINCE, CRC, TYPEGUID, SHOWSTRUCT, SOURCETYPE, DATASOURCE, DBVERSION, VERSION, APPID)
+  values ('PERFENDVALSOURCE', 'PERFENDVALSOURCE', 'PERFENDVALSOURCE', '指标完成值数据来源', '1', '20140422000000000', '20140422000000000', null, '2020', '87', null, null, '1', '2', 'select * from v_perf_enum where elementcode = ''PERFENDVALSOURCE''', sysdate, 1, 'pmkpi');
+
+  insert into Fasp_t_Dicdssource (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, STARTTIME, ENDTIME, YEAR, PROVINCE, CRC, TYPEGUID, SHOWSTRUCT, SOURCETYPE, DATASOURCE, DBVERSION, VERSION, APPID)
+  values ('PERFENDVALTYPE', 'PERFENDVALTYPE', 'PERFENDVALTYPE', '完成值取值方式', '1', '20140422000000000', '20140422000000000', null, '2020', '87', null, null, '1', '2', 'select * from v_perf_enum where elementcode = ''PERFENDVALTYPE''', sysdate, 1, 'pmkpi');
+
+  insert into Fasp_t_Dicdssource (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, STARTTIME, ENDTIME, YEAR, PROVINCE, CRC, TYPEGUID, SHOWSTRUCT, SOURCETYPE, DATASOURCE, DBVERSION, VERSION, APPID)
+  values ('PERFEVIDENCEFILE', 'PERFEVIDENCEFILE', 'PERFEVIDENCEFILE', '佐证资料要求', '1', '20140422000000000', '20140422000000000', null, '2020', '87', null, null, '1', '2', 'select * from v_perf_enum where elementcode = ''PERFEVIDENCEFILE''', sysdate, 1, 'pmkpi');
+
+  insert into Fasp_t_Dicdssource (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, STARTTIME, ENDTIME, YEAR, PROVINCE, CRC, TYPEGUID, SHOWSTRUCT, SOURCETYPE, DATASOURCE, DBVERSION, VERSION, APPID)
+  values ('PERFVALRULE', 'PERFVALRULE', 'PERFVALRULE', '赋值规则', '1', '20140422000000000', '20140422000000000', null, '2020', '87', null, null, '1', '2', 'select * from v_perf_enum where elementcode = ''PERFVALRULE''', sysdate, 1, 'pmkpi');
+
+  delete FROM perf_enum t where t.elementcode in ('PERFENDVALSOURCE','PERFENDVALTYPE','PERFEVIDENCEFILE','PERFVALRULE');
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE7', '7', 'PERFENDVALSOURCE', '媒体舆论', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 7);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE6', '6', 'PERFENDVALSOURCE', '问卷调查报告', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 6);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE5', '5', 'PERFENDVALSOURCE', '部门业务评判', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 5);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE4', '4', 'PERFENDVALSOURCE', '部门业务统计', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 4);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE8', '8', 'PERFENDVALSOURCE', '其他数据来源', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 8);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE1', '1', 'PERFENDVALSOURCE', '统计部门统计数据', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 1);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE2', '2', 'PERFENDVALSOURCE', '权威机构调查（统计）', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 2);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALSOURCE3', '3', 'PERFENDVALSOURCE', '部门统计年鉴', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 3);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALTYPE5', '5', 'PERFENDVALTYPE', '趋势判断法', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 5);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALTYPE4', '4', 'PERFENDVALTYPE', '问卷调查法', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 4);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALTYPE3', '3', 'PERFENDVALTYPE', '情况说明法', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 3);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALTYPE1', '1', 'PERFENDVALTYPE', '直接证明法', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 1);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFENDVALTYPE2', '2', 'PERFENDVALTYPE', '情况统计法', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 2);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFEVIDENCEFILE1', '1', 'PERFEVIDENCEFILE', '正式资料', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 1);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFEVIDENCEFILE2', '2', 'PERFEVIDENCEFILE', '工作资料', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 2);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFEVIDENCEFILE3', '3', 'PERFEVIDENCEFILE', '原始凭证', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 3);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFEVIDENCEFILE4', '4', 'PERFEVIDENCEFILE', '说明材料', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 4);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFVALRULE1', '1', 'PERFVALRULE', '正向定量指标（≥、＞、=）：目标完成率＞130%，得分=[1-（完成率-130%）×0.59]×权重分;100%≤目标完成率≤130%，得满分；目标完成率＜100%，得分=目标完成率×指标权重分 目标完成率=（实际完成值/目标值）×100%', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 1);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFVALRULE2', '2', 'PERFVALRULE', '反向定量指标（≤、＜）：目标完成率≥100%，得满分；50%≤目标完成率≤100%，得分=[1-（实际完成值-目标值）/目标值]×指标权重分;目标完成率＜50%，不得分 目标完成率=（目标值/实际完成值）×100%', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 2);
+
+  insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+  values ('PERFVALRULE3', '3', 'PERFVALRULE', '定性指标：根据目标完成情况，客观评判目标完成档次（分为基本达成目标、部分实现目标、实现目标程度较低三个档次），并分别按照100%-80%（含）、80%-60%（含）、60%-0%合理确定完成比例，得分=完成比例×指标权重分', '1', '20210118162733', '20210118162733', '2016', '87', 1, 'pmkpi', '#', 1, 1, null, null, 3);

@@ -1,0 +1,12 @@
+begin
+
+--结转校验-审核定义配置
+delete from perf_t_auditdefine where guid = 'EED47FE19AC10202E0533315A8C02FDB';
+insert into perf_t_auditdefine (GUID, CODE, NAME, EXPLAIN, YEAR, AGENCYGUID, WFID, WFSTATUS, CREATER, CREATETIME, UPDATETIME, PROVINCE, ORDERNUM, STATUS, "procedure", AUDITDETYPE, ISALLTABLE, RECORDADOPT, CHECKFLAG, VIEWGUID, AUDITBEANID, REMARK, AUDITSQL)
+values ('EED47FE19AC10202E0533315A8C02FDB', 'pkg_perf_checkTransfer', '预算结转送审校验', null, 2016, null, null, null, '2ABB1E119E395E6EEC48EFA9D6ABB0CD', '20210509183741', '20210708154745', '87', null, 1, 'pkg_perf_checkTransfer.checkTransIndex', 'procedure', 1, 1, null, null, null, null, null);
+
+delete from perf_t_busauditdefine where busguid = 'EED47FE19AC20202E0533315A8C02FDB';
+insert into perf_t_busauditdefine (GUID, BUSGUID, ORDERNUM, AUDITDEFINE, ERRTYPE, PROVINCE, YEAR)
+values ('EED47FE19AC30202E0533315A8C02FDB', 'EED47FE19AC20202E0533315A8C02FDB', 1, 'EED47FE19AC10202E0533315A8C02FDB', 'force', '87', 2016);
+
+

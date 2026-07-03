@@ -1,0 +1,52 @@
+version: "2"
+services:
+ admin:
+  hostname: admin
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  image: cloud/ifmis-framework-admin:1.0.0-SNAPSHOT
+  ports:
+   - "8082:8082"
+  environment:
+   - spring.profiles.active=dev
+ zipkin:
+  image: cloud/ifmis-framework-zipkin:1.0.0-SNAPSHOT
+  hostname: zipkin
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "9411:9411"
+  environment:
+   - spring.profiles.active=dev
+   - SERVER_USERNAME=user
+   - SERVER_PASSWORD=password
+ zuul-outer:
+  image: cloud/ifmis-framework-zuul:1.0.0-SNAPSHOT
+  hostname: zuul
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "80:80"
+  environment:
+   - spring.profiles.active=outer
+ zuul-micro:
+  image: cloud/ifmis-framework-zuul:1.0.0-SNAPSHOT
+  hostname: zuul
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8921:8921"
+  environment:
+   - spring.profiles.active=micro
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.2.240:1521:orcl
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: BDG_4300
+    #java -cp druid-1.0.15.jar com.alibaba.druid.filter.config.ConfigTools 123456  使用durid的ConfigFilter对数据库密码加密
+    password: HlIkhn6qlVxaoep5si0SpXy74jCXnGQ9OpFkSmrerpXf064jeK/RvmH4fNcydFgt5kHF48Kovg1rzSsflyphCw==
+    publickey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALiuVHCgx4fhz5deVLE+MK30IOsPb3jKn6B2C/XSzO4mDivJ8b60c0+0C82YeMOwhYG/74EVwM342BtXY0iaeFMCAwEAAQ==
+    #password: 1
+    openMulti: true
+    type: com.alibaba.druid.pool.xa.DruidXADataSource
+    idle-timeout: 30000
+    validationQuery: SELECT 1 from dual
+    #配置初始化大小、最小、最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    #配置从连接池获取连接等待超时的时间
+    maxWait: 10000
+    poolMaximumIdleConnections: 0
+    # 根据自身业务及事务大小来设置  
+    connectionProperties: config.decrypt=true;config.decrypt.key=${spring.datasource.publickey};oracle.net.CONNECT_TIMEOUT=2000;oracle.jdbc.ReadTimeout=1000000
+    filters: mergeStat,config,slf4j
+    #设置从连接池获取连接时是否检查连接有效性，true时，每次都检查;false时，不检查
+    testOnBorrow: true
+    #设置往连接池归还连接时是否检查连接有效性，true时，每次都检查;false时，不检查
+    testOnReturn: false
+    #设置从连接池获取连接时是否检查连接有效性，true时，如果连接空闲时间超过minEvictableIdleTimeMillis进行检查，否则不检查;false时，不检查
+    testWhileIdle: true
+    #打开后，增强timeBetweenEvictionRunsMillis的周期性连接检查，minIdle内的空闲连接，每次检查强制验证连接有效性
+    keepAlive: true
+    #配置间隔多久启动一次DestroyThread，对连接池内的连接才进行一次检测，单位是毫秒。
+    #检测时:1.如果连接空闲并且超过minIdle以外的连接，如果空闲时间超过minEvictableIdleTimeMillis设置的值则直接物理关闭。2.在minIdle以内的不处理。
+    timeBetweenEvictionRunsMillis: 600000
+    #配置一个连接在池中最大空闲时间，单位是毫秒
+    minEvictableIdleTimeMillis: 7200000
+    #关闭abanded连接时输出错误日志，这样出现连接泄露时可以通过错误日志定位忘记关闭连接的位置
+    logAbandoned: true
+    #连接泄露检查，打开removeAbandoned功能 , 连接从连接池借出后，长时间不归还，将触发强制回连接。回收周期随timeBetweenEvictionRunsMillis进行，如果连接为从连接池借出状态，并且未执行任何sql，并且从借出时间起已超过removeAbandonedTimeout时间，则强制归还连接到连接池中。
+    removeAbandoned: true
+    # 超时时间，秒
+    removeAbandonedTimeout: 3600
+    removeAbandonedTimeoutMillis: 1800000
+    #打开PSCache，并且指定每个连接上PSCache的大小，Oracle等支持游标的数据库，打开此开关，会以数量级提升性能，具体查阅PSCache相关资料
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    atomikos:
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      maxLifetime: 20000
+      maxPoolSize: 25
+      minPoolSize: 3
+      testQuery: select 1 from dual
+      xaDataSourceClassName: oracle.jdbc.xa.client.OracleXADataSource

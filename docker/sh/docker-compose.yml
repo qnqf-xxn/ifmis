@@ -1,0 +1,286 @@
+version: "2"
+services:
+ peer1: # 默认情况下，其他服务可以使用服务名称连接到该服务。因此，对于peer2的节点，它需要连接http://${REGISTRY_SERVER1:127.0.0.1}:${REGISTRY_SERVER1_PORT:8761}/eureka/，因此需要配置该服务的名称是peer1。
+  image: cloud/ifmis-framework-registry:1.0.0-SNAPSHOT
+  hostname: eureka_master
+  networks:
+   - eureka-net
+  ports:
+   - "8761:8761"
+  restart: always
+  environment:
+   - spring.profiles.active=peer1
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+ peer2:
+  image: cloud/ifmis-framework-registry:1.0.0-SNAPSHOT
+  hostname: eureka_backup
+  networks:
+   - eureka-net
+  ports:
+   - "8762:8762"
+  restart: always
+  environment:
+   - spring.profiles.active=peer2
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - SLEEP_SECOND=30
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761 -c 'java -jar /ifmis-framework-registry-1.0.0-SNAPSHOT.jar';
+ config:
+  image: cloud/ifmis-framework-config:1.0.0-SNAPSHOT
+  hostname: config
+  networks:
+   - eureka-net
+  ports:
+   - "8880:8880"
+  restart: always
+  depends_on:
+   - peer1
+   - peer2
+  environment:
+   - spring.profiles.active=subversion
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - CONFIG_SERVER_USERNAME=user
+   - CONFIG_SERVER_PASSWORD=password
+   - SLEEP_SECOND=30
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761,192.168.2.68:8762 -c 'java -jar /ifmis-framework-config-1.0.0-SNAPSHOT.jar';
+ admin:
+  image: cloud/ifmis-framework-admin:1.0.0-SNAPSHOT
+  hostname: admin
+  networks:
+   - eureka-net
+  ports:
+   - "8082:8082"
+  restart: always
+  depends_on:
+   - peer1
+   - peer2
+   - config
+  environment:
+   - spring.profiles.active=dev
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - SERVER_USERNAME=user
+   - SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - CONFIG_SERVER_USERNAME=user
+   - CONFIG_SERVER_PASSWORD=password
+   - SLEEP_SECOND=60
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761,192.168.2.68:8762,192.168.2.68:8880 -c 'java -jar /ifmis-framework-admin-1.0.0-SNAPSHOT.jar';
+ zipkin:
+  image: cloud/ifmis-framework-zipkin:1.0.0-SNAPSHOT
+  hostname: zipkin
+  networks:
+   - eureka-net
+  ports:
+   - "9411:9411"
+  restart: always
+  depends_on:
+   - peer1
+   - peer2
+   - config
+   - admin
+  environment:
+   - spring.profiles.active=dev
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - CONFIG_SERVER_USERNAME=user
+   - CONFIG_SERVER_PASSWORD=password
+   - SERVER_USERNAME=user
+   - SERVER_PASSWORD=password
+   - SLEEP_SECOND=90
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761,192.168.2.68:8762,192.168.2.68:8880,192.168.2.68:8082 -c 'java -jar /ifmis-framework-zipkin-1.0.0-SNAPSHOT.jar';
+ gateway:
+  image: cloud/ifmis-framework-gateway:1.0.0-SNAPSHOT
+  hostname: gateway
+  networks:
+   - eureka-net
+  ports:
+   - "8080:8080"
+  restart: always
+  depends_on:
+   - peer1
+   - peer2
+   - config
+   - admin
+  environment:
+   - spring.profiles.active=dev
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - CONFIG_SERVER_USERNAME=user
+   - CONFIG_SERVER_PASSWORD=password
+   - SLEEP_SECOND=90
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761,192.168.2.68:8762,192.168.2.68:8880,192.168.2.68:8082 -c 'java -jar /ifmis-framework-gateway-1.0.0-SNAPSHOT.jar';
+ public:
+  image: cloud/ifmis-framework-public-service:1.0.0-SNAPSHOT
+  hostname: ifmis-framework-public-service
+  networks:
+   - eureka-net
+  ports:
+   - "8003:8003"
+  restart: always
+  depends_on:
+   - peer1
+   - peer2
+   - config
+   - admin
+   - zipkin
+  environment:
+   - spring.profiles.active=dev
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - CONFIG_SERVER_USERNAME=user
+   - CONFIG_SERVER_PASSWORD=password
+   - ZIPKIN_SERVER=192.168.2.68
+   - ZIPKIN_SERVER_PORT=9411
+   - SLEEP_SECOND=90
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761,192.168.2.68:8762,192.168.2.68:8880,192.168.2.68:8082 -c 'java -jar /ifmis-framework-public-service-1.0.0-SNAPSHOT.jar';
+ public-webapp:
+  image: cloud/ifmis-framework-public-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-framework-public-webapp
+  networks:
+   - eureka-net
+  ports:
+   - "7003:7003"
+  restart: always
+  depends_on:
+   - peer1
+   - peer2
+   - config
+   - admin
+   - zipkin
+  environment:
+   - spring.profiles.active=dev
+   - eureka.instance.ip-address=192.168.2.68
+   - REGISTRY_SERVER1=192.168.2.68
+   - REGISTRY_SERVER1_PORT=8761
+   - REGISTRY_SERVER2=192.168.2.68
+   - REGISTRY_SERVER2_PORT=8762
+   - REGISTRY_SERVER_USERNAME=user
+   - REGISTRY_SERVER_PASSWORD=password
+   - ADMIN_SERVER=192.168.2.68
+   - ADMIN_SERVER_PORT=8082
+   - ADMIN_SERVER_USERNAME=user
+   - ADMIN_SERVER_PASSWORD=password
+   - RABBITMQ_SERVER=192.168.2.68
+   - RABBITMQ_SERVER_PORT=5672
+   - RABBITMQ_SERVER_USERNAME=admin
+   - RABBITMQ_SERVER_PASSWORD=123456
+   - CONFIG_SERVER_USERNAME=user
+   - CONFIG_SERVER_PASSWORD=password
+   - ZIPKIN_SERVER=192.168.2.68
+   - ZIPKIN_SERVER_PORT=9411
+   - SLEEP_SECOND=90
+  volumes:
+   - "./entrypoint.sh:/entrypoint.sh"
+  tty: true
+  entrypoint: /entrypoint.sh -d 192.168.2.68:8761,192.168.2.68:8762,192.168.2.68:8880,192.168.2.68:8082 -c 'java -jar /ifmis-framework-public-webapp-1.0.0-SNAPSHOT.jar';
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

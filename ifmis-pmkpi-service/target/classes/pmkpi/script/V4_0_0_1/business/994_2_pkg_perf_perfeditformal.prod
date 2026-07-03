@@ -1,0 +1,71 @@
+CREATE OR REPLACE PACKAGE BODY PKG_PERF_EDITFORMAL is
+
+  procedure getEditdata(pmainguid varchar2,pagencyguid varchar2,ptablecode varchar2,o_cs out CS)
+    is
+       tmainsql      varchar(4000);
+       tinsertsql      varchar(4000);
+       tsql            varchar(4000);
+       tfcs          cs;
+       tcs          cs;
+       tguid      varchar(40);
+       ttablecode      varchar(40);
+       tcolumncode      varchar(100);
+       tname      varchar(200);
+       tquerysql  varchar(4000);
+       tsumcol    varchar(1000);
+       tordernum  number(3);
+       tvalue     number(18,2);
+       tnum       number(3);
+    begin
+      --select Global_Multyear_Cz.Secu_f_Global_Setparm('', '3300', '2020', '') into tnum from dual;
+      --对配置sql的金额字段进行获取
+      tmainsql := 'select t.guid,t.tablecode,t.columncode,t.name,t.querysql,t.sumcol,ordernum from perf_t_editformal t where tablecode=:1 order by ordernum';
+
+      open tfcs for tmainsql using ptablecode;
+       loop
+            fetch tfcs into tguid,ttablecode,tcolumncode,tname,tquerysql,tsumcol,tordernum;
+            EXIT WHEN tfcs%NOTFOUND;
+            if tquerysql is not null then
+              tquerysql := replace(tquerysql,'#agencyguid#', pagencyguid);
+              tquerysql := replace(tquerysql,'#mainguid#',pmainguid);
+              execute immediate tquerysql into tvalue;
+            else
+              tvalue := 0;
+            end if;
+            tinsertsql := 'insert into perf_tmp_editformal(guid,tablecode,columncode,name,value,sumcol,ordernum) values(:1,:2,:3,:4,:5,:6,:7)';
+            execute immediate tinsertsql using tguid,ttablecode,tcolumncode,tname,tvalue,tsumcol,tordernum;
+       end loop;
+       close tfcs;
+       --获取存在公式的数据
+              tmainsql := 'select t.guid, t.sumcol from perf_tmp_editformal t where t.sumcol is not null order by ordernum desc';
+                open tcs for tmainsql;
+                loop
+                  fetch tcs into tguid, tsumcol;
+                  EXIT WHEN tcs%NOTFOUND;
+                  if tsumcol is not null then
+                    tsumcol := replace(tsumcol,'[', '');
+                    tsumcol := replace(tsumcol,']','');
+                  end if;
+                  tmainsql := 'select t.columncode from perf_tmp_editformal t where 1=1';
+                  open tfcs for tmainsql;
+                  loop
+                    fetch tfcs into tcolumncode;
+                    EXIT WHEN tfcs%NOTFOUND;
+
+                    tnum := instr(tsumcol, tcolumncode);
+                    if tnum>0 then
+                      tsumcol := replace(tsumcol, tcolumncode, ' (select value from perf_tmp_editformal t where t.columncode='''||tcolumncode||''')') ;
+                    end if;
+                  end loop;
+                  close tfcs;
+                  
+                  tsql := 'select ' || tsumcol || ' from dual';
+                  execute immediate tsql into tvalue;
+                  tsql := 'update perf_tmp_editformal t set t.value= :1 where t.guid=:2';
+                  execute immediate tsql using tvalue,tguid;
+                end loop;
+                close tcs;
+       tmainsql := 'select * from perf_tmp_editformal order by ordernum';
+      open o_cs for tmainsql;
+    end;
+end PKG_PERF_EDITFORMAL;

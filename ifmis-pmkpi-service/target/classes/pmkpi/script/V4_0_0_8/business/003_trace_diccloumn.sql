@@ -1,0 +1,6 @@
+begin
+
+delete from bus_t_diccolumn t where t.tablecode='PERF_T_PROMONITOR' and t.columncode='FININTORGGUID';
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, '099003', null, '1', 'FININTORGGUID', '1', '2020', '87', 'B71F832B8AFF03B0E0530100007FA9FF', 'FININTORGGUID', 'PERF_T_PROMONITOR', 'ดฆสา', 'N', '20', 5, 1, 1, null, sysdate);

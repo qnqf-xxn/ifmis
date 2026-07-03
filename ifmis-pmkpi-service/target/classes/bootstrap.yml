@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ifmis-pmkpi-service
+  profiles:
+    active: dev
+  cloud:
+    #mq消息
+    stream:
+      bindings:
+        BimSyncAgencyNameInput:
+          destination: bim_sync_agencyname
+          group: pmkpi_sync_agencyname_group_${ifmis.config.file:}
+        BimSyncAgencyNameOutput:
+          destination: bim_sync_agencyname_feedback
+        PdmSyncBackinfoInput:
+          destination: pdm_sync_backinfo
+  main:
+    allow-circular-references: true
+ifmis:
+  fasp2:
+    pmkpi:
+      enable: true

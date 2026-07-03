@@ -1,0 +1,6 @@
+begin
+  
+delete from bus_t_diccolumn t where t.tablecode='PERF_T_SELFPERFINDEX' and t.columncode='ACTUALVALUE';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'PMKPISELFINDEXVAL', null, '1', 'ACTUALVALUE', '1', '2016', '87', 'P484S0861D224348BE04CC4C08231249', 'ACTUALVALUE', 'PERF_T_SELFPERFINDEX', '实际完成值', 'S', '1000', null, 1, 0, null, sysdate);
+

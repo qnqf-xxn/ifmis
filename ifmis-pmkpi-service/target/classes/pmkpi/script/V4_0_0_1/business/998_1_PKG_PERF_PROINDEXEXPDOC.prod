@@ -1,0 +1,9 @@
+create or replace package PKG_PERF_PROINDEXEXPDOC is
+
+    type CS is REF CURSOR;
+    /**
+    * 获取监控指标数据
+    **/
+    procedure getProindex(p_busguid varchar2, o_cs  out cs);
+
+end PKG_PERF_PROINDEXEXPDOC;

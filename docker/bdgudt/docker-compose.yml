@@ -1,0 +1,29 @@
+version: "2"
+services:
+ bdgudt:
+  image: cloud/ifmis-bdgudt-service:1.0.0-SNAPSHOT
+  hostname: ifmis-bdgudt-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8009:8009"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ bdgudt-webapp:
+  image: cloud/ifmis-bdgudt-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-bdgudt-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7009:7009"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

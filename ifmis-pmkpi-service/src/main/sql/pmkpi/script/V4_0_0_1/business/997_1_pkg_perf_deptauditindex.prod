@@ -1,0 +1,7 @@
+create or replace package pkg_perf_deptauditindex is
+
+  TYPE CS IS REF CURSOR;
+  --校验项目指标     
+  procedure   checkDeptAuditIndex(o_cs out CS);
+  
+end pkg_perf_deptauditindex;

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ifmis-pmkpi-webapp
+  profiles:
+    active: dev
+logging:
+  level:
+    root: INFO

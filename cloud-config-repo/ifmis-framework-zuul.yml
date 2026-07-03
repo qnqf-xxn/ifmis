@@ -1,0 +1,122 @@
+zuul:
+  #配置属性 zuul.max.host.connections 已经被两个新的配置属性替代, 
+  #zuul.host.maxTotalConnections （总连接数）和 zuul.host.maxPerRouteConnections,（每个路由连接数） 默认值分别是200和20.
+  #max:
+    #host:
+      #connections: 500
+  host:
+    #zuul.host.connect-timeout-millis， zuul.host.socket-timeout-millis这两个配置，这两个和ribbon.ReadTimeout， ribbon.SocketTimeout这两个就是ribbon超时时间设置都是配超时的。
+    #区别在于，如果路由方式是serviceId的方式，那么ribbon的生效，如果是url的方式，则zuul.host开头的生效。（此处重要！使用serviceId路由和url路由是不一样的超时策略） 
+    #如果你在zuul配置了熔断fallback的话，熔断超时也要配置，不然如果你配置的ribbon超时时间大于熔断的超时，那么会先走熔断，相当于你配的ribbon超时就不生效了。 
+    #熔断超时是这样的： hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000 
+    socket-timeout-millis: 3600000
+    connect-timeout-millis: 10000
+    #路径前缀的配置，这个不要改
+    stripPrefix: true
+    #最大的总连接数（根据实际的需要进行设置，可以设置较大的值，5000-20000）
+    maxTotalConnections: 5000
+    #每个路由连接数（这个按实际并发进行分配，压力测试时，需要调大）
+    maxPerRouteConnections: 2000
+  semaphore:
+    #设置全部路由最大信号量
+    max-semaphores: 1000
+
+#ribbon的默认超时配置
+ribbon: 
+  ReadTimeout: 3600000
+  ConnectTimeout: 10000
+  #重试设置，为避免重复请求，设置为0
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+  #每个应用host最大请求数量
+  MaxConnectionsPerHost: 2000
+  #全部服务总和的最大数量
+  MaxTotalConnections: 4000
+  
+hystrix:
+  command:
+    default:
+      execution:
+        timeout: 
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            #熔断超时时间
+            timeoutInMilliseconds: 3600000 
+          semaphore:
+            #这个属性主要是来控制Hystrix降级并行的线程数，现在系统没有做降级的处理，这个最好跟最大请求数一致
+            maxConcurrentRequests: 1000
+      curcuitBreaker:
+        #当在配置时间窗口内达到此数量的失败后，进行短路。默认20个，简言之，10s内请求失败数量达到20个，断路器开
+        requestVolumnThreshold: 1000
+  threadpool:
+    default:
+      #线程池核心线程数，这个是全剧设置，可以不改，并发太高了再优化
+      coreSize: 1000
+#ribbon默认的serviceid，如果需要修改全局设置，则修改这个配置即可
+bus-ribbon-default-name:     
+  ribbon: 
+    NFLoadBalancerRuleClassName: gov.mof.fasp2.gateway.loadbancer.rule.BusBaseLoadBancerRule
+            
+spring:
+  application:
+    name: ${ifmis.gateway.outergatewayname}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+
+renren:
+  cluster: false  #集群配置  true集群环境   false单机环境，还需打开pom.xml里的spring-session-data-redis注释
+  globalSessionTimeout: 3600   #单机环境，session过期时间为60分钟
+  redis:
+    open: false  #是否开启redis缓存  true开启   false关闭
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: gov.mof.fasp2.gateway.manage.modules.*.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+#      id-type: input
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+#      field-strategy: not_null
+      #驼峰下划线转换
+      column-underline: true
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+
+scheduled:
+  log:
+    clean:
+      enabled: true
+ifmis:
+  zuul:
+    log:
+      #如果日志量非常大，可以只记录异常日志，默认为false
+      saveerroronly: false
+      #如果日志量非常大，可以只记录操作超过多少秒的日志
+      dealtime: 1
+      #启用批量记录日志，默认为true，所以不配置也可以，如果需要实时的记录，需要配置为false，数据库压力较大，须谨慎
+      enablebatch: true
+      #批量记录日志的大小，建议根据现场1分钟的日志量进行设置，太大则会有内存溢出的风险，建议不要超过10w
+      batchsize: 50

@@ -1,0 +1,17 @@
+begin
+  
+delete from bus_t_diccolumn where tablecode = 'PM_PERF_GOAL_INFO' and columncode = 'RATIO';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'RATIO', '1', '2016', '87', 'E632787C7BD4D81887EA6AD49C3678C7', 'RATIO', 'PM_PERF_GOAL_INFO', '权重比例', 'N', '6', null, 1, 1, null, sysdate);
+
+
+
+delete from bus_t_diccolumn where tablecode = 'PERF_T_SELFPERFGOAL' and columncode in ('RATIO','WEIGHTSCORE');
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'RATIO', '1', '2016', '87', '9974A8857A9DFACD6C62BE9BB42BCB95', 'RATIO', 'PERF_T_SELFPERFGOAL', '权重比例', 'N', '6', null, 1, 1, null, sysdate);
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'WEIGHTSCORE', '1', '2016', '87', '1A21E0CBF8DF218C10C839CC4F1DEE7E', 'WEIGHTSCORE', 'PERF_T_SELFPERFGOAL', '指标权重得分', 'N', '20', null, 1, 1, null, sysdate);
+
+
+

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+    <bean id="pmkpi.evaluate.EvaluatePage" class="gov.mof.fasp2.pmkpi.evaluate.page.EvaluatePage"></bean>
+    <bean id="pmkpi.evaluate.ThirdEvaluateService" class="gov.mof.fasp2.pmkpi.evaluate.service.ThirdEvaluateService">
+        <property name="thirdEvaluateBo" ref="pmkpi.evaluate.ThirdEvaluateBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.ThirdEvaluateBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluate.ThirdEvaluateBo" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluate.ThirdEvaluateBo" class="gov.mof.fasp2.pmkpi.evaluate.bo.ThirdEvaluateBo">
+        <property name="thirdEvaluateDAO" ref="pmkpi.evaluate.ThirdEvaluateDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.ThirdEvaluateDAO" class="gov.mof.fasp2.pmkpi.evaluate.dao.ThirdEvaluateDAO"></bean>
+
+    <bean id="pmkpi.evaluate.PreEvaluateService" class="gov.mof.fasp2.pmkpi.evaluate.service.PreEvaluateService">
+        <property name="preEvaluateBo" ref="pmkpi.evaluate.PreEvaluateBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluate.PreEvaluateBo" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateBo" class="gov.mof.fasp2.pmkpi.evaluate.bo.PreEvaluateBo">
+        <property name="preEvaluateDAO" ref="pmkpi.evaluate.PreEvaluateDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateDAO" class="gov.mof.fasp2.pmkpi.evaluate.dao.PreEvaluateDAO"></bean>
+
+
+    <bean id="pmkpi.evaluate.EvaluateEntrustService" class="gov.mof.fasp2.pmkpi.evaluate.service.EvaluateEntrustService">
+        <property name="evaluateEntrustBo" ref="pmkpi.evaluate.EvaluateEntrustBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.EvaluateEntrustBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluate.EvaluateEntrustBo" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluate.EvaluateEntrustBo" class="gov.mof.fasp2.pmkpi.evaluate.bo.EvaluateEntrustBo">
+        <property name="evaluateEntrustDAO" ref="pmkpi.evaluate.EvaluateEntrustDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.EvaluateEntrustDAO" class="gov.mof.fasp2.pmkpi.evaluate.dao.EvaluateEntrustDAO"></bean>
+
+
+    <bean id="pmkpi.evaluate.PreEvaluateEditService" class="gov.mof.fasp2.pmkpi.evaluate.service.PreEvaluateEditService">
+        <property name="preEvaluateBo" ref="pmkpi.evaluate.PreEvaluateBOTX"></property>
+    </bean>
+
+    <bean id="pmkpi.evaluate.PreEvaluateProGoalService" class="gov.mof.fasp2.pmkpi.evaluate.service.PreEvaluateProGoalService">
+        <property name="preEvaluateProGoalBo" ref="pmkpi.evaluate.PreEvaluateProGoalBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateProGoalBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluate.PreEvaluateProGoalBo" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateProGoalBo" class="gov.mof.fasp2.pmkpi.evaluate.bo.PreEvaluateProGoalBo">
+        <property name="preEvaluateProGoalDAO" ref="pmkpi.evaluate.PreEvaluateProGoalDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateProGoalDAO" class="gov.mof.fasp2.pmkpi.evaluate.dao.PreEvaluateProGoalDAO"></bean>
+
+    <bean id="pmkpi.evaluate.PreEvaluateOpinionService" class="gov.mof.fasp2.pmkpi.evaluate.service.PreEvaluateOpinionService">
+        <property name="preEvaluateOpinionBo" ref="pmkpi.evaluate.PreEvaluateOpinionBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateOpinionBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluate.PreEvaluateOpinionBo" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateOpinionBo" class="gov.mof.fasp2.pmkpi.evaluate.bo.PreEvaluateOpinionBo">
+        <property name="preEvaluateOpinionDAO" ref="pmkpi.evaluate.PreEvaluateOpinionDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluate.PreEvaluateOpinionDAO" class="gov.mof.fasp2.pmkpi.evaluate.dao.PreEvaluateOpinionDAO"></bean>
+
+
+    <bean id="pmkpi.evaluation.financial.confirmnew.ConfirmNewService" class="gov.mof.fasp2.pmkpi.evaluation.financial.confirmnew.ConfirmNewService">
+        <property name="confirmNewBO" ref="pmkpi.evaluation.financial.confirmnew.ConfirmNewBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluation.financial.confirmnew.ConfirmNewBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluation.financial.confirmnew.ConfirmNewBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluation.financial.confirmnew.ConfirmNewBO" class="gov.mof.fasp2.pmkpi.evaluation.financial.confirmnew.ConfirmNewBO">
+        <property name="confirmNewDAO" ref="pmkpi.evaluation.financial.confirmnew.ConfirmNewDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluation.financial.confirmnew.ConfirmNewDAO" class="gov.mof.fasp2.pmkpi.evaluation.financial.confirmnew.ConfirmNewDAO"></bean>
+
+    <!-- 重点评价 -->
+    <bean id="pmkpi.evaluation.EvaPrjIndexPage" class="gov.mof.fasp2.pmkpi.evaluation.financial.prjindex.EvaPrjIndexPage"></bean>
+    <bean id="pmkpi.evaluation.EvaPrjIndexService" class="gov.mof.fasp2.pmkpi.evaluation.financial.prjindex.EvaPrjIndexService">
+        <property name="evaPrjIndexBO" ref="pmkpi.evaluation.EvaPrjIndexBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluation.EvaPrjIndexBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluation.EvaPrjIndexBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluation.EvaPrjIndexBO" class="gov.mof.fasp2.pmkpi.evaluation.financial.prjindex.EvaPrjIndexBO">
+        <property name="evaPrjIndexDAO" ref="pmkpi.evaluation.EvaPrjIndexDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluation.EvaPrjIndexDAO" class="gov.mof.fasp2.pmkpi.evaluation.financial.prjindex.EvaPrjIndexDAO"></bean>
+
+</beans>

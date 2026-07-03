@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    password: 1
+    url: jdbc:oracle:thin:@192.168.22.10:1525/pdb
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: ifmis_34jz_dev
+    openMulti: true
+    type: com.alibaba.druid.pool.DruidDataSource
+    idle-timeout: 30000
+    validationQuery: SELECT 1 from dual
+    initialSize: 5
+    maxActive: 20
+    maxWait: 60000
+    poolMaximumIdleConnections: 0
+    poolPreparedStatements: false
+    xaDataSourceClassName: com.alibaba.druid.pool.xa.DruidXADataSource
+    multi:
+    - key: 2016
+      password: 1
+      url: jdbc:oracle:thin:@192.168.2.68:1521:pdb
+      idle-timeout: 20000
+      driver-class-name: oracle.jdbc.OracleDriver
+      username: bdm_normal
+      type: com.alibaba.druid.pool.DruidDataSource
+    - key: 2019
+      password: 1
+      url: jdbc:oracle:thin:@192.168.3.91:1521:orcl
+      driver-class-name: oracle.jdbc.OracleDriver
+      username: ifmis_34jz

@@ -1,0 +1,29 @@
+version: "2"
+services:
+ bdm:
+  image: cloud/ifmis-bdm-service:1.0.0-SNAPSHOT
+  hostname: ifmis-bdm-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8004:8004"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ bdm-webapp:
+  image: cloud/ifmis-bdm-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-bdm-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7004:7004"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

@@ -1,0 +1,5 @@
+CREATE OR REPLACE PACKAGE PKG_PERF_EDITFORMAL is
+
+    type cs is REF CURSOR;
+    procedure getEditdata(pmainguid varchar2,pagencyguid varchar2,ptablecode varchar2,o_cs out CS);
+end PKG_PERF_EDITFORMAL;

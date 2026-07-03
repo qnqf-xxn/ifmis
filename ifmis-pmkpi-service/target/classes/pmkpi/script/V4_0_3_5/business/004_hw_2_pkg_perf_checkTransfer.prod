@@ -1,0 +1,73 @@
+create or replace package body pkg_perf_checkTransfer is
+  procedure checkTransIndex(o_cs out CS)
+    is
+       tmainsql      varchar(4000);
+       tinsertsql    varchar(4000);
+       tprocs          cs;
+       tramark       varchar(4000);--提示信息
+       tagencyname   varchar(4000); --单位名称
+       tablecatcode  varchar2(32); -- 项目类别
+       tablecode     varchar(400); --物理表名
+       tablename     varchar(400); --中文表名
+       tauditName    varchar(400); --审核定义名称
+       talarmlevels  varchar(1);    -- 0 :强制性审核   1：提示性审核
+       gnum          number(20);
+       tnum          number(20);
+       tyear         number(4);     --年度
+       tprovince     varchar2(200); --区划
+       tproname      varchar2(400); -- 项目名称
+       tproguid      varchar2(32); -- 项目guid
+       tprocode      varchar(32);  -- 项目code
+       tcount        number(10);
+    begin
+      talarmlevels := '0';
+      --select global_multyear_cz.v_pmYear into tyear from dual;       --年度
+      --select global_multyear_cz.v_pmDivID into tprovince from dual;  -- 区划
+      --select global_multyear_cz.Secu_f_Global_Setparm('',''||tprovince||'',''||tyear||'','') into tcount from dual;
+      tmainsql := 'select t.pro_name, t.guid, t.pro_code, a.code || '' - '' || a.name, t.pro_cat_code from v_perf_project_info t left join pmkpi_fasp_t_pubagency a on t.agencyguid = a.guid where exists (select 1 from perf_tmp_guids a where a.code = t.pro_code)';
+
+      open tprocs for tmainsql;
+        loop
+          fetch tprocs into tproname,tproguid,tprocode,tagencyname,tablecatcode;
+          EXIT WHEN tprocs%NOTFOUND;
+
+          tablecode := 'perf_transfer_goal、perf_transfer_indicator';
+          tablename := '结转项目绩效年度目标、指标表';
+          tauditName := '结转项目绩效年度目标、指标审核';
+
+          --1、结转项目绩效年度目标
+          tmainsql := 'select count(1) from v_perf_transfer_goal t where t.pro_code = :1 ';
+          execute immediate tmainsql into gnum using tprocode;
+
+          --2、结转项目绩效年度指标
+          tmainsql := 'select count(1) from v_perf_transfer_indicator t where t.pro_code = :1 ';
+          execute immediate tmainsql into tnum using tprocode;
+
+          --基本支出项目不校验年度指标
+          if tablecatcode = '1' or tablecatcode = '21' then
+            tmainsql := 'select 1 from dual';
+          execute immediate tmainsql into tnum;
+          end if;
+
+          if gnum = 0 and tnum = 0 and tproguid is not null then
+            tramark := tprocode||'-'|| tproname || '-项目年度目标、指标不能为空！';
+          elsif gnum = 0 and tproguid is not null then
+            tramark := tprocode||'-'|| tproname || '-项目年度目标不能为空！';
+          elsif tnum = 0 and tproguid is not null then
+            tramark := tprocode||'-'|| tproname || '-项目年度指标不能为空！';
+          end if;
+
+          if tramark is not null then
+            tinsertsql := 'insert into perf_tmp_auditerrorinfo(guid,busguid,remark,agencyname,tablecode,tablename,auditname,alarmlevels) values(:1,:2,:3,:4,:5,:6,:7,:8)';
+          execute immediate tinsertsql using tproguid,tproguid,tramark,tagencyname,tablecode,tablename,tauditName,talarmlevels;
+          end if;
+
+          tramark := null;
+
+        end loop;
+      close tprocs;
+      tmainsql := 'select * from perf_tmp_auditerrorinfo';
+      open o_cs for tmainsql;
+    end;
+
+end pkg_perf_checkTransfer;

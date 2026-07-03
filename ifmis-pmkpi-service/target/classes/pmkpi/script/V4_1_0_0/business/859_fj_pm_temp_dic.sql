@@ -1,0 +1,12 @@
+begin
+
+delete from bus_t_diccolumn t where t.tablecode in('PM_PERF_GOAL_TEMP') and COLUMNCODE = 'CREATE_TIME';
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values ('BE00036', null, null, '0', 'CREATE_TIME', '1', '2016', '87', 'C09CE4EFA01BEF40E053480A050AA041', 'CREATE_TIME', 'PM_PERF_GOAL_TEMP', '创建时间', 'D', null, null, 1, null, null, sysdate);
+
+delete from bus_t_diccolumn t where t.tablecode in('PM_PERF_INDICATOR_TEMP') and COLUMNCODE = 'CREATE_TIME';
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values ('BE00036', null, null, '0', 'CREATE_TIME', '1', '2016', '87', 'AE7A505688432B55E0530603A8C08935', 'CREATE_TIME', 'PM_PERF_INDICATOR_TEMP', '创建时间', 'D', null, null, 1, null, null, sysdate);
+

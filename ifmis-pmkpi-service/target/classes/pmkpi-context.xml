@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+
+    <!-- 注解注入BO配置 -->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+    <bean id="pmkpi.common.PmkpiPage" class="gov.mof.fasp2.pmkpi.common.PmkpiPage"></bean>
+    <bean id="pmkpi.common.PmkpiService" class="gov.mof.fasp2.pmkpi.common.PmkpiService"></bean>
+    <bean id="pmkpi.common.PmkpiBO" class="gov.mof.fasp2.pmkpi.common.PmkpiBO"></bean>
+    <bean id="pmkpi.common.PmkpiDAO" class="gov.mof.fasp2.pmkpi.common.PmkpiDAO"></bean>
+    <bean class="gov.mof.fasp2.pmkpi.dataexport.DataExportComponet" id="pmkpi.dataexport"/>
+
+    <bean id="pmkpi.PmkpiTreeTabsLayoutService"
+          class="gov.mof.fasp2.pmkpi.common.service.PmkpiTreeTabsLayoutService"></bean>
+    <bean id="pmkpi.PmkpiTabsCommonBO" class="gov.mof.fasp2.pmkpi.common.bo.PmkpiTabsCommonBO"></bean>
+    <bean id="busuigencytreelistadatatable" class="gov.mof.fasp2.pmkpi.common.componet.BusAgencyTreelistTableComponet"
+          parent="busuitreelistdatatable"></bean>
+
+
+    <!-- 绩效业务 -->
+    <import resource="classpath:pmkpi-perfcontext.xml"/>
+
+    <!-- 配置 -->
+    <import resource="classpath:pmkpi-setting.xml"/>
+
+    <!-- 绩效抽评 -->
+    <import resource="classpath:pmkpi-randomComment.xml"/>
+
+    <!-- 评价类型 -->
+    <import resource="classpath:pmkpi-evaluatetemp.xml"/>
+
+    <!-- 部门综合评价 -->
+    <import resource="classpath:pmkpi-deptOverallMerit.xml"/>
+
+    <!-- 评价类型 -->
+    <import resource="classpath:pmkpi-evaluate.xml"/>
+
+    <!-- 江苏绩效追加 -->
+    <!--<import resource="classpath:pmkpi-jsproj.xml"/>-->
+    <!-- 绩效智慧平台 -->
+    <!--<import resource="classpath:pmkpi-wisDomKpi.xml"/>-->
+    <!-- 绩效目标监审 -->
+    <import resource="classpath:pmkpi-perfSupervision.xml"/>
+
+    <!--山西双流程-->
+    <import resource="classpath:pmkpi-doubleprocess.xml"/>
+
+    <!--绩效目标查询-->
+    <import resource="classpath:pmkpi-perfQuery.xml"/>
+
+    <!--事前绩效评估查询-->
+    <import resource="classpath:pmkpi-assessQuery.xml"/>
+
+
+</beans>

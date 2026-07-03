@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+    <bean id="pmkpi.randomcomment.RandomCommentPage" class="gov.mof.fasp2.pmkpi.randomComment.page.RandomCommentPage"></bean>
+    <!-- 抽评范围标识 -->
+    <bean id="pmkpi.randomcomment.RandomCommentScopeService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentScopeService">
+        <property name="randomCommentScopeBO" ref="pmkpi.randomcomment.RandomCommentScopeBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentScopeBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentScopeBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentScopeBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentScopeBO">
+        <property name="randomCommentScopeDAO" ref="pmkpi.randomcomment.RandomCommentScopeDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentScopeDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentScopeDAO"></bean>
+    
+    <!-- 抽评对象确定 -->
+    <bean id="pmkpi.randomcomment.RandomCommentObjectService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentObjectService">
+        <property name="randomCommentObjectBO" ref="pmkpi.randomcomment.RandomCommentObjectBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentObjectBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentObjectBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentObjectBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentObjectBO">
+        <property name="randomCommentObjectDAO" ref="pmkpi.randomcomment.RandomCommentObjectDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentObjectDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentObjectDAO"></bean>
+    
+    <!-- 随机抽评管理 -->
+    <bean id="pmkpi.randomcomment.RandomCommentRandomService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentRandomService">
+        <property name="randomCommentRandomBO" ref="pmkpi.randomcomment.RandomCommentRandomBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentRandomBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentRandomBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentRandomBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentRandomBO">
+        <property name="randomCommentRandomDAO" ref="pmkpi.randomcomment.RandomCommentRandomDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentRandomDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentRandomDAO"></bean>
+    
+    <!-- 抽评选择项目 -->
+    <bean id="pmkpi.randomcomment.RandomCommentProjService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentProjService">
+        <property name="randomCommentProjBO" ref="pmkpi.randomcomment.RandomCommentProjBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentProjBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentProjBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentProjBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentProjBO">
+        <property name="randomCommentProjDAO" ref="pmkpi.randomcomment.RandomCommentProjDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentProjDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentProjDAO"></bean>
+   
+    <!-- 随机抽取设置 -->
+    <bean id="pmkpi.randomcomment.RandomAddService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomAddService">
+        <property name="randomCommentRandomBO" ref="pmkpi.randomcomment.RandomCommentRandomBOTX"></property>
+    </bean>
+    
+    <!-- 随机抽取 -->
+    <bean id="pmkpi.randomcomment.RandomService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomService">
+        <property name="randomCommentRandomBO" ref="pmkpi.randomcomment.RandomCommentRandomBOTX"></property>
+    </bean>
+    
+    <!-- 抽评结果上传 -->
+    <bean id="pmkpi.randomcomment.RandomCommentResultService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentResultService">
+        <property name="randomCommentResultBO" ref="pmkpi.randomcomment.RandomCommentResultBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentResultBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentResultBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentResultBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentResultBO">
+        <property name="randomCommentResultDAO" ref="pmkpi.randomcomment.RandomCommentResultDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentResultDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentResultDAO"></bean>
+    
+    <!-- 抽评委托 -->
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentEntrustService">
+        <property name="randomCommentEntrustBO" ref="pmkpi.randomcomment.RandomCommentEntrustBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentEntrustBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentEntrustBO">
+        <property name="randomCommentEntrustDAO" ref="pmkpi.randomcomment.RandomCommentEntrustDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentEntrustDAO"></bean>
+ 
+	<!-- 抽评委托第三方 -->
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustingService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentEntrustingService">
+        <property name="randomCommentEntrustingBO" ref="pmkpi.randomcomment.RandomCommentEntrustingBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustingBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentEntrustingBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustingBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentEntrustingBO">
+        <property name="randomCommentEntrustingDAO" ref="pmkpi.randomcomment.RandomCommentEntrustingDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentEntrustingDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentEntrustingDAO"></bean>
+ 	
+ 	<!-- 抽评查询 -->
+    <bean id="pmkpi.randomcomment.RandomCommentQueryService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomCommentQueryService">
+        <property name="randomCommentQueryBO" ref="pmkpi.randomcomment.RandomCommentQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomCommentQueryBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentQueryBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomCommentQueryBO">
+        <property name="randomCommentQueryDAO" ref="pmkpi.randomcomment.RandomCommentQueryDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomCommentQueryDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomCommentQueryDAO"></bean>
+ 
+  	<!-- 抽评实际绩效情况-->
+    <bean id="pmkpi.randomcomment.RandomIndexEditService" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomIndexEditService">
+        <property name="randomIndexEditBO" ref="pmkpi.randomcomment.RandomIndexEditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomIndexEditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomIndexEditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomIndexEditBO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomIndexEditBO">
+        <property name="randomIndexEditDAO" ref="pmkpi.randomcomment.RandomIndexEditDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomIndexEditDAO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomIndexEditDAO"></bean>
+    <!-- 抽评项目自评质量-->
+    <bean id="pmkpi.randomcomment.RandomQualityEditService" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomQualityEditService">
+        <property name="randomQualityEditBO" ref="pmkpi.randomcomment.RandomQualityEditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomQualityEditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomQualityEditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomQualityEditBO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomQualityEditBO">
+        <property name="randomQualityEditDAO" ref="pmkpi.randomcomment.RandomQualityEditDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomQualityEditDAO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomQualityEditDAO"></bean>
+    
+    <!-- 绩效抽评问题-->
+    <bean id="pmkpi.randomcomment.RandomProblemEditService" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomProblemEditService">
+        <property name="randomProblemEditBO" ref="pmkpi.randomcomment.RandomProblemEditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomProblemEditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomProblemEditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomProblemEditBO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomProblemEditBO">
+        <property name="randomProblemEditDAO" ref="pmkpi.randomcomment.RandomProblemEditDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomProblemEditDAO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomProblemEditDAO"></bean>
+    
+    <!-- 绩效抽评表 --><!--
+    <bean id="pmkpi.randomcomment.RandomTabEditService" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomTabEditService">
+        <property name="randomTabEditBO" ref="pmkpi.randomcomment.RandomTabEditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomTabEditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomTabEditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomTabEditBO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomTabEditBO">
+        <property name="randomTabEditDAO" ref="pmkpi.randomcomment.RandomTabEditDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomTabEditDAO" class="gov.mof.fasp2.pmkpi.randomComment.tab.RandomTabEditDAO"></bean>
+    --><!-- 绩效指标新增-->
+    <bean id="pmkpi.randomcomment.RandomMeasuresAddService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomMeasuresAddService">
+        <property name="randomMeasuresAddBO" ref="pmkpi.randomcomment.RandomMeasuresAddBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomMeasuresAddBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomMeasuresAddBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomMeasuresAddBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomMeasuresAddBO">
+        <property name="randomMeasuresAddDAO" ref="pmkpi.randomcomment.RandomMeasuresAddDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomMeasuresAddDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomMeasuresAddDAO"></bean>
+    
+    <!-- 选择绩效指标-->
+    <bean id="pmkpi.randomcomment.RandomChooseMeasuresAddService" class="gov.mof.fasp2.pmkpi.randomComment.service.RandomChooseMeasuresAddService">
+        <property name="randomChooseMeasuresAddBO" ref="pmkpi.randomcomment.RandomChooseMeasuresAddBOTX"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomChooseMeasuresAddBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.randomcomment.RandomChooseMeasuresAddBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomChooseMeasuresAddBO" class="gov.mof.fasp2.pmkpi.randomComment.bo.RandomChooseMeasuresAddBO">
+        <property name="randomChooseMeasuresAddDAO" ref="pmkpi.randomcomment.RandomChooseMeasuresAddDAO"></property>
+    </bean>
+    <bean id="pmkpi.randomcomment.RandomChooseMeasuresAddDAO" class="gov.mof.fasp2.pmkpi.randomComment.dao.RandomChooseMeasuresAddDAO"></bean>
+    
+</beans>

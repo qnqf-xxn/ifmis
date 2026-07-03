@@ -1,0 +1,300 @@
+server:
+  servlet:
+    jsp:
+      init-parameters:
+        development: true #修改jsp页面立即生效
+  tomcat:
+    basedir: .
+    uri-encoding: UTF-8
+    max-http-post-size: -1
+    #最大线程数，大并发请求时，tomcat能创建来处理请求的最大线程数，超过则放入请求队列中进行排队，默认值为200；
+    max-threads: 1000
+    #当最大线程数（maxThreads）被使用完时，可以放入请求队列排队个数，超过这个数返回connection refused（请求被拒绝）
+    #一般设置和maxThreads一样，不过这个具体需要根据自己的应用实际访问峰值和平均值来权衡，默认值为100
+    accept-count: 1000
+#通用配置，注册中心、安全信息、rabbitmq
+#测试：http://config:8880/common/dev
+spring:
+  mvc:
+    async:
+      request-timeout: 3600000
+  datasource:
+    openMulti: true
+    #启用时将激活atomikos数据源配置
+    jta: false
+    #没用，程序里设置使用com.alibaba.druid.pool.DruidDataSource
+    type: com.alibaba.druid.pool.xa.DruidXADataSource
+    idle-timeout: 30000
+    validationQuery: SELECT 1 from dual
+    #初始化连接个数
+    initialSize: 5
+    #最小空闲数
+    minIdle: 5
+    #最大活动数
+    maxActive: 300
+    #从连接池中获取连接的最大等待时间，单位ms
+    maxWait: 3000
+    #当前最小空闲连接数，其实也可以不用
+    poolMaximumIdleConnections: 0
+    #oracle.net.CONNECT_TIMEOUT获取连接使用的时间，不建议超过5000ms，oracle.jdbc.ReadTimeout，从socket读取数据的时间，总体上说这个时间应该包含了query-timeout的时间，1800000ms，30分钟
+    connectionProperties: oracle.net.CONNECT_TIMEOUT=2000;oracle.jdbc.ReadTimeout=1800000
+    #建议为true（默认false），当应用向连接池申请连接时，连接池会判断这条连接是否是可用的
+    testOnBorrow: true
+    #为true（默认false），当应用使用完连接，连接池回收连接的时候会判断该连接是否还可用。
+    testOnReturn: false
+    #为true（默认true），当应用向连接池申请连接，并且testOnBorrow为false时，连接池将会判断连接是否处于空闲状态，如果是，则验证这条连接是否可用。
+    #此时判断连接空闲的依据是空闲时间大于timeBetweenEvictionRunsMillis（默认1分钟），并不是使用minEvictableIdleTimeMillis跟maxEvictableIdleTimeMillis，
+    testWhileIdle: true
+    #保持连接的有效性，也就是跟数据库续租
+    #当连接的空闲时间大于keepAliveBetweenTimeMillis（默认2分钟），但是小于minEvictableIdleTimeMillis（默认30分钟），Druid会通过调用validationQuery保持该连接的有效性。
+    #当连接空闲时间大于minEvictableIdleTimeMillis，Druid会直接将该连接关闭，keepAlive会无效。
+    keepAlive: true
+    #空闲2分钟后就会检测连接是否有效
+    keepAliveBetweenTimeMillis: 120000
+    #作为验证连接是否有效的时间周期，如果testOnBorrow==false并且testWhileIdle==true,则在应用获取连接的时候会判断连接的空闲时间是否大于timeBetweenEvictionRunsMillis，如果大于则会验证该连接是否有效。
+    timeBetweenEvictionRunsMillis: 300000
+    #最小空闲时间，默认30分钟，如果连接池中非运行中的连接数大于minIdle，并且那部分连接的非运行时间大于minEvictableIdleTimeMillis，则连接池会将那部分连接设置成Idle状态并关闭
+    minEvictableIdleTimeMillis: 1800000
+    #池中的连接如果非运行时间大于maxEvictableIdleTimeMillis，也会强行把它关闭，而不用判断空闲连接数是否小于minIdle
+    maxEvictableIdleTimeMillis: 3600000
+    #如果回收了泄露的连接，是否要打印一条log，默认false
+    logAbandoned: true
+    #如果连接泄露，是否需要回收泄露的连接，默认false
+    removeAbandoned: true
+    #连接回收的超时时间，默认5分钟
+    #removeAbandonedTimeout: 3600
+    removeAbandonedTimeoutMillis: 300000
+    #没用
+    poolPreparedStatements: true
+    #没用
+    maxPoolPreparedStatementPerConnectionSize: 20
+    atomikos:
+      borrowConnectionTimeout: 30
+      loginTimeout: 500000
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      maxLifetime: 20000
+      maxPoolSize: 25
+      minPoolSize: 3
+      testQuery: select 1 from dual
+      xaDataSourceClassName: oracle.jdbc.xa.client.OracleXADataSource
+    filters: config,slf4j,stat
+    druid: 
+      removeAbandoned: true
+      removeAbandonedTimeout: 3600
+      removeAbandonedTimeoutMillis: 1800000
+      filter:
+        slf4j:
+          enabled: true
+          result-set-log-enabled: false
+          statement-create-after-log-enabled: false
+          statement-executable-sql-log-enable: true
+          statement-log-enabled: false
+          statement-log-error-enabled: true
+      stat-view-servlet:
+        enabled: true
+        login-password: 123456
+        login-username: druid
+        reset-enable: true
+        url-pattern: /druid/*
+        allow: ""
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+        url-pattern: /*
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 3000MB # 上传一个文件最大值,默认1Mb
+      max-request-size: 3000MB # 上传多个文件最大值,50Mb,默认10Mb
+  security:
+    user:
+      name: ${SERVER_USERNAME:user}
+      password: ${SERVER_PASSWORD:password}
+      roles: ${SERVER_SUPERUSER:SUPERUSER}
+  rabbitmq:
+    host: ${RABBITMQ_SERVER:127.0.0.1}
+    port: ${RABBITMQ_SERVER_PORT:5672}
+    username: ${RABBITMQ_SERVER_USERNAME:admin}
+    password: ${RABBITMQ_SERVER_PASSWORD:123456}
+  cloud:
+    config:
+      failFast: true
+      retry: #和重试机制相关的配置有如下四个：
+        max-interval: 2000 # 最大间隔时间，默认2000ms
+        multiplier: 1.1 # 间隔乘数，默认1.1
+        initial-interval: 1000 # 初始重试间隔时间，默认1000ms
+        max-attempts: 6 # 配置重试次数，默认为6
+      bus:
+        trace:
+          enabled: true
+      allowOverride: true
+      overrideNone: true
+      overrideSystemProperties: false
+    stream:
+      debugmode: true
+      #sender: ${spring.stream.sender:false}
+      #Binding: 包括 Input Binding 和 Output Binding。
+      #Binding 在消息中间件与应用程序提供的 Provider 和 Consumer 之间提供了一个桥梁，
+      #实现了开发者只需使用应用程序的 Provider 或 Consumer 生产或消费数据即可，屏蔽了开发者与底层消息中间件的接触。
+    inetutils:
+      ignoredInterfaces:
+      - lo
+      - eth0
+      - eth1
+      #preferredNetworks: 127.0.0.1
+eureka:
+  instance:
+    hostname: ${eureka.instance.ip-address:${spring.cloud.client.ip-address}}
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+    lease-expiration-duration-in-seconds: 30 # 续约更新时间间隔（默认30秒）#服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除,注意，EurekaServer一定要设置eureka.server.eviction-interval-timer-in-ms否则这个配置无效，这个配置一般为服务刷新时间配置的三倍
+    lease-renewal-interval-in-seconds: 30 # 续约到期时间（默认90秒）服务刷新时间配置，每隔这个时间会主动心跳一次
+    prefer-ip-address: true
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+    metadata-map:
+      zone: ${zone.name}
+      user:
+        name: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+  client:
+    enabled: true
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    prefer-same-zone-eureka: true
+    registryFetchIntervalSeconds: 50
+    #使用这个就会有问题，需要设置eureka.instance.ip-addres才能启用
+    #prefer-ip-address: true
+    #地区
+    region: beijing
+    availability-zones:
+      beijing: zone-1,zone-2
+    service-url:
+      zone-1: http://${REGISTRY_SERVER_USERNAME:user}:${REGISTRY_SERVER_PASSWORD:password}@${REGISTRY_SERVER1:peer1}:${REGISTRY_SERVER1_PORT:8761}${REGISTRY_SERVER_CONTEXT-PATH:/}eureka/
+      zone-2: http://${REGISTRY_SERVER_USERNAME:user}:${REGISTRY_SERVER_PASSWORD:password}@${REGISTRY_SERVER2:peer2}:${REGISTRY_SERVER2_PORT:8762}${REGISTRY_SERVER_CONTEXT-PATH:/}eureka/
+
+management:
+  # 设置端点是否可用 默认只有shutdown可用
+  enabled-by-default: true
+  endpoints:
+    web:
+      # 设置是否暴露端点 默认只有health和info可见
+      exposure:
+        # 包括所有端点
+        include: '*'  # 注意需要添加引号
+  endpoint:
+#    health:
+#      show-details: ALWAYS
+    logfile:
+      enabled: true #可在线查看日志
+    shutdown:
+      enabled: true #客户端开启停止服务端点
+      sensitive: true  #禁用密码验证
+  security:
+    enabled: false #SpringBoot 1.5以后的版本都默认开启端点保护
+  health:
+    db:
+      enabled: false
+    redis:
+      enabled: true
+    elasticsearch:
+      enabled: false
+encrypt:
+  keyStore:
+    location: classpath:/server.jks # jks文件的路径
+    password: letmein               # storepass
+    alias: mytestkey                # alias
+    secret: changeme                # keypass
+
+swagger:
+  basePackage: gov.mof.fasp2
+  title: 财政信息一体化系统2.0
+  description: 外部服务接口API
+  version: V3.2.9
+#logging:
+#  level:
+#    root: INFO
+#    com:
+#      netflix:
+#        eureka: 'off'
+#        discovery:  'off'
+# INFO ENDPOINT CONFIGURATION
+info:
+  app:
+    name: ${spring.application.name}
+    java:
+      version: ${java.version}
+      
+#基础配置文件
+ifmis:
+  fasp2:
+    gateway:
+      address: 10.104.28.50:20000
+  gateway:
+    #微服务网管serviceid
+    microservicegatewayname: ifmis-gateway-microservice
+    outergatewayname: ifmis-gateway-outer
+    filters: gov.mof.fasp2.microlog.feign.config.interceptor.MicroCallLogInterceptor,gov.mof.fasp2.buscore.microcall.intercepters.TokenidIntercepter
+  framework:
+    afterstart:
+      beans: gov.mof.fasp2.buscore.system.startrun.BuscommonEvictDatas,gov.mof.fasp2.buscore.system.startrun.BuscommonDropTable
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 3600000
+        readTimeout: 3600000
+hystrix:
+  command:
+    default:
+      execution:
+        timeout: 
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            #熔断超时时间
+            timeoutInMilliseconds: 3600000 
+          semaphore:
+            #这个属性主要是来控制Hystrix降级并行的线程数，现在系统没有做降级的处理，这个最好跟最大请求数一致
+            maxConcurrentRequests: 1000
+      curcuitBreaker:
+        #当在配置时间窗口内达到此数量的失败后，进行短路。默认20个，简言之，10s内请求失败数量达到20个，断路器开
+        requestVolumnThreshold: 1000
+  threadpool:
+    default:
+      #线程池核心线程数，这个是全剧设置，可以不改，并发太高了再优化
+      coreSize: 1000
+#解决sql注入，加了这个配置，功能都不正常了
+buscommon:
+  paramjson:
+    encode:
+      enable: true
+logging:
+  level:
+    org:
+      apache:
+        servicecomb:
+          bizkeeper:
+            BizkeeperHandler: ERROR
+    druid:
+      sql:
+        Statement: ERROR
+    root: info
+http:
+  client:
+    socket-timeout-millis: 30000
+    connect-timeout-millis: 20000
+    connection-request-timeout-millis: 20000
+    #最大的总连接数（根据实际的需要进行设置，可以设置较大的值，5000-20000）
+    maxTotalConnections: 1000
+    #每个路由连接数（这个按实际并发进行分配，压力测试时，需要调大）
+    maxPerRouteConnections: 1000
+    timeToLive: -1

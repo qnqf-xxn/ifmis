@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+table.customList_tab{border:1px solid #fff;margin-left:30px}
+
+td.customList_title{background:#f9f9f9;border:1px solid #e5e5e5;height:30px;}
+
+div.icop {border-right: 1px solid #e5e5e5;float: left;width: 43px;height: 30px;background: url(images/i_54.png) center no-repeat;display: inline;}
+div.titlename {display:inline;float: left;padding-left: 8px;font-size: 16px;line-height: 30px;font-family: "microsoft yahei";}
+
+.button_style_1 {display:inline-block;border:0;border-left:1px solid #e5e5e5;background:none;float:right;padding:0 10px;height:30px;text-align:center;cursor:pointer;color:#469dea;font-size:14px;}
+.button_style{background: #f2f9ff;border: 1px solid #d9e9f6;margin-right: 0px;line-height: 14px;float: left;padding: 6px 20px;white-space: nowrap;cursor: pointer;font-size: 14px;font-family: Microsoft YaHei;color: #499bed;}

@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+
+    <!-- 绩效缓存start -->
+	<buscore_cache:domain id="pmkpi.common.cacheserver" initbeanid="pmkpi.system.util.KPISystemCache" maxsize="10000" partition="true" />
+	<bean id="pmkpi.system.util.KPISystemCache" class="gov.mof.fasp2.pmkpi.setting.kpisystemset.KPISystemCache"/>
+	<buscore_cache:domain id="pmkpi.jsondata.cacheserver" initbeanid="pmkpi.common.cache.PmkpiJsonCache" maxsize="10000" partition="true" unduplacate="true" />
+	<bean id="pmkpi.common.cache.PmkpiJsonCache" class="gov.mof.fasp2.pmkpi.common.cache.PmkpiJsonCache"/>
+	<!-- 绩效缓存end -->
+	<!-- 页面组件数据权限定义start gm 0810 -->
+	<bean id="pmkpi.componentAllot.PerfComponentRulePage" class="gov.mof.fasp2.pmkpi.componentAllot.PerfComponentRulePage"/>
+	<bean id="pmkpi.componentAllot.PerfDataAllotService" class="gov.mof.fasp2.pmkpi.componentAllot.PerfDataAllotService"/>
+	<bean id="pmkpi.componentAllot.PerfComponentRuleBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.componentAllot.PerfComponentRuleBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.componentAllot.PerfComponentRuleBO" class="gov.mof.fasp2.pmkpi.componentAllot.PerfComponentRuleBO"/>
+	<bean id="pmkpi.componentAllot.PerfComponentRuleDAO" class="gov.mof.fasp2.pmkpi.componentAllot.PerfComponentRuleDAO"/>
+	<bean id="pmkpi.datarule.rightservice" class="gov.mof.fasp2.pmkpi.perfset.datarule.PmkpiRightService"/>
+	<bean id="pmkpi.perfset.PerfDataRulePage" class="gov.mof.fasp2.pmkpi.perfset.datarule.PerfDataRulePage"/>
+	<bean id="pmkpi.perfset.PerfDataRuleService" class="gov.mof.fasp2.pmkpi.perfset.datarule.PerfDataRuleService"/>
+	<bean id="pmkpi.perfset.PerfDataRuleBO" class="gov.mof.fasp2.pmkpi.perfset.datarule.PerfDataRuleBO"/>
+	<bean id="pmkpi.perfset.PerfDataRuleDAO" class="gov.mof.fasp2.pmkpi.perfset.datarule.PerfDataRuleDAO"/>
+	<bean id="pmkpi.perfset.PerfDataRuleBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.perfset.PerfDataRuleBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+
+
+	<!-- 页面数据权限定义end gm 0810 -->
+	<!-- 审核流程 start -->
+
+	<!-- 四性审核 start -->
+	<bean id="pmkpi.naturesaudit.NaturesAuditPage" class="gov.mof.fasp2.pmkpi.setting.auditprocess.naturesaudit.NaturesAuditPage"></bean>
+	<bean id="pmkpi.naturesaudit.NaturesAuditService" class="gov.mof.fasp2.pmkpi.setting.auditprocess.naturesaudit.NaturesAuditService">
+		<property name="naturesAuditBO" ref="pmkpi.naturesaudit.NaturesAuditBOTX"></property>
+	</bean>
+	<bean id="pmkpi.naturesaudit.NaturesAuditBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.naturesaudit.NaturesAuditBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.naturesaudit.NaturesAuditBO" class="gov.mof.fasp2.pmkpi.setting.auditprocess.naturesaudit.NaturesAuditBO">
+		<property name="naturesAuditDAO" ref="pmkpi.naturesaudit.NaturesAuditDAO"></property>
+	</bean>
+	<bean id="pmkpi.naturesaudit.NaturesAuditDAO" class="gov.mof.fasp2.pmkpi.setting.auditprocess.naturesaudit.NaturesAuditDAO"></bean>
+
+	<!-- 四性审核 end -->
+
+	<!-- 流程节点绑定审核配置 start -->
+	<bean id="pmkpi.setting.auditnode.AuditNodePage" class="gov.mof.fasp2.pmkpi.setting.auditprocess.auditnode.AuditNodePage">
+	</bean>
+	<bean id="pmkpi.setting.auditnode.AuditNodeService" class="gov.mof.fasp2.pmkpi.setting.auditprocess.auditnode.AuditNodeService">
+		<property name="auditNodeB0" ref="pmkpi.setting.auditnode.AuditNodeB0TX"></property>
+	</bean>
+	<bean id="pmkpi.setting.auditnode.AuditNodeB0TX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.auditnode.AuditNodeB0" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.auditnode.AuditNodeB0" class="gov.mof.fasp2.pmkpi.setting.auditprocess.auditnode.AuditNodeB0">
+		<property name="auditNodeDAO" ref="pmkpi.setting.auditnode.AuditNodeDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.auditnode.AuditNodeDAO" class="gov.mof.fasp2.pmkpi.setting.auditprocess.auditnode.AuditNodeDAO"></bean>
+	<!-- 流程节点绑定审核配置 end -->
+
+	<!-- 审核流程 end-->
+
+	<!-- 指标库 start -->
+	<bean id="pmkpi.setting.index.IndexPage" class="gov.mof.fasp2.pmkpi.setting.index.IndexPage"></bean>
+	<bean id="pmkpi.setting.index.IndexService" class="gov.mof.fasp2.pmkpi.setting.index.IndexService">
+		<property name="indexBO" ref="pmkpi.setting.index.IndexBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.index.IndexEditService" class="gov.mof.fasp2.pmkpi.setting.index.IndexEditService">
+		<property name="indexBO" ref="pmkpi.setting.index.IndexBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.index.IndexBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.index.IndexBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.index.IndexBO" class="gov.mof.fasp2.pmkpi.setting.index.IndexBO">
+		<property name="indexDAO" ref="pmkpi.setting.index.IndexDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.index.IndexDAO" class="gov.mof.fasp2.pmkpi.setting.index.IndexDAO"></bean>
+	<!-- 指标库 end -->
+	<!-- 指标库 new -->
+	<bean id="pmkpi.setting.indexlib.report.IndexRpPage" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexRpPage"/>
+	<bean id="pmkpi.setting.indexlib.report.IndexRpService" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexRpService"/>
+	<bean id="pmkpi.setting.indexlib.report.IndexRpEditService" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexRpEditService"/>
+	<!-- 声明事务bean  -->
+	<bean id="pmkpi.setting.indexlib.report.IndexRpBOTx" parent="fasp2TxProxy">
+		<property name="target"><ref bean="pmkpi.setting.indexlib.report.IndexRpBO" /></property>
+		<property name="proxyTargetClass"><value>true</value></property>
+	</bean>
+	<bean id="pmkpi.setting.indexlib.report.IndexRpBO" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexRpBO"/>
+	<bean id="pmkpi.setting.indexlib.report.IndexRpDAO" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexRpDAO"/>
+	<!-- 审核-->
+	<bean id="pmkpi.setting.indexlib.audit.IndexAuditPage" class="gov.mof.fasp2.pmkpi.setting.indexlib.audit.IndexAuditPage"/>
+	<bean id="pmkpi.setting.indexlib.audit.IndexAuditService" class="gov.mof.fasp2.pmkpi.setting.indexlib.audit.IndexAuditService"/>
+	<!-- 声明事务bean  -->
+	<bean id="pmkpi.setting.indexlib.audit.IndexAuditBOTx" parent="fasp2TxProxy">
+		<property name="target"><ref bean="pmkpi.setting.indexlib.audit.IndexAuditBO" /></property>
+		<property name="proxyTargetClass"><value>true</value></property>
+	</bean>
+	<bean id="pmkpi.setting.indexlib.audit.IndexAuditBO" class="gov.mof.fasp2.pmkpi.setting.indexlib.audit.IndexAuditBO"/>
+	<bean id="pmkpi.setting.indexlib.audit.IndexAuditDAO" class="gov.mof.fasp2.pmkpi.setting.indexlib.audit.IndexAuditDAO"/>
+	<!-- 查询-->
+	<bean id="pmkpi.setting.indexlib.query.IndexQueryPage" class="gov.mof.fasp2.pmkpi.setting.indexlib.query.IndexQueryPage"/>
+	<bean id="pmkpi.setting.indexlib.query.IndexQueryService" class="gov.mof.fasp2.pmkpi.setting.indexlib.query.IndexQueryService">
+	<property name="indexQueryBO" ref="pmkpi.setting.indexlib.query.IndexQueryBOTx"></property>
+</bean>
+	<!-- 声明事务bean  -->
+	<bean id="pmkpi.setting.indexlib.query.IndexQueryBOTx" parent="fasp2TxProxy">
+		<property name="target"><ref bean="pmkpi.setting.indexlib.query.IndexQueryBO" /></property>
+		<property name="proxyTargetClass"><value>true</value></property>
+	</bean>
+	<bean id="pmkpi.setting.indexlib.query.IndexQueryBO" class="gov.mof.fasp2.pmkpi.setting.indexlib.query.IndexQueryBO"/>
+	<bean id="pmkpi.setting.indexlib.query.IndexQueryDAO" class="gov.mof.fasp2.pmkpi.setting.indexlib.query.IndexQueryDAO"/>
+
+	<!--选择调整 start-->
+	<bean id="pmkpi.setting.indexlib.report.IndexCheckPage" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexCheckPage"></bean>
+	<bean id="pmkpi.setting.indexlib.report.IndexCheckService" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexCheckService">
+		<property name="indexCheckBO" ref="pmkpi.setting.indexlib.report.IndexCheckBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.indexlib.report.IndexCheckBOTX" parent="fasp2TxProxy">
+		<property name="target"><ref bean="pmkpi.setting.indexlib.report.IndexCheckBO" /></property>
+		<property name="proxyTargetClass"><value>true</value></property>
+	</bean>
+	<bean id="pmkpi.setting.indexlib.report.IndexCheckBO" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexCheckBO">
+		<property name="indexCheckDAO" ref="pmkpi.setting.indexlib.report.IndexCheckDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.indexlib.report.IndexCheckDAO" class="gov.mof.fasp2.pmkpi.setting.indexlib.report.IndexCheckDAO"></bean>
+	<!--选择调整 end-->
+
+	<!-- 指标库 end -->
+
+	<!-- 财政个性指标授权 -->
+	<bean id="pmkpi.finagive.IndFinaGivePage" class="gov.mof.fasp2.pmkpi.setting.indexlib.finagive.IndFinaGivePage"></bean>
+	<bean id="pmkpi.finagive.IndFinaGiveService" class="gov.mof.fasp2.pmkpi.setting.indexlib.finagive.IndFinaGiveService">
+		<property name="indFinaGiveBO" ref="pmkpi.finagive.IndFinaGiveBOTX"></property>
+	</bean>
+	<bean id="pmkpi.finagive.IndFinaGiveEdit" class="gov.mof.fasp2.pmkpi.setting.indexlib.finagive.IndFinaGiveEdit">
+		<property name="indFinaGiveBO" ref="pmkpi.finagive.IndFinaGiveBOTX"></property>
+	</bean>
+	<bean id="pmkpi.finagive.IndFinaGiveBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.finagive.IndFinaGiveBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.finagive.IndFinaGiveBO" class="gov.mof.fasp2.pmkpi.setting.indexlib.finagive.IndFinaGiveBO">
+		<property name="indFinaGiveDAO" ref="pmkpi.finagive.IndFinaGiveDAO"></property>
+	</bean>
+	<bean id="pmkpi.finagive.IndFinaGiveDAO" class="gov.mof.fasp2.pmkpi.setting.indexlib.finagive.IndFinaGiveDAO"></bean>
+
+	<!-- 模板/案例指标维护 start -->
+	<bean id="pmkpi.setting.modelcase.ModelCasePage" class="gov.mof.fasp2.pmkpi.setting.modelcase.ModelCasePage"></bean>
+	<bean id="pmkpi.setting.modelcase.ModelCaseService" class="gov.mof.fasp2.pmkpi.setting.modelcase.ModelCaseService">
+		<property name="modelCaseBO" ref="pmkpi.setting.modelcase.ModelCaseBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.modelcase.ModelCaseIndexService" class="gov.mof.fasp2.pmkpi.setting.modelcase.ModelCaseIndexService">
+		<property name="modelCaseBO" ref="pmkpi.setting.modelcase.ModelCaseBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.modelcase.ModelCaseIndexEditService" class="gov.mof.fasp2.pmkpi.setting.modelcase.ModelCaseIndexEditService">
+		<property name="modelCaseBO" ref="pmkpi.setting.modelcase.ModelCaseBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.modelcase.ModelCaseBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.modelcase.ModelCaseBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.modelcase.ModelCaseBO" class="gov.mof.fasp2.pmkpi.setting.modelcase.ModelCaseBO">
+		<property name="modelCaseDAO" ref="pmkpi.setting.modelcase.ModelCaseDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.modelcase.ModelCaseDAO" class="gov.mof.fasp2.pmkpi.setting.modelcase.ModelCaseDAO"></bean>
+	<!-- 模板/案例指标维护 end -->
+	
+	<!--系统配置  start-->
+	<bean id="pmkpi.kpisystemset.KPISystemSetPage" class="gov.mof.fasp2.pmkpi.setting.kpisystemset.KPISystemSetPage">
+	</bean>
+	<bean id="pmkpi.kpisystemset.KPISystemSetService" class="gov.mof.fasp2.pmkpi.setting.kpisystemset.KPISystemSetService">
+		<property name="kpiSystemSetBO" ref="pmkpi.kpisystemset.KPISystemSetBOTX"></property>
+	</bean>
+	<bean id="pmkpi.kpisystemset.KPISystemSetBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.kpisystemset.KPISystemSetBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.kpisystemset.KPISystemSetBO" class="gov.mof.fasp2.pmkpi.setting.kpisystemset.KPISystemSetBO">
+		<property name="kpiSystemSetDAO" ref="pmkpi.kpisystemset.KPISystemSetDAO"></property>
+	</bean>
+	<bean id="pmkpi.kpisystemset.KPISystemSetDAO" class="gov.mof.fasp2.pmkpi.setting.kpisystemset.KPISystemSetDAO"></bean>
+	<!--系统配置  end-->
+	
+	<!-- 用户对单位 start -->
+	<bean id="pmkpi.uservagency.UserVAgencyPage" class="gov.mof.fasp2.pmkpi.setting.uservagency.UserVAgencyPage"/>
+	<bean id="pmkpi.uservagency.UserVAgencyService" class="gov.mof.fasp2.pmkpi.setting.uservagency.UserVAgencyService"/>
+	<bean id="pmkpi.uservagency.UserVAgencyBO" class="gov.mof.fasp2.pmkpi.setting.uservagency.UserVAgencyBO"/>
+	<bean id="pmkpi.uservagency.UserVAgencyDAO" class="gov.mof.fasp2.pmkpi.setting.uservagency.UserVAgencyDAO"/>
+	<bean id="pmkpi.uservagency.UserVAgencyBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.uservagency.UserVAgencyBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<!-- 用户对单位 end  -->
+	
+	<!-- 打分配置 start-->
+	<bean id="pmkpi.setting.question.PmkpiQuestionPage" class="gov.mof.fasp2.pmkpi.setting.question.PmkpiQuestionPage">
+	</bean>
+	<bean id="pmkpi.setting.question.PmkpiQuestionService" class="gov.mof.fasp2.pmkpi.setting.question.PmkpiQuestionService">
+		<property name="pmkpiQuestionBO" ref="pmkpi.setting.question.PmkpiQuestionBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.question.PmkpiQuestionBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.question.PmkpiQuestionBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.question.PmkpiQuestionBO" class="gov.mof.fasp2.pmkpi.setting.question.PmkpiQuestionBO">
+		<property name="pmkpiQuestionDAO" ref="pmkpi.setting.question.PmkpiQuestionDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.question.PmkpiQuestionDAO" class="gov.mof.fasp2.pmkpi.setting.question.PmkpiQuestionDAO"></bean>
+	<!-- 打分配置 end-->
+	
+	<!-- 资金模板  start-->
+	<bean id="pmkpi.setting.fund.FundtempSetPage" class="gov.mof.fasp2.pmkpi.setting.fund.FundtempSetPage">
+	</bean>
+	<bean id="pmkpi.setting.fund.FundtempSetService" class="gov.mof.fasp2.pmkpi.setting.fund.FundtempSetService">
+		<property name="fundtempSetBO" ref="pmkpi.setting.fund.FundtempSetBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.fund.FundtempSetBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.fund.FundtempSetBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.fund.FundtempSetBO" class="gov.mof.fasp2.pmkpi.setting.fund.FundtempSetBO">
+		<property name="fundtempSetDAO" ref="pmkpi.setting.fund.FundtempSetDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.fund.FundtempSetDAO" class="gov.mof.fasp2.pmkpi.setting.fund.FundtempSetDAO"></bean>
+	<!-- 资金模板  end-->
+
+	<!-- 审核视图信息 start -->
+	<bean id="pmkpi.setting.auditviewinfo.AuditViewInfoPage" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditviewinfo.AuditViewInfoPage">
+	</bean>
+	<bean id="pmkpi.setting.auditviewinfo.AuditViewInfoService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditviewinfo.AuditViewInfoService">
+		<property name="auditViewInfoBO" ref="pmkpi.setting.auditviewinfo.AuditViewInfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.auditviewinfo.EditAudiViewService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditviewinfo.EditAudiViewService">
+		<property name="auditViewInfoBO" ref="pmkpi.setting.auditviewinfo.AuditViewInfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.auditviewinfo.AuditViewInfoBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.auditviewinfo.AuditViewInfoBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.auditviewinfo.AuditViewInfoBO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditviewinfo.AuditViewInfoBO">
+		<property name="auditViewInfoDAO" ref="pmkpi.setting.auditviewinfo.AuditViewInfoDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.auditviewinfo.AuditViewInfoDAO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditviewinfo.AuditViewInfoDAO"></bean>
+
+	<!-- 审核视图信息 end -->
+	
+	<!-- 审核定义信息 start -->
+	<bean id="pmkpi.setting.define.AuditDefinedPage" class="gov.mof.fasp2.pmkpi.setting.auditdefine.define.AuditDefinedPage">
+	</bean>
+	<bean id="pmkpi.setting.define.AuditDefinedService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.define.AuditDefinedService">
+		<property name="auditDefinedBO" ref="pmkpi.setting.define.AuditDefinedBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.define.AuditDefinedAddService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.define.AuditDefinedAddService">
+		<property name="auditDefinedBO" ref="pmkpi.setting.define.AuditDefinedBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.define.AuditDefinedBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.define.AuditDefinedBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.define.AuditDefinedBO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.define.AuditDefinedBO">
+		<property name="auditDefinedDAO" ref="pmkpi.setting.define.AuditDefinedDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.define.AuditDefinedDAO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.define.AuditDefinedDAO"></bean>
+	<!-- 审核定义信息 end -->
+
+	<!-- 审核定义业务调用配置 start -->
+	<bean id="pmkpi.setting.busauditdefine.BusAuditDefinePage" class="gov.mof.fasp2.pmkpi.setting.auditdefine.busauditdefine.BusAuditDefinePage"></bean>
+	<bean id="pmkpi.setting.busauditdefine.BusAuditDefineService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.busauditdefine.BusAuditDefineService">
+		<property name="busAuditDefineBO" ref="pmkpi.setting.busauditdefine.BusAuditDefineBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.busauditdefine.BusAuditMenuEditService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.busauditdefine.BusAuditMenuEditService">
+		<property name="busAuditDefineBO" ref="pmkpi.setting.busauditdefine.BusAuditDefineBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.busauditdefine.BusAuditDefineBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.busauditdefine.BusAuditDefineBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.busauditdefine.BusAuditDefineBO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.busauditdefine.BusAuditDefineBO">
+		<property name="busAuditDefineDAO" ref="pmkpi.setting.busauditdefine.BusAuditDefineDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.busauditdefine.BusAuditDefineDAO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.busauditdefine.BusAuditDefineDAO"></bean>
+	<!-- 审核定义业务调用配置 end -->
+
+	<!-- 事前评估模板配置 start -->
+	<bean id="pmkpi.setting.assessment.AssessmentSetPage" class="gov.mof.fasp2.pmkpi.setting.assessment.AssessmentSetPage"></bean>
+	<bean id="pmkpi.setting.assessment.AssessmentSetService" class="gov.mof.fasp2.pmkpi.setting.assessment.AssessmentSetService">
+		<property name="assessmentSetBO" ref="pmkpi.setting.assessment.AssessmentSetBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.assessment.AssessmentSetBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.assessment.AssessmentSetBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.assessment.AssessmentSetBO" class="gov.mof.fasp2.pmkpi.setting.assessment.AssessmentSetBO">
+		<property name="assessmentSetDAO" ref="pmkpi.setting.assessment.AssessmentSetDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.assessment.AssessmentSetDAO" class="gov.mof.fasp2.pmkpi.setting.assessment.AssessmentSetDAO">
+	</bean>
+	<!-- 事前评估模板配置 end -->
+	<!-- 层次分类 -->
+	<bean id="pmkpi.arrangement.ArrangementPage" class="gov.mof.fasp2.pmkpi.setting.arrangement.ArrangementPage"></bean>
+	<bean id="pmkpi.arrangement.ArrangementService" class="gov.mof.fasp2.pmkpi.setting.arrangement.ArrangementService">
+		<property name="arrangementBO" ref="pmkpi.arrangement.ArrangementBOTX"></property>
+	</bean>
+	<bean id="pmkpi.arrangement.ArrangementBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.arrangement.ArrangementBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.arrangement.ArrangementBO" class="gov.mof.fasp2.pmkpi.setting.arrangement.ArrangementBO">
+		<property name="arrangementDAO" ref="pmkpi.arrangement.ArrangementDAO"></property>
+	</bean>
+	<bean id="pmkpi.arrangement.ArrangementDAO" class="gov.mof.fasp2.pmkpi.setting.arrangement.ArrangementDAO"></bean>
+
+	<!-- 固化指标维护  start -->
+	<bean id="pmkpi.curingindex.CuringIndexSetPage" class="gov.mof.fasp2.pmkpi.setting.curingindex.CuringIndexSetPage"></bean>
+	<bean id="pmkpi.curingindex.CuringIndexSetService" class="gov.mof.fasp2.pmkpi.setting.curingindex.CuringIndexSetService">
+		<property name="curingIndexSetBO" ref="pmkpi.curingindex.CuringIndexSetBOTX"></property>
+	</bean>
+	<bean id="pmkpi.curingindex.CuringIndexSetBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.curingindex.CuringIndexSetBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.curingindex.CuringIndexSetBO" class="gov.mof.fasp2.pmkpi.setting.curingindex.CuringIndexSetBO">
+		<property name="curingIndexSetDAO" ref="pmkpi.curingindex.CuringIndexSetDAO"></property>
+	</bean>
+	<bean id="pmkpi.curingindex.CuringIndexSetDAO" class="gov.mof.fasp2.pmkpi.setting.curingindex.CuringIndexSetDAO"></bean>
+	<!-- 固化指标委会  end -->
+
+	<!-- 中介库 -->
+	<bean id="pmkpi.baseinfo.BaseinfoPage" class="gov.mof.fasp2.pmkpi.setting.baseinfo.BaseinfoPage"></bean>
+	<bean id="pmkpi.baseinfo.BaseinfoService" class="gov.mof.fasp2.pmkpi.setting.baseinfo.BaseinfoService">
+		<property name="baseinfoBO" ref="pmkpi.baseinfo.BaseinfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.baseinfo.BaseinfoEditService" class="gov.mof.fasp2.pmkpi.setting.baseinfo.BaseinfoEditService">
+		<property name="baseinfoBO" ref="pmkpi.baseinfo.BaseinfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.baseinfo.BasereviewerService" class="gov.mof.fasp2.pmkpi.setting.baseinfo.BasereviewerService">
+		<property name="baseinfoBO" ref="pmkpi.baseinfo.BaseinfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.baseinfo.BaseinfoBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.baseinfo.BaseinfoBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.baseinfo.BaseinfoBO" class="gov.mof.fasp2.pmkpi.setting.baseinfo.BaseinfoBO">
+		<property name="baseinfoDAO" ref="pmkpi.baseinfo.BaseinfoDAO"></property>
+	</bean>
+	<bean id="pmkpi.baseinfo.BaseinfoDAO" class="gov.mof.fasp2.pmkpi.setting.baseinfo.BaseinfoDAO"></bean>
+
+	<!-- 表格数据维护 start -->
+	<bean id="pmkpi.setting.dataset.PerfDataSetPage" class="gov.mof.fasp2.pmkpi.setting.dataset.PerfDataSetPage"></bean>
+	<bean id="pmkpi.setting.dataset.PerfDataSetService" class="gov.mof.fasp2.pmkpi.setting.dataset.PerfDataSetService">
+		<property name="perfDataSetBO" ref="pmkpi.setting.dataset.PerfDataSetBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.dataset.PerfDataSetBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.dataset.PerfDataSetBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.dataset.PerfDataSetBO" class="gov.mof.fasp2.pmkpi.setting.dataset.PerfDataSetBO">
+		<property name="perfDataSetDAO" ref="pmkpi.setting.dataset.PerfDataSetDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.dataset.PerfDataSetDAO" class="gov.mof.fasp2.pmkpi.setting.dataset.PerfDataSetDAO"></bean>
+	<!-- 表格数据维护 end -->
+	<!-- 表格数据权限数据维护 start -->
+	<bean id="pmkpi.setting.zjdataset.ZjTempDataPage" class="gov.mof.fasp2.pmkpi.setting.zjtempdata.ZjTempDataPage"></bean>
+	<bean id="pmkpi.setting.zjdataset.ZjTempDataService" class="gov.mof.fasp2.pmkpi.setting.zjtempdata.ZjTempDataService">
+		<property name="zjTempDataBO" ref="pmkpi.setting.zjdataset.ZjTempDataBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.zjdataset.ZjTempDataBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.zjdataset.ZjTempDataBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.zjdataset.ZjTempDataBO" class="gov.mof.fasp2.pmkpi.setting.zjtempdata.ZjTempDataBO">
+		<property name="zjTempDataDAO" ref="pmkpi.setting.zjdataset.ZjTempDataDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.zjdataset.ZjTempDataDAO" class="gov.mof.fasp2.pmkpi.setting.zjtempdata.ZjTempDataDAO"></bean>
+	<!-- 表格数据维护 end -->
+
+	<!-- 审核定义分类start -->
+	<bean class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditclassify.page.AuditClassifyPage"/>
+	<bean id="pmkpi.setting.auditclassify.AuditClassifyService" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditclassify.service.AuditClassifyService"></bean>
+	<bean id="pmkpi.setting.auditclassify.AuditClassifyDAO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditclassify.dao.AuditClassifyDAO"/>
+	<bean id="pmkpi.setting.auditclassify.AuditClassifyBO" class="gov.mof.fasp2.pmkpi.setting.auditdefine.auditclassify.bo.AuditClassifyBO"/>
+	<bean id="pmkpi.setting.auditclassify.AuditClassifyBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.auditclassify.AuditClassifyBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<!-- 审核定义分类 end -->
+	<!-- UI维护 start -->
+	<bean id="pmkpi.setting.buspage.ui.UiPage" class="gov.mof.fasp2.pmkpi.setting.buspage.ui.UiSetPage"></bean>
+	<bean id="pmkpi.setting.buspage.ui.UiService" class="gov.mof.fasp2.pmkpi.setting.buspage.ui.UiService">
+		<property name="uiSetBO" ref="pmkpi.setting.buspage.ui.UiBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.ui.UiBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.buspage.ui.UiBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.ui.UiBO" class="gov.mof.fasp2.pmkpi.setting.buspage.ui.UiSetBO">
+		<property name="uiSetDAO" ref="pmkpi.setting.buspage.ui.UiDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.ui.UiDAO" class="gov.mof.fasp2.pmkpi.setting.buspage.ui.UiSetDAO"></bean>
+	<!-- UI维护 end -->
+
+	<!-- 页面配置维护 start -->
+	<bean id="pmkpi.setting.buspage.BusAppendPage" class="gov.mof.fasp2.pmkpi.setting.buspage.BusAppendPage"></bean>
+	<bean id="pmkpi.setting.buspage.BusAppendService" class="gov.mof.fasp2.pmkpi.setting.buspage.BusAppendService">
+		<property name="busAppendBO" ref="pmkpi.setting.buspage.BusAppendBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.BusEditMenuService" class="gov.mof.fasp2.pmkpi.setting.buspage.BusEditMenuService">
+		<property name="busAppendBO" ref="pmkpi.setting.buspage.BusAppendBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.BusAppendBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.buspage.BusAppendBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.BusAppendBO" class="gov.mof.fasp2.pmkpi.setting.buspage.BusAppendBO">
+		<property name="busAppendDAO" ref="pmkpi.setting.buspage.BusAppendDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.buspage.BusAppendDAO" class="gov.mof.fasp2.pmkpi.setting.buspage.BusAppendDAO"></bean>
+	<!-- 页面配置维护 end -->
+
+	<!-- tree表格数据维护 start -->
+	<bean id="pmkpi.setting.tempdataset.PerfTempDataSetPage" class="gov.mof.fasp2.pmkpi.setting.tempdataset.PerfTempDataSetPage"></bean>
+	<bean id="pmkpi.setting.tempdataset.PerfTempDataSetService" class="gov.mof.fasp2.pmkpi.setting.tempdataset.PerfTempDataSetService">
+		<property name="perfTempDataBO" ref="pmkpi.setting.tempdataset.PerfTempDataSetBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.tempdataset.PerfTempDataSetBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.tempdataset.PerfTempDataSetBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.tempdataset.PerfTempDataSetBO" class="gov.mof.fasp2.pmkpi.setting.tempdataset.PerfTempDataSetBO">
+		<property name="perfTempDataSetDAO" ref="pmkpi.setting.tempdataset.PerfTempDataSetDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.tempdataset.PerfTempDataSetDAO" class="gov.mof.fasp2.pmkpi.setting.tempdataset.PerfTempDataSetDAO"></bean>
+	<!-- tree表格数据维护 end -->
+
+	<!-- 导出模板维护 start -->
+	<bean id="pmkpi.setting.expdoc.temp.ExpdocTempPage" class="gov.mof.fasp2.pmkpi.setting.expdoc.temp.ExpdocTempPage"></bean>
+	<bean id="pmkpi.setting.expdoc.temp.ExpdocTempService" class="gov.mof.fasp2.pmkpi.setting.expdoc.temp.ExpdocTempService">
+		<property name="expdocTempBO" ref="pmkpi.setting.expdoc.temp.ExpdocTempBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.expdoc.temp.ExpdocTempBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.expdoc.temp.ExpdocTempBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.expdoc.temp.ExpdocTempBO" class="gov.mof.fasp2.pmkpi.setting.expdoc.temp.ExpdocTempBO">
+		<property name="expdocTempDAO" ref="pmkpi.setting.expdoc.temp.ExpdocTempDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.expdoc.temp.ExpdocTempDAO" class="gov.mof.fasp2.pmkpi.setting.expdoc.temp.ExpdocTempDAO"></bean>
+	<!-- 导出模板维护 end -->
+
+	<!-- 导出模板定义 start -->
+	<bean id="pmkpi.setting.expdoc.ExpdocPage" class="gov.mof.fasp2.pmkpi.setting.expdoc.ExpdocPage"></bean>
+	<bean id="pmkpi.setting.expdoc.ExpdocService" class="gov.mof.fasp2.pmkpi.setting.expdoc.ExpdocService">
+		<property name="expdocBO" ref="pmkpi.setting.expdoc.ExpdocBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.expdoc.ExpdocBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.expdoc.ExpdocBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.expdoc.ExpdocBO" class="gov.mof.fasp2.pmkpi.setting.expdoc.ExpdocBO">
+		<property name="expdocDAO" ref="pmkpi.setting.expdoc.ExpdocDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.expdoc.ExpdocDAO" class="gov.mof.fasp2.pmkpi.setting.expdoc.ExpdocDAO"></bean>
+	<!-- 导出模板定义 end -->
+
+	<!-- 事前绩效评估申报 start -->
+	<bean id="pmkpi.setting.evaluation.report.EvaluationReportPage" class="gov.mof.fasp2.pmkpi.setting.evaluation.report.EvaluationReportPage"></bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationReportService" class="gov.mof.fasp2.pmkpi.setting.evaluation.report.EvaluationReportService">
+		<property name="evaluationReportBO" ref="pmkpi.setting.evaluation.report.EvaluationReportBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationReportBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.evaluation.report.EvaluationReportBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationCheckService" class="gov.mof.fasp2.pmkpi.setting.evaluation.report.EvaluationCheckService">
+		<property name="evaluationCheckBO" ref="pmkpi.setting.evaluation.report.EvaluationCheckBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationCheckBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.evaluation.report.EvaluationCheckBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationCheckBO" class="gov.mof.fasp2.pmkpi.setting.evaluation.report.EvaluationCheckBO">
+		<property name="evaluationReportDAO" ref="pmkpi.setting.evaluation.report.EvaluationReportDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationReportBO" class="gov.mof.fasp2.pmkpi.setting.evaluation.report.EvaluationReportBO">
+		<property name="evaluationReportDAO" ref="pmkpi.setting.evaluation.report.EvaluationReportDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.report.EvaluationReportDAO" class="gov.mof.fasp2.pmkpi.setting.evaluation.report.EvaluationReportDAO"></bean>
+	<!-- 事前绩效评估申报 end -->
+
+	<!-- 事前绩效评估信息 start -->
+	<bean id="pmkpi.setting.evaluation.editinfo.EvaluationInfoPage" class="gov.mof.fasp2.pmkpi.setting.evaluation.editinfo.EvaluationInfoPage"></bean>
+	<bean id="pmkpi.setting.evaluation.editinfo.EvaluationInfoService" class="gov.mof.fasp2.pmkpi.setting.evaluation.editinfo.EvaluationInfoService">
+		<property name="evaluationInfoBO" ref="pmkpi.setting.evaluation.editinfo.EvaluationInfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.editinfo.EvaluationInfoBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.evaluation.editinfo.EvaluationInfoBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.editinfo.EvaluationInfoBO" class="gov.mof.fasp2.pmkpi.setting.evaluation.editinfo.EvaluationInfoBO">
+		<property name="evaluationInfoDAO" ref="pmkpi.setting.evaluation.editinfo.EvaluationInfoDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.editinfo.EvaluationInfoDAO" class="gov.mof.fasp2.pmkpi.setting.evaluation.editinfo.EvaluationInfoDAO"></bean>
+	<!-- 事前绩效评估信息 end -->
+
+	<!-- 事前绩效评估审核 start -->
+	<bean id="pmkpi.setting.evaluation.audit.EvaluationAuditPage" class="gov.mof.fasp2.pmkpi.setting.evaluation.audit.EvaluationAuditPage"></bean>
+	<bean id="pmkpi.setting.evaluation.audit.EvaluationAuditService" class="gov.mof.fasp2.pmkpi.setting.evaluation.audit.EvaluationAuditService">
+		<property name="evaluationAuditBO" ref="pmkpi.setting.evaluation.audit.EvaluationAuditBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.audit.EvaluationAuditBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.evaluation.audit.EvaluationAuditBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.audit.EvaluationAuditBO" class="gov.mof.fasp2.pmkpi.setting.evaluation.audit.EvaluationAuditBO">
+		<property name="evaluationAuditDAO" ref="pmkpi.setting.evaluation.audit.EvaluationAuditDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.audit.EvaluationAuditDAO" class="gov.mof.fasp2.pmkpi.setting.evaluation.audit.EvaluationAuditDAO"></bean>
+	<!-- 事前绩效评估审核 end -->
+
+	<!-- 事前绩效评估查询 start -->
+	<bean id="pmkpi.setting.evaluation.query.EvaluationQueryPage" class="gov.mof.fasp2.pmkpi.setting.evaluation.query.EvaluationQueryPage"></bean>
+	<bean id="pmkpi.setting.evaluation.query.EvaluationQueryService" class="gov.mof.fasp2.pmkpi.setting.evaluation.query.EvaluationQueryService">
+		<property name="evaluationQueryBO" ref="pmkpi.setting.evaluation.query.EvaluationQueryBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.query.EvaluationQueryBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.evaluation.query.EvaluationQueryBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.query.EvaluationQueryBO" class="gov.mof.fasp2.pmkpi.setting.evaluation.query.EvaluationQueryBO">
+		<property name="evaluationQueryDAO" ref="pmkpi.setting.evaluation.query.EvaluationQueryDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.query.EvaluationQueryDAO" class="gov.mof.fasp2.pmkpi.setting.evaluation.query.EvaluationQueryDAO"></bean>
+	<!-- 事前绩效评估查询 end -->
+
+	<!-- 项目库 事前绩效评估审核  start -->
+	<bean id="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditPage" class="gov.mof.fasp2.pmkpi.setting.evaluation.proaudit.ProEvaluationAuditPage"></bean>
+	<bean id="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditService" class="gov.mof.fasp2.pmkpi.setting.evaluation.proaudit.ProEvaluationAuditService">
+		<property name="proEvaluationAuditBO" ref="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditBO" class="gov.mof.fasp2.pmkpi.setting.evaluation.proaudit.ProEvaluationAuditBO">
+		<property name="proEvaluationAuditDAO" ref="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.evaluation.proaudit.ProEvaluationAuditDAO" class="gov.mof.fasp2.pmkpi.setting.evaluation.proaudit.ProEvaluationAuditDAO"></bean>
+	<!-- 项目库 事前绩效评估审核 end -->
+
+
+	<!--项目单位变更维护 start-->
+	<bean id="pmkpi.setting.proagency.ProagencyPage" class="gov.mof.fasp2.pmkpi.setting.proagency.ProagencyPage"></bean>
+	<bean id="pmkpi.setting.proagency.ProagencyService" class="gov.mof.fasp2.pmkpi.setting.proagency.ProagencyService">
+		<property name="proagencyBO" ref="pmkpi.setting.proagency.ProagencyBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.proagency.ProagencyEditService" class="gov.mof.fasp2.pmkpi.setting.proagency.ProagencyEditService">
+		<property name="proagencyBO" ref="pmkpi.setting.proagency.ProagencyBOTX"></property>
+	</bean>
+	<bean id="pmkpi.setting.proagency.ProagencyBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.setting.proagency.ProagencyBO"/>
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.setting.proagency.ProagencyBO" class="gov.mof.fasp2.pmkpi.setting.proagency.ProagencyBO">
+		<property name="proagencyDAO" ref="pmkpi.setting.proagency.ProagencyDAO"></property>
+	</bean>
+	<bean id="pmkpi.setting.proagency.ProagencyDAO" class="gov.mof.fasp2.pmkpi.setting.proagency.ProagencyDAO"></bean>
+	<!--项目单位变更维护 end-->
+
+</beans>

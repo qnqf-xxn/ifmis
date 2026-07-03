@@ -1,0 +1,29 @@
+version: "2"
+services:
+ msfs:
+  image: cloud/ifmis-msfs-service:1.0.0-SNAPSHOT
+  hostname: ifmis-msfs-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8010:8010"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ msfs-webapp:
+  image: cloud/ifmis-msfs-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-msfs-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7010:7010"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

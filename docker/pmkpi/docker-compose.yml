@@ -1,0 +1,29 @@
+version: "2"
+services:
+ pmkpi:
+  image: cloud/ifmis-pmkpi-service:1.0.0-SNAPSHOT
+  hostname: ifmis-pmkpi-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8008:8008"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ pmkpi-webapp:
+  image: cloud/ifmis-pmkpi-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-pmkpi-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7008:7008"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

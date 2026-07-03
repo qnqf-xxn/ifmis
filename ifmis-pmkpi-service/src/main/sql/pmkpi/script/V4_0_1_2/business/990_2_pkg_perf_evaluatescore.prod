@@ -1,0 +1,88 @@
+create or replace package body pkg_perf_evaluatescore is
+
+  ----绩效工作管理考核评分计算
+  procedure workevaluatescore(o_cs out CS)
+    is
+       tmainsql      varchar(4000);
+       tinsertsql    varchar(4000);
+       tquerysql     varchar(4000);
+       tcs           cs;
+       tnum          number(1);
+       tguid         varchar2(38);
+       tmainguid     varchar(40);
+       tscoretype    varchar(32);--评分表类型
+       ttasktype     varchar(32);--任务类型
+       tbustype      varchar(32);--业务类型
+       tsubprovince  varchar(9);--下级区划分区
+       tsaveAgency   varchar(32);-- 单位guid
+       tpagetype     varchar(32);--查询类型
+       tvalue     varchar(4000);
+    begin
+      --select Global_Multyear_Cz.Secu_f_Global_Setparm('', '340000000', '2021', '') into tnum from dual;
+      
+      select count(t.value) into tnum from perf_tmp_auditdefinewheresql t where t.key = 'mainguid';
+      if tnum >0 then
+         select t.value into tmainguid from perf_tmp_auditdefinewheresql t where t.key = 'mainguid';
+      end if;
+      
+      select count(t.value) into tnum from perf_tmp_auditdefinewheresql t where t.key = 'scoretype';
+      if tnum >0 then
+         select t.value into tscoretype from perf_tmp_auditdefinewheresql t where t.key = 'scoretype';
+      end if;
+
+      select count(t.value) into tnum from perf_tmp_auditdefinewheresql t where t.key = 'bustype';
+      if tnum >0 then
+         select t.value into tbustype from perf_tmp_auditdefinewheresql t where t.key = 'bustype';
+      end if;
+      
+      select count(t.value) into tnum from perf_tmp_auditdefinewheresql t where t.key = 'subprovince';
+      if tnum >0 then
+         select t.value into tsubprovince from perf_tmp_auditdefinewheresql t where t.key = 'subprovince';
+      end if;
+      
+      select count(t.value) into tnum from perf_tmp_auditdefinewheresql t where t.key = 'saveAgency';
+      if tnum >0 then
+         select t.value into tsaveAgency from perf_tmp_auditdefinewheresql t where t.key = 'saveAgency';
+      end if;
+      
+      select count(t.value) into tnum from perf_tmp_auditdefinewheresql t where t.key = 'pagetype';
+      if tnum >0 then
+         select t.value into tpagetype from perf_tmp_auditdefinewheresql t where t.key = 'pagetype';
+      end if;
+      
+      --校验综合评价指标
+      tmainsql := 'select t.guid,t.querysql from v_perf_t_evaluatetemp t where t.bustype=:1';
+      open tcs for tmainsql using tscoretype;
+       loop
+            fetch tcs into tguid,tquerysql;
+            EXIT WHEN tcs%NOTFOUND;
+                 tvalue := null;
+                 if tquerysql is not null then
+                   if tbustype = 'dept' then
+                      tquerysql := replace(tquerysql, '#agency#', tsaveAgency);
+                   end if;
+                   if tbustype = 'subprovince' then
+                      tquerysql := replace(tquerysql, '#subprovince#', tsubprovince);
+                   end if;
+                   dbms_output.put_line(tquerysql);
+                   execute immediate tquerysql into tvalue;
+                 end if;
+                 /*if tvalue is null then 
+                   tvalue :=0;
+                 end if;*/
+               tinsertsql :='insert into perf_tmp_evaluatetemp(guid, code, name, explain, evalstd, score, selfscore, ratiscore, mainguid, remark, bustype, audittype, createtime, updatetime, year, province, levelno, isleaf, superid, ordernum, isadd, isedit, querysql,creater,status)';
+               if tpagetype = 'audit' then
+                  tmainsql := 'select t.guid, t.code, t.name, t.explain, t.evalstd, t.score, nvl('''||tvalue||''',a.selfscore), nvl('''||tvalue||''',a.ratiscore), a.mainguid, t.remark, t.bustype, t.audittype, t.createtime, t.updatetime, t.year, t.province, t.levelno, t.isleaf, t.superid, t.ordernum, t.isadd, t.isedit, t.querysql,a.creater,a.status from v_perf_t_evaluatetemp t left join v_perf_t_deptscore a on a.mainguid =:1 and a.tempguid = t.guid where t.guid=:2 order by t.ordernum';
+                  tinsertsql := tinsertsql || tmainsql;
+               else
+                  tmainsql := ' select t.guid, t.code, t.name, t.explain, t.evalstd, t.score, nvl('''||tvalue||''',a.selfscore), a.ratiscore, a.mainguid, t.remark, t.bustype, t.audittype, t.createtime, t.updatetime, t.year, t.province, t.levelno, t.isleaf, t.superid, t.ordernum, t.isadd, t.isedit, t.querysql,a.creater,a.status from v_perf_t_evaluatetemp t left join v_perf_t_deptscore a on a.mainguid =:1 and a.tempguid = t.guid where t.guid=:2 order by t.ordernum';
+                  tinsertsql := tinsertsql || tmainsql;
+               end if;
+               execute immediate tinsertsql using tmainguid,tguid;
+
+       end loop;
+       close tcs;
+      tmainsql := 'select * from perf_tmp_evaluatetemp order by ordernum';
+      open o_cs for tmainsql;
+    end;
+end pkg_perf_evaluatescore;

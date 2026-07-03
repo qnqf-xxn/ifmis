@@ -1,0 +1,77 @@
+begin
+  execute immediate 'create or replace view v_perf_project_year as 
+  select a.GUID,
+       a.PRO_ID,
+       a.PRO_CODE,
+       a.PRO_NAME,
+       a.AGENCYGUID,
+       a.AGENCY_CODE,
+       a.DEPT_CODE,
+       a.FININTORGGUID,
+       a.MOF_DEP_CODE,
+       a.MANAGE_DEPT_CODE,
+       a.CREATER,
+       a.CREATE_TIME,
+       a.UPDATE_TIME,
+       a.VERSION,
+       a.VERSION_NAME,
+       a.MOF_DIV_CODE,
+       a.SETUP_YEAR,
+       a.PROVINCE,
+       a.YEAR,
+       a.WFID,
+       a.WFSTATUS,
+       a.TRAOBJ_AGENCY_CODE,
+       a.CEN_TRA_PRO_CODE,
+       a.PRO_SOURCE_CODE,
+       a.PRO_TERM,
+       a.PRO_START_YEAR,
+       a.FUN_RES_CODE,
+       a.PRO_CAT_CODE,
+       a.DISTRI_TYPE_CODE,
+       a.IS_TRACK,
+       a.IS_CAPTIAL_CONS_PRO,
+       a.PRO_TOTAL_AMT,
+       a.SCOI_INVEST_FUND,
+       a.PRO_DESC,
+       a.DRAFT_TEMPLATE_CODE,
+       a.IS_END,
+       a.IS_SCIENTIFIC,
+       a.IS_DELETED,
+       a.IS_USESET,
+       a.ISPUBLISH,
+       a.ISHISTORY,
+       a.LASTUPDATETIME,
+       a.FROMGUID,
+       a.ADJSTATUS,
+       a.PROJECTKIND,
+       b.APPLY_UP,
+       b.FIN_AUDIT_MONEY,
+       b.REPLY_AMT,
+       b.ADJ_AMT,
+       b.DIS_AMT,
+       b.CUR_AMT
+  from V_PERF_PROJECT_INFO a,
+       (SELECT t.pro_code,
+               sum(t.APPLY_UP) APPLY_UP,
+               sum(t.FIN_AUDIT_MONEY) FIN_AUDIT_MONEY,
+               sum(t.REPLY_AMT) REPLY_AMT,
+               sum(t.ADJ_AMT) ADJ_AMT,
+               sum(t.DIS_AMT) DIS_AMT,
+               sum(t.CUR_AMT) CUR_AMT
+          FROM V_BGT_PM_ANNUAL t
+         WHERE t.IS_DELETED = 2
+         group by t.pro_code
+        union all
+        SELECT t.pro_code,
+               sum(t.APPLY_UP) APPLY_UP,
+               sum(t.FIN_AUDIT_MONEY) FIN_AUDIT_MONEY,
+               sum(t.REPLY_AMT) REPLY_AMT,
+               sum(t.ADJ_AMT) ADJ_AMT,
+               sum(t.DIS_AMT) DIS_AMT,
+               sum(t.CUR_AMT) CUR_AMT
+          FROM V_BGT_TRA t
+         WHERE t.IS_DELETED = 2
+         group by t.pro_code) b
+ WHERE a.PRO_CODE = b.PRO_CODE
+';

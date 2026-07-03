@@ -1,0 +1,5 @@
+begin
+
+delete from bus_t_diccolumn t where t.tablecode='BAS_PERF_INDICATOR' and t.dbcolumncode='INDEXTRANPAY';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'INDEXTRANPAY', null, '1', 'INDEXTRANPAY', '1', '2016', '87', 'ED15452046AB0B42E0533315A8C0D3C2', 'INDEXTRANPAY', 'BAS_PERF_INDICATOR', '转移支付转向类型', 'S', '40', null, 1, 1, null, sysdate);

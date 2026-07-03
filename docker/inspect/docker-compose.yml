@@ -1,0 +1,29 @@
+version: "2"
+services:
+  inspect:
+    image: cloud/ifmis-inspect-service:1.0.0-SNAPSHOT
+    hostname: ifmis-inspect-service
+    networks:
+      - eureka-net
+    env_file:
+      - ../api.env
+    ports:
+      - "8005:8005"
+    environment:
+      - spring.profiles.active=dev
+      - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+  inspect-webapp:
+    image: cloud/ifmis-inspect-webapp:1.0.0-SNAPSHOT
+    hostname: ifmis-inspect-webapp
+    networks:
+      - eureka-net
+    env_file:
+      - ../api.env
+    ports:
+      - "7005:7005"
+    environment:
+      - spring.profiles.active=dev
+networks:
+  eureka-net:
+    driver: bridge
+#docker network create eureka-net

@@ -1,0 +1,29 @@
+version: "2"
+services:
+ bim:
+  image: cloud/ifmis-bim-service:1.0.0-SNAPSHOT
+  hostname: ifmis-bim-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8017:8017"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ bim-webapp:
+  image: cloud/ifmis-bim-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-bim-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7017:7017"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

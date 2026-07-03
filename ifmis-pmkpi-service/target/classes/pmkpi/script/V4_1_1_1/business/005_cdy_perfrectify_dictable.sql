@@ -1,0 +1,8 @@
+begin
+  
+delete from bus_t_diccolumn t where t.tablecode='PERF_T_RECTIFY' and t.columncode in('FEEDBACKAMT','FEEDBACKREMARK');
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FEEDBACKAMT', '1', null, null, '1814D9B5D6857C54E0635B03A8C064F5', 'FEEDBACKAMT', 'PERF_T_RECTIFY', '整改反馈金额', 'N', '18', null, null, 1, null, sysdate);
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'FEEDBACKREMARK', '1', null, null, '1814D9B5D6887C54E0635B03A8C064F5', 'FEEDBACKREMARK', 'PERF_T_RECTIFY', '整改反馈备注', 'S', '300', null, null, 1, null, sysdate);

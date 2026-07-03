@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.22.10:1525/pdb  #北京本地
+    username: ifmis_34jz_dev
+    password: 1
+    driver-class-name: oracle.jdbc.OracleDriver
+    #配置初始化大小、最小、最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20

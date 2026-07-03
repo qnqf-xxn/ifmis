@@ -1,0 +1,8 @@
+begin
+
+delete from bus_t_diccolumn t where t.tablecode='PERF_T_EXPDOCMAIN' and t.columncode in('EXPFILENAME','TEMPLATENAME');
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'EXPFILENAME', '1', '2016', '87', '1dee6e5798213c6820f77b0078584a67', 'EXPFILENAME', 'PERF_T_EXPDOCMAIN', '导出文件名称', 'S', '200', null, 1, 1, null, sysdate);
+
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, null, null, '1', 'TEMPLATENAME', '1', '2016', '87', '23ea2f7a891038d6db6e36a6c42caa0b', 'TEMPLATENAME', 'PERF_T_EXPDOCMAIN', '模板名称', 'S', '100', null, 1, 1, null, sysdate);

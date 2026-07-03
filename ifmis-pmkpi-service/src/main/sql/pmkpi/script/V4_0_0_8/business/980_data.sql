@@ -1,0 +1,40 @@
+begin
+
+
+--系统配置
+delete from perf_t_systemset t where t.guid in('B2172C9A2E795C4FE0539E1E380A5987');
+
+insert into perf_t_systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('B2172C9A2E795C4FE0539E1E380A5987', 'PERFREVIEISFILEDIV', '第三方评审推送是否显示文件', '1', '0不显示1显示', null, 12, 2016, '87', 1);
+
+update perf_t_systemset t set t.PARAMVALUE='2' where guid='BCC749CFE993EAF2E053480A050A3A41';
+
+DELETE FROM Perf_t_Systemset t where t.guid='8CC5E4C7B2E1BCBE3DDC735295087D99';
+insert into Perf_t_Systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('8CC5E4C7B2E1BCBE3DDC735295087D99', 'agency_lefttree', '单位绩效左侧树来源', 'PMKPIAGENCYALLPAY', '1、PMKPIAGENCYALLPAY单位 2、PMKPIDEPT 部门', null, 3, 2016, '87', 1);
+
+--计算符号
+delete from perf_enum t where t.ELEMENTCODE in ('PMKPIZBXS','PMKPIZBXS','PMKPIZBXS','PMKPIZBXS','PMKPIZBXS','PMKPIZBXS') and t.province='87' and t.year=2016;
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BE5CCC7CC1C18D62E053480A050AC06F', '1', 'PMKPIZBXS', '≥', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, 1);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BE5CCC7CC1C28D62E053480A050AC06F', '2', 'PMKPIZBXS', '＞', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, 2);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BE5CCC7CC1C38D62E053480A050AC06F', '3', 'PMKPIZBXS', '＝', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, 3);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BE5CCC7CC1C48D62E053480A050AC06F', '4', 'PMKPIZBXS', '＜', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, 4);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BE5CCC7CC1C58D62E053480A050AC06F', '5', 'PMKPIZBXS', '≤', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, 5);
+
+insert into perf_enum (GUID, CODE, ELEMENTCODE, NAME, STATUS, CREATETIME, UPDATETIME, YEAR, PROVINCE, VERSION, APPID, SUPERID, LEVELNO, ISLEAF, REMARK, CREATER, ORDERNUM)
+values ('BE5CCC7CC1C68D62E053480A050AC06F', '6', 'PMKPIZBXS', '定性', '1', null, null, '2016', '87', null, 'pmkpi', null, 2, 1, null, null, 6);
+
+
+--预算终审接口配置
+DELETE FROM Perf_t_Systemset t where t.guid='BF8784FA3E6B9FD5E053B11FA8C0F2AD';
+insert into perf_t_systemset (GUID, PARAMCODE, PARAMNAME, PARAMVALUE, REMARK, APPID, ORDERNUM, YEAR, PROVINCE, STATUS)
+values ('BF8784FA3E6B9FD5E053B11FA8C0F2AD', 'DEPTBGTAUDIT', '预算二上终审接口修改流程终审', '{"bgtwfstatus":"011","deptwfstatus":"011"}', 'bgtwfstatus预算终审状态，deptwfstatus部门绩效目标终状态', 'pmkpi', 12, 2016, '87', 1);

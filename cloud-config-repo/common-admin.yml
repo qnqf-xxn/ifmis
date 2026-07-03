@@ -1,0 +1,23 @@
+#通用配置:管理客户端
+#测试：http://config:8880/bootadmin/dev
+spring:
+  security:
+    admin:
+      name: ${ADMIN_SERVER_USERNAME:user}
+      password: ${ADMIN_SERVER_PASSWORD:password}
+  boot:
+    admin:
+      client:
+        enabled: false #是否启用springbootAdmin客户端
+        instance:
+          name: ${spring.application.name}
+          management-base-url: http://${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+          #name:  ${spring.application.name}
+          service-base-url: http://${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}
+        url: http://${ADMIN_SERVER:admin}:${ADMIN_SERVER_PORT:8082}  #要注册的服务端
+        username: ${spring.security.admin.name}
+        password: ${spring.security.admin.password}
+        period: 10 #注册时间间隔，单位是毫秒；默认值是10秒钟注册一次

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--项目绩效查询-->
+    <bean id="pmkpi.perfQuery.PerfQueryPage" class="gov.mof.fasp2.pmkpi.perfQuery.PerfQueryPage"></bean>
+    <bean id="pmkpi.perfQuery.PerfQueryService" class="gov.mof.fasp2.pmkpi.perfQuery.PerfQueryService">
+        <property name="perfQueryBO" ref="pmkpi.perfQuery.PerfQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfQuery.PerfQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfQuery.PerfQueryBO"/>
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfQuery.PerfQueryBO" class="gov.mof.fasp2.pmkpi.perfQuery.PerfQueryBO">
+        <property name="perfQueryDAO" ref="pmkpi.perfQuery.PerfQueryDAO"></property>
+    </bean>
+    <bean id="pmkpi.perfQuery.PerfQueryDAO" class="gov.mof.fasp2.pmkpi.perfQuery.PerfQueryDAO"></bean>
+
+
+    <!--一级项目-->
+    <bean id="pmkpi.perfQuery.FirstProgramQueryPage" class="gov.mof.fasp2.pmkpi.perfQuery.firstPro.FirstProgramQueryPage"></bean>
+    <bean id="pmkpi.perfQuery.FirstProgramQueryService" class="gov.mof.fasp2.pmkpi.perfQuery.firstPro.FirstProgramQueryService">
+        <property name="firstProgramQueryBO" ref="pmkpi.perfQuery.firstProgramQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfQuery.firstProgramQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfQuery.firstProgramQueryBO"/>
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfQuery.firstProgramQueryBO" class="gov.mof.fasp2.pmkpi.perfQuery.firstPro.FirstProgramQueryBO">
+        <property name="firstProgramQueryDAO" ref="pmkpi.perfQuery.FirstProgramQueryDAO"></property>
+    </bean>
+    <bean id="pmkpi.perfQuery.FirstProgramQueryDAO" class="gov.mof.fasp2.pmkpi.perfQuery.firstPro.FirstProgramQueryDAO"></bean>
+
+    <!--转移支付-->
+    <bean id="pmkpi.perfQuery.TransPayQueryPage" class="gov.mof.fasp2.pmkpi.perfQuery.transPay.TransPayQueryPage"></bean>
+    <bean id="pmkpi.perfQuery.TransPayQueryServicee" class="gov.mof.fasp2.pmkpi.perfQuery.transPay.TransPayQueryService">
+        <property name="transPayQueryBO" ref="pmkpi.perfQuery.transPayQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfQuery.transPayQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfQuery.transPayQueryBO"/>
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfQuery.transPayQueryBO" class="gov.mof.fasp2.pmkpi.perfQuery.transPay.TransPayQueryBO">
+        <property name="transPayQueryDAO" ref="pmkpi.perfQuery.TransPayQueryDAO"></property>
+    </bean>
+    <bean id="pmkpi.perfQuery.TransPayQueryDAO" class="gov.mof.fasp2.pmkpi.perfQuery.transPay.TransPayQueryDAO"></bean>
+
+    <!-- 河北模式贵州项目支出特殊修改申报  -->
+    <bean id="pmkpi.perfpromod.ProModRpPage" class="gov.mof.fasp2.pmkpi.perfpromod.report.ProModRpPage"></bean>
+    <bean id="pmkpi.perfpromod.ProModRpService" class="gov.mof.fasp2.pmkpi.perfpromod.report.ProModRpService">
+        <property name="proModRpBO" ref="pmkpi.perfpromod.ProModRpBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModRpCheck" class="gov.mof.fasp2.pmkpi.perfpromod.report.ProModRpCheck">
+        <property name="proModRpBO" ref="pmkpi.perfpromod.ProModRpBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModRpBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfpromod.ProModRpBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModRpBO" class="gov.mof.fasp2.pmkpi.perfpromod.report.ProModRpBO">
+        <property name="proModRpDAO" ref="pmkpi.perfpromod.ProModRpDAO"></property>
+    </bean>
+
+    <bean id="pmkpi.perfpromod.ProModRpDAO" class="gov.mof.fasp2.pmkpi.perfpromod.report.ProModRpDAO"></bean>
+
+    <!-- 河北模式贵州项目支出特殊修改审核  -->
+    <bean id="pmkpi.perfpromod.ProModAuditPage" class="gov.mof.fasp2.pmkpi.perfpromod.audit.ProModAuditPage"></bean>
+    <bean id="pmkpi.perfpromod.ProModAuditService" class="gov.mof.fasp2.pmkpi.perfpromod.audit.ProModAuditService">
+        <property name="proModAuditBO" ref="pmkpi.perfpromod.ProModAuditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModAuditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfpromod.ProModAuditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModAuditBO" class="gov.mof.fasp2.pmkpi.perfpromod.audit.ProModAuditBO">
+        <property name="proModAuditDAO" ref="pmkpi.perfpromod.ProModAuditDAO"></property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModAuditDAO" class="gov.mof.fasp2.pmkpi.perfpromod.audit.ProModAuditDAO"></bean>
+
+    <!-- 河北模式贵州项目支出特殊修改查询  -->
+    <bean id="pmkpi.perfpromod.ProModQyPage" class="gov.mof.fasp2.pmkpi.perfpromod.query.ProModQyPage"></bean>
+    <bean id="pmkpi.perfpromod.ProModQyService" class="gov.mof.fasp2.pmkpi.perfpromod.query.ProModQyService"></bean>
+    <bean id="pmkpi.perfpromod.ProModQyBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.perfpromod.ProModQyBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModQyBO" class="gov.mof.fasp2.pmkpi.perfpromod.query.ProModQyBO">
+        <property name="proModQyDAO" ref="pmkpi.perfpromod.ProModQyDAO"></property>
+    </bean>
+    <bean id="pmkpi.perfpromod.ProModQyDAO" class="gov.mof.fasp2.pmkpi.perfpromod.query.ProModQyDAO"></bean>
+
+    <!-- 河北模式贵州项目支出特殊修改申报 基本信息 开始  -->
+    <bean id="pmkpi.promod.editinfo.ProModInfoPage" class="gov.mof.fasp2.pmkpi.perfpromod.info.ProModInfoPage"></bean>
+    <bean id="pmkpi.promod.editinfo.ProModInfoService" class="gov.mof.fasp2.pmkpi.perfpromod.info.ProModInfoService">
+        <property name="proModInfoBO" ref="pmkpi.promod.editinfo.ProModInfoBOTX"></property>
+    </bean>
+    <bean id="pmkpi.promod.editinfo.ProModInfoBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.promod.editinfo.ProModInfoBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.promod.editinfo.ProModInfoBO" class="gov.mof.fasp2.pmkpi.perfpromod.info.ProModInfoBO">
+        <property name="proModInfoDAO" ref="pmkpi.promod.editinfo.ProModInfoDAO"></property>
+    </bean>
+    <bean id="pmkpi.promod.editinfo.ProModInfoDAO" class="gov.mof.fasp2.pmkpi.perfpromod.info.ProModInfoDAO"></bean>
+    <!--  河北模式贵州项目支出特殊修改申报 基本信息 结束  -->
+
+    <!-- 河北模式贵州项目支出特殊修改申报 目标指标页面 开始  -->
+    <bean id="pmkpi.prjindex.ProModIndexPage" class="gov.mof.fasp2.pmkpi.perfpromod.prjindex.ProModIndexPage"></bean>
+    <bean id="pmkpi.prjindex.ProModIndexService" class="gov.mof.fasp2.pmkpi.perfpromod.prjindex.ProModIndexService">
+        <property name="proModIndexBO" ref="pmkpi.prjindex.ProModIndexBOTX"></property>
+    </bean>
+    <bean id="pmkpi.prjindex.ProModIndexBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.prjindex.ProModIndexBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.prjindex.ProModIndexBO" class="gov.mof.fasp2.pmkpi.perfpromod.prjindex.ProModIndexBO">
+        <property name="proModIndexDAO" ref="pmkpi.prjindex.ProModIndexDAO"></property>
+    </bean>
+    <bean id="pmkpi.prjindex.ProModIndexDAO" class="gov.mof.fasp2.pmkpi.perfpromod.prjindex.ProModIndexDAO"></bean>
+    <!--  河北模式贵州项目支出特殊修改申报 目标指标页面 结束  -->
+    <!-- 项目综合查询 -->
+    <bean id="pmkpi.allseo.ProSeoPage" class="gov.mof.fasp2.pmkpi.allseo.ProSeoPage"></bean>
+    <bean id="pmkpi.allseo.ProSeoService" class="gov.mof.fasp2.pmkpi.allseo.ProSeoService">
+        <property name="proSeoBO" ref="pmkpi.allseo.ProSeoBOTX"></property>
+    </bean>
+    <bean id="pmkpi.allseo.ProAllInfo" class="gov.mof.fasp2.pmkpi.allseo.ProAllInfo">
+        <property name="proSeoBO" ref="pmkpi.allseo.ProSeoBOTX"></property>
+    </bean>
+    <bean id="pmkpi.allseo.ProSeoBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.allseo.ProSeoBO"/>
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.allseo.ProSeoBO" class="gov.mof.fasp2.pmkpi.allseo.ProSeoBO">
+        <property name="proSeoDAO" ref="pmkpi.allseo.ProSeoDAO"></property>
+    </bean>
+    <bean id="pmkpi.allseo.ProSeoDAO" class="gov.mof.fasp2.pmkpi.allseo.ProSeoDAO"></bean>
+
+
+</beans>

@@ -1,0 +1,29 @@
+version: "2"
+services:
+ gbdm:
+  image: cloud/ifmis-gbdm-service:1.0.0-SNAPSHOT
+  hostname: ifmis-gbdm-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8019:8019"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ gbdm-webapp:
+  image: cloud/ifmis-gbdm-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-gbdm-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7019:7019"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

@@ -1,0 +1,29 @@
+version: "2"
+services:
+ bcm:
+  image: cloud/ifmis-bcm-service:1.0.0-SNAPSHOT
+  hostname: ifmis-bcm-service
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "8018:8018"
+  environment:
+   - spring.profiles.active=dev
+   - JAVA_OPTS=-Xms512m -Xmx2048m -XX:MaxPermSize=387m -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
+ bcm-webapp:
+  image: cloud/ifmis-bcm-webapp:1.0.0-SNAPSHOT
+  hostname: ifmis-bcm-webapp
+  networks:
+   - eureka-net
+  env_file:
+   - ../api.env
+  ports:
+   - "7018:7018"
+  environment:
+   - spring.profiles.active=dev
+networks:
+ eureka-net:
+  driver: bridge
+#docker network create eureka-net

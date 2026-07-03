@@ -1,0 +1,11 @@
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter$FaviconConfiguration.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$ResourceChainCustomizerConfiguration.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$ResourceHandlerRegistrationCustomizer.class
+gov\mof\fasp2\cloud\framework\config\config\WelcomePageHandlerMapping.class
+gov\mof\fasp2\cloud\framework\config\ConfigServiceApplication$SecurityPermitAllConfig.class
+gov\mof\fasp2\cloud\framework\config\ConfigServiceApplication.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$ResourceChainResourceHandlerRegistrationCustomizer.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$EnableWebMvcConfiguration.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration.class
+gov\mof\fasp2\cloud\framework\config\config\WebMvcAutoConfiguration$OptionalPathExtensionContentNegotiationStrategy.class

@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: ifmis-framework-registry
+  profiles:
+    active: dev
+  security:
+    user:
+      name: ${REGISTRY_SERVER_USERNAME:user}
+      password: ${REGISTRY_SERVER_PASSWORD:password}
+    admin:
+      name: ${ADMIN_SERVER_USERNAME:user}
+      password: ${ADMIN_SERVER_PASSWORD:password}
+  boot:
+    admin:
+      client:
+        instance:
+          management-base-url: http://${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+          name:  ${spring.application.name}-admin
+          service-base-url: http://${eureka.instance.ip-address:${spring.cloud.client.ip-address}}:${server.port}
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}
+        url: http://${ADMIN_SERVER:admin}:${ADMIN_SERVER_PORT:8082}  #要注册的服务端
+        username: ${spring.security.admin.name}
+        password: ${spring.security.admin.password}
+  autoconfigure:
+    exclude: 
+      - com.alibaba.cloud.nacos.registry.NacosServiceRegistryAutoConfiguration
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-time-in-ms: 4000
+
+# actuator监控
+management:
+  # server:
+  #  port: 8081 # 设置监控服务端口
+  endpoints:
+    # 设置端点是否可用 默认只有shutdown可用
+    enabled-by-default: true
+    web:
+      # 设置是否暴露端点 默认只有health和info可见
+      exposure:
+        # 包括所有端点
+        include: "*" # 注意需要添加引号
+        # 排除端点
+        exclude: shutdown

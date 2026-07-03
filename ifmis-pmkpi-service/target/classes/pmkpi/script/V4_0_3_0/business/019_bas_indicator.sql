@@ -1,0 +1,7 @@
+begin
+
+--个性指标 行业大类字段不翻译
+delete from bus_t_diccolumn where tablecode ='BAS_PERF_INDICATOR' and columncode = 'INDEXCATEGORIES';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'INDEXCOMFUNC', null, '1', 'INDEXCATEGORIES', '1', '2016', '87', 'B686DC99B6F00CCAE0530100007FB3EC', 'INDEXCATEGORIES', 'BAS_PERF_INDICATOR', '指标大类', 'S', '40', null, 1, 1, null, sysdate);
+

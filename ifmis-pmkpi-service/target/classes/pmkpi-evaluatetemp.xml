@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/fasp2/buscore/cache
+		http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd">
+<!-- 审核定义信息 start -->
+	<bean id="pmkpi.evaluatetemp.EvaluateTempPage" class="gov.mof.fasp2.pmkpi.evaluateTemp.page.EvaluateTempPage">
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempService" class="gov.mof.fasp2.pmkpi.evaluateTemp.service.EvaluateTempService">
+		<property name="evaluateTempBO" ref="pmkpi.evaluatetemp.EvaluateTempBOTX"></property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempAddService" class="gov.mof.fasp2.pmkpi.evaluateTemp.service.EvaluateTempAddService">
+		<property name="evaluateTempBO" ref="pmkpi.evaluatetemp.EvaluateTempBOTX"></property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempInfoService" class="gov.mof.fasp2.pmkpi.evaluateTemp.service.EvaluateTempInfoService">
+		<property name="evaluateTempInfoBO" ref="pmkpi.evaluatetemp.EvaluateTempInfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvalTempInfoAddService" class="gov.mof.fasp2.pmkpi.evaluateTemp.service.EvalTempInfoAddService">
+		<property name="evaluateTempInfoBO" ref="pmkpi.evaluatetemp.EvaluateTempInfoBOTX"></property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.evaluatetemp.EvaluateTempBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempInfoBOTX" parent="fasp2TxProxy">
+		<property name="target">
+			<ref bean="pmkpi.evaluatetemp.EvaluateTempInfoBO" />
+		</property>
+		<property name="proxyTargetClass">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempBO" class="gov.mof.fasp2.pmkpi.evaluateTemp.bo.EvaluateTempBO">
+		<property name="evaluateTempDAO" ref="pmkpi.evaluatetemp.EvaluateTempDAO"></property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempInfoBO" class="gov.mof.fasp2.pmkpi.evaluateTemp.bo.EvaluateTempInfoBO">
+		<property name="evaluateTempDAO" ref="pmkpi.evaluatetemp.EvaluateTempDAO"></property>
+	</bean>
+	<bean id="pmkpi.evaluatetemp.EvaluateTempDAO" class="gov.mof.fasp2.pmkpi.evaluateTemp.dao.EvaluateTempDAO"></bean>
+	<!-- 审核定义信息 end -->
+
+</beans>

@@ -1,0 +1,7 @@
+create or replace package pkg_perf_checkperfindex is
+  TYPE CS IS REF CURSOR;
+  procedure   checkBdmYearAdjperf(o_cs out CS);
+  procedure   checkTJdeptPerf(o_cs out CS);
+  procedure   checkTJdeptPerfReview(o_cs out CS);
+  procedure   checkTJdeptPerfBgt(o_cs out CS);
+end pkg_perf_checkperfindex;

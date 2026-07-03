@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:buscore_distributed="http://www.springframework.org/schema/fasp2/buscore/distributed"
+       xmlns:buscore_communication="http://www.springframework.org/schema/fasp2/buscore/communication"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xmlns:gtx="http://www.springframework.org/schema/fasp2/gtx"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/fasp2/buscore/distributed
+        http://www.springframework.org/schema/fasp2/buscore/distributed/distributed.xsd
+        http://www.springframework.org/schema/fasp2/buscore/communication
+        http://www.springframework.org/schema/fasp2/buscore/communication/communication.xsd
+        http://www.springframework.org/schema/fasp2/buscore/cache
+        http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd
+        http://www.springframework.org/schema/fasp2/gtx
+        http://www.springframework.org/schema/fasp2/gtx/gtx.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationPage" class="gov.mof.fasp2.pmkpi.financialEvaluation.page.FinancialEvaluationPage"></bean>
+    <!-- 评价对象确定 -->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationObjectService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationObjectService">
+        <property name="financialEvaluationObjectBO" ref="pmkpi.financialEvaluation.FinancialEvaluationObjectBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationObjectBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationObjectBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationObjectBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationObjectBO">
+        <property name="financialEvaluationObjectDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationObjectDAO"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationObjectDAO" class="gov.mof.fasp2.pmkpi.financialEvaluation.dao.FinancialEvaluationObjectDAO"></bean>
+    
+    <!-- 评价对象新增 -->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationAddService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationAddService">
+        <property name="financialEvaluationObjectBO" ref="pmkpi.financialEvaluation.FinancialEvaluationObjectBOTX"></property>
+    </bean>
+    <!-- 选择项目 -->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationProjService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationProjService">
+        <property name="financialEvaluationProjBO" ref="pmkpi.financialEvaluation.FinancialEvaluationProjBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationProjBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationProjBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationProjBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationProjBO">
+        <property name="financialEvaluationProjDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationProjDAO"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationProjDAO" class="gov.mof.fasp2.pmkpi.financialEvaluation.dao.FinancialEvaluationProjDAO"></bean>
+    <!-- 抽评委托 -->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationEntrustService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationEntrustService">
+        <property name="financialEvaluationEntrustBO" ref="pmkpi.financialEvaluation.FinancialEvaluationEntrustBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationEntrustBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationEntrustBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationEntrustBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationEntrustBO">
+        <property name="financialEvaluationEntrustDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationEntrustDAO"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationEntrustDAO" class="gov.mof.fasp2.pmkpi.financialEvaluation.dao.FinancialEvaluationEntrustDAO"></bean>
+    
+    <!-- 评价通知下达 -->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationNoticeService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationNoticeService">
+        <property name="financialEvaluationNoticeBO" ref="pmkpi.financialEvaluation.FinancialEvaluationNoticeBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationNoticeBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationNoticeBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationNoticeBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationNoticeBO">
+        <property name="financialEvaluationNoticeDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationNoticeDAO"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationNoticeDAO" class="gov.mof.fasp2.pmkpi.financialEvaluation.dao.FinancialEvaluationNoticeDAO"></bean>
+    
+    <!-- 评价通知接收 -->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationAcceptService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationAcceptService">
+        <property name="financialEvaluationAcceptBO" ref="pmkpi.financialEvaluation.FinancialEvaluationAcceptBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationAcceptBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationAcceptBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationAcceptBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationAcceptBO">
+        <property name="financialEvaluationNoticeDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationNoticeDAO"></property>
+    </bean>
+
+    <!-- 评价通知撰写-->
+    <bean id="pmkpi.financialEvaluation.NoticeEditService" class="gov.mof.fasp2.pmkpi.financialEvaluation.tab.NoticeEditService">
+        <property name="noticeEditBO" ref="pmkpi.financialEvaluation.NoticeEditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.NoticeEditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.NoticeEditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.NoticeEditBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.tab.NoticeEditBO">
+        <property name="NoticeEditDAO" ref="pmkpi.financialEvaluation.NoticeEditDAO"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.NoticeEditDAO" class="gov.mof.fasp2.pmkpi.financialEvaluation.tab.NoticeEditDAO"></bean>
+    
+    <!-- 评价结果-->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationResultService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationResultService">
+        <property name="financialEvaluationResultBO" ref="pmkpi.financialEvaluation.FinancialEvaluationResultBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationResultBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationResultBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationResultBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationResultBO">
+        <property name="financialEvaluationResultDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationResultDAO"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationResultDAO" class="gov.mof.fasp2.pmkpi.financialEvaluation.dao.FinancialEvaluationResultDAO"></bean>
+
+    <!-- 评价结果查询-->
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationQueryService" class="gov.mof.fasp2.pmkpi.financialEvaluation.service.FinancialEvaluationQueryService">
+        <property name="financialEvaluationQueryBO" ref="pmkpi.financialEvaluation.FinancialEvaluationQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.financialEvaluation.FinancialEvaluationQueryBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.financialEvaluation.FinancialEvaluationQueryBO" class="gov.mof.fasp2.pmkpi.financialEvaluation.bo.FinancialEvaluationQueryBO">
+        <property name="financialEvaluationResultDAO" ref="pmkpi.financialEvaluation.FinancialEvaluationResultDAO"></property>
+    </bean>
+
+    <!-- 评价结果应用 -->
+    <bean id="pmkpi.evaluation.FinApplicationPage" class="gov.mof.fasp2.pmkpi.evaluation.financial.finapp.FinApplicationPage"></bean>
+
+    <bean id="pmkpi.evaluation.financial.FinApplicationService" class="gov.mof.fasp2.pmkpi.evaluation.financial.finapp.FinApplicationService">
+        <property name="finApplicationBO" ref="pmkpi.evaluation.FinApplicationBOTX"></property>
+    </bean>
+    <bean id="pmkpi.evaluation.FinApplicationBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.evaluation.FinApplicationBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.evaluation.FinApplicationBO" class="gov.mof.fasp2.pmkpi.evaluation.financial.finapp.FinApplicationBO">
+        <property name="finApplicationDAO" ref="pmkpi.evaluation.FinApplicationDAO"></property>
+    </bean>
+    <bean id="pmkpi.evaluation.FinApplicationDAO" class="gov.mof.fasp2.pmkpi.evaluation.financial.finapp.FinApplicationDAO"></bean>
+
+
+</beans>

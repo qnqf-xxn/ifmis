@@ -1,0 +1,33 @@
+create or replace package body PERF_FUNDPAY_VIEW is
+    v_procode  varchar2(40);
+    v_agencyguid varchar2(40);
+    v_month number(2);
+  function set_procode(procodes varchar2) RETURN varchar2 is
+    begin
+      v_procode := procodes;
+      return v_procode;
+    end;
+  function get_procode RETURN varchar2 is
+    begin
+       return v_procode;
+      end;
+  function set_agencyguid(agencyguids varchar2) RETURN varchar2 is
+    begin
+      v_agencyguid := agencyguids;
+      return v_agencyguid;
+    end;
+  function get_agencyguid RETURN varchar2 is
+    begin
+       return v_agencyguid;
+      end;
+  function set_month(months varchar2) RETURN varchar2 is
+    begin
+      v_month := months;
+      return v_month;
+    end;
+  function get_month RETURN varchar2 is
+    begin
+       return v_month;
+      end;
+
+  end PERF_FUNDPAY_VIEW;

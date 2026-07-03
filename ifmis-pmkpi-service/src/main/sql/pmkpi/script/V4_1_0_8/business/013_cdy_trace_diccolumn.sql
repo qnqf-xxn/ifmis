@@ -1,0 +1,5 @@
+begin
+  
+delete from bus_t_diccolumn t where t.tablecode in('V_PERF_TRACEPROJECT_INFO') and t.columncode='PROVINCETASK';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'VD00001', null, '1', 'PROVINCETASK', '1', '2020', '87', '106146A7F761393BE0630A64A8C09387', 'PROVINCETASK', 'V_PERF_TRACEPROJECT_INFO', '**任务下达1是2否', 'S', '40', null, 1, 0, null, sysdate);

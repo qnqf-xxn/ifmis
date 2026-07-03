@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:buscore_distributed="http://www.springframework.org/schema/fasp2/buscore/distributed"
+       xmlns:buscore_communication="http://www.springframework.org/schema/fasp2/buscore/communication"
+       xmlns:buscore_cache="http://www.springframework.org/schema/fasp2/buscore/cache"
+       xmlns:gtx="http://www.springframework.org/schema/fasp2/gtx"
+       xmlns:busgtx="http://www.springframework.org/schema/bus/busgtx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/fasp2/buscore/distributed
+        http://www.springframework.org/schema/fasp2/buscore/distributed/distributed.xsd
+        http://www.springframework.org/schema/fasp2/buscore/communication
+        http://www.springframework.org/schema/fasp2/buscore/communication/communication.xsd
+        http://www.springframework.org/schema/fasp2/buscore/cache
+        http://www.springframework.org/schema/fasp2/buscore/cache/cache.xsd
+        http://www.springframework.org/schema/fasp2/gtx
+        http://www.springframework.org/schema/fasp2/gtx/gtx.xsd
+        http://www.springframework.org/schema/bus/busgtx
+        http://www.springframework.org/schema/bus/busgtx/busgtx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritManagePage" class="gov.mof.fasp2.pmkpi.deptoverallmerit.page.DeptOverallMeritManagePage"></bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritManageService" class="gov.mof.fasp2.pmkpi.deptoverallmerit.service.DeptOverallMeritManageService">
+        <property name="deptOverallMeritManageBO" ref="pmkpi.deptoverallmerit.DeptOverallMeritManageBOTX"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritManageBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.deptoverallmerit.DeptOverallMeritManageBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritManageBO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.bo.DeptOverallMeritManageBO">
+        <property name="deptOverallMeritManageDAO" ref="pmkpi.deptoverallmerit.DeptOverallMeritManageDAO"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritManageDAO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.dao.DeptOverallMeritManageDAO"></bean>
+    
+    
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritReportPage" class="gov.mof.fasp2.pmkpi.deptoverallmerit.page.DeptOverallMeritReportPage"></bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritReportService" class="gov.mof.fasp2.pmkpi.deptoverallmerit.service.DeptOverallMeritReportService">
+        <property name="deptOverallMeritReportBO" ref="pmkpi.deptoverallmerit.DeptOverallMeritReportBOTX"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritReportBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.deptoverallmerit.DeptOverallMeritReportBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritReportBO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.bo.DeptOverallMeritReportBO">
+        <property name="deptOverallMeritReportDAO" ref="pmkpi.deptoverallmerit.DeptOverallMeritReportDAO"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritReportDAO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.dao.DeptOverallMeritReportDAO"></bean>
+
+
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritAuditPage" class="gov.mof.fasp2.pmkpi.deptoverallmerit.page.DeptOverallMeritAuditPage"></bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritAuditService" class="gov.mof.fasp2.pmkpi.deptoverallmerit.service.DeptOverallMeritAuditService">
+        <property name="deptOverallMeritAuditBO" ref="pmkpi.deptoverallmerit.DeptOverallMeritAuditBOTX"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritAuditBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.deptoverallmerit.DeptOverallMeritAuditBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritAuditBO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.bo.DeptOverallMeritAuditBO">
+        <property name="deptOverallMeritReportDAO" ref="pmkpi.deptoverallmerit.DeptOverallMeritReportDAO"></property>
+    </bean>
+    
+    
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritQueryPage" class="gov.mof.fasp2.pmkpi.deptoverallmerit.page.DeptOverallMeritQueryPage"></bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritQueryService" class="gov.mof.fasp2.pmkpi.deptoverallmerit.service.DeptOverallMeritQueryService">
+        <property name="deptOverallMeritQueryBO" ref="pmkpi.deptoverallmerit.DeptOverallMeritQueryBOTX"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritQueryBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.deptoverallmerit.DeptOverallMeritQueryBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptOverallMeritQueryBO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.bo.DeptOverallMeritQueryBO">
+        <property name="deptOverallMeritReportDAO" ref="pmkpi.deptoverallmerit.DeptOverallMeritReportDAO"></property>
+    </bean>
+
+    <bean id="pmkpi.deptoverallmerit.tab.DeptScoreService" class="gov.mof.fasp2.pmkpi.deptoverallmerit.tab.DeptScoreService">
+        <property name="deptScoreBO" ref="pmkpi.deptoverallmerit.DeptScoreBOTX"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptScoreBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.deptoverallmerit.DeptScoreBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptScoreBO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.tab.DeptScoreBO">
+        <property name="deptScoreDAO" ref="pmkpi.deptoverallmerit.DeptScoreDAO"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.DeptScoreDAO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.tab.DeptScoreDAO"></bean>
+    
+    <bean id="pmkpi.deptoverallmerit.tab.WorkContentService" class="gov.mof.fasp2.pmkpi.deptoverallmerit.tab.WorkContentService">
+        <property name="workContentBO" ref="pmkpi.deptoverallmerit.WorkContentBOTX"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.WorkContentBOTX" parent="fasp2TxProxy">
+        <property name="target">
+            <ref bean="pmkpi.deptoverallmerit.WorkContentBO" />
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.WorkContentBO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.tab.WorkContentBO">
+        <property name="workContentDAO" ref="pmkpi.deptoverallmerit.WorkContentDAO"></property>
+    </bean>
+    <bean id="pmkpi.deptoverallmerit.WorkContentDAO" class="gov.mof.fasp2.pmkpi.deptoverallmerit.tab.WorkContentDAO"></bean>
+
+</beans>

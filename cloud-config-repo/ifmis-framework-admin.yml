@@ -1,0 +1,6 @@
+#通用配置:管理客户端
+#测试：http://config:8880/admin/dev
+server:
+  port: 8082
+
+zone.name: zone-1

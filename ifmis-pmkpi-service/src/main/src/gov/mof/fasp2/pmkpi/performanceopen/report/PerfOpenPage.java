@@ -1,0 +1,35 @@
+package gov.mof.fasp2.pmkpi.performanceopen.report;
+
+import gov.mof.fasp2.pmkpi.common.PmkpiPage;
+import gov.mof.fasp2.pmkpi.perfutil.PerfServiceFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+
+/**
+ * @author zhangxutao
+ * @version 1.0
+ * @description: TODO
+ * @date 2023/4/18 10:30
+ */
+public class PerfOpenPage extends PmkpiPage {
+
+    /**
+     * 绩效公开填报
+     * @param request -- 请求
+     * @param response -- 响应
+     * @param config
+     * @return
+     * @throws Exception
+     */
+    public Map index(HttpServletRequest request, HttpServletResponse response, Map config) throws Exception {
+        PerfOpenBO perfOpenBO  = (PerfOpenBO) PerfServiceFactory.getBean("pmkpi.performanceopen.PerfOpenBOTX");
+        String menuId = request.getParameter("menuId");
+        request.setAttribute("leftconfig", perfOpenBO.getTraceLeftTree(menuId));
+        config.put("left", "lefttree");
+        this.getHeadTitle(config,menuId);
+        this.waitDoAction(request,response,config);
+        return config;
+    }
+}

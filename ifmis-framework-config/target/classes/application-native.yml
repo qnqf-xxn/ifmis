@@ -1,0 +1,11 @@
+spring:
+  profiles: native  # 配置使用本地储存 D:/IdeaProjects_2019/ifmis-spring-cloud/cloud-config-repo/trunk
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: D:/idea/ifmis-ty4.1/pmkpi/cloud-config-repo
+      allowOverride: false
+      overrideNone: false
+      overrideSystemProperties: false
+

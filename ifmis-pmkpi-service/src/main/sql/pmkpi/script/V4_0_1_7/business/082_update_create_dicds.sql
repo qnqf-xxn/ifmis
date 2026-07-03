@@ -1,0 +1,8 @@
+begin
+  
+DELETE FROM  Bus_t_Diccolumn t WHERE t.tablecode='PERF_PROJECT_INFO' and t.columncode='CREATER';
+
+insert into Bus_t_Diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, '61006100UEw5VQ8y', null, '0', 'CREATER', '1', null, null, 'BCB2D3DC43BA9ECBE053470A050A6189', 'CREATER', 'PERF_PROJECT_INFO', 'Ω®µ•»À', 'S', '32', null, 1, 1, null, sysdate);
+
+

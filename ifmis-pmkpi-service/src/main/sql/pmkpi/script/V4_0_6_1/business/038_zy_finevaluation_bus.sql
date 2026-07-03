@@ -1,0 +1,8 @@
+begin
+  
+delete from bus_t_diccolumn where tablecode = 'PERF_T_FINEVALUATION' and columncode = 'EVALUATEAREA';
+insert into bus_t_diccolumn (DEID, CSID, EXP, ISSYS, DBCOLUMNCODE, ISUSES, YEAR, PROVINCE, COLUMNID, COLUMNCODE, TABLECODE, NAME, DATATYPE, DATALENGTH, SCALE, VERSION, NULLABLE, DEFAULTVALUE, DBVERSION)
+values (null, 'EVALUATEAREA', null, '1', 'EVALUATEAREA', '1', '2016', '87', 'EDCA29FB8AFC1D5C6BB1822BAFE9F1E9', 'EVALUATEAREA', 'PERF_T_FINEVALUATION', '∆¿º€¡Ï”Ú', 'S', '40', null, 1, 1, null, sysdate);
+
+
+

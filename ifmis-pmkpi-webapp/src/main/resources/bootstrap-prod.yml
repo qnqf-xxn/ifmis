@@ -1,0 +1,88 @@
+spring:
+  profiles: prod
+  boot:
+    admin:
+      client:
+        enabled: false
+  zipkin:
+    enabled: false
+  cloud:
+    config:
+      enabled: false
+  security:
+    user:
+      name: user
+      password: password
+      roles: SUPERUSER
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 3000MB # 上传一个文件最大值,默认1Mb
+      max-request-size: 3000MB # 上传多个文件最大值,50Mb,默认10Mb
+server:
+  servlet:
+    jsp:
+      init-parameters:
+        development: true #修改jsp页面立即生效
+    session:
+      timeout: 3600s
+  tomcat:
+    basedir: .
+    uri-encoding: UTF-8
+management:
+  # 设置端点是否可用 默认只有shutdown可用
+  enabled-by-default: true
+  endpoints:
+    web:
+      # 设置是否暴露端点 默认只有health和info可见
+      exposure:
+        # 包括所有端点
+        include: '*'  # 注意需要添加引号
+  endpoint:
+    health:
+      show-details: ALWAYS
+    logfile:
+      enabled: true #可在线查看日志
+    shutdown:
+      enabled: true #客户端开启停止服务端点
+      sensitive: true  #禁用密码验证
+  security:
+    enabled: false #SpringBoot 1.5以后的版本都默认开启端点保护
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    lease-expiration-duration-in-seconds: 30 # 续约更新时间间隔（默认30秒）#服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除,注意，EurekaServer一定要设置eureka.server.eviction-interval-timer-in-ms否则这个配置无效，这个配置一般为服务刷新时间配置的三倍
+    lease-renewal-interval-in-seconds: 10 # 续约到期时间（默认90秒）服务刷新时间配置，每隔这个时间会主动心跳一次
+info:
+  app:
+    name: ${spring.application.name}
+    java:
+      version: ${java.version}
+feign:
+  hystrix:
+    enabled: true
+#ribbon的默认超时配置,这个暂时也不生效
+ribbon:
+  ReadTimeout: 3600000
+  ConnectTimeout: 3600000
+  # 同一台实例最大重试次数,不包括首次调用
+  MaxAutoRetries: 0
+  # 重试负载均衡其他的实例最大重试次数,不包括首次server
+  MaxAutoRetriesNextServer: 0
+  # 是否所有操作都重试，POST请求注意多次提交错误。
+  # 默认false，设定为false的话，只有get请求会重试
+  OkToRetryOnAllOperations: false
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3600000

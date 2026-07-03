@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2915809b-d783-44aa-9ab6-f37fbc629990" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/.idea/$PROJECT_FILE$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/lib.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/rq_report.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/qaplug_profiles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hqbpmn备份的副本.jar" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2AvMihiFnouWqCCEVN6yWFfmJwT" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/wangshuzhe/xckj/项目/工作流/框架lib包/lib&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="2915809b-d783-44aa-9ab6-f37fbc629990" name="变更" comment="" />
+      <created>1655885734309</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655885734309</updated>
+      <workItem from="1655885735639" duration="226000" />
+      <workItem from="1664436604568" duration="489000" />
+      <workItem from="1678947425038" duration="40000" />
+      <workItem from="1678949646775" duration="630000" />
+      <workItem from="1678957332620" duration="609000" />
+      <workItem from="1679020015802" duration="153000" />
+      <workItem from="1679021118702" duration="46000" />
+      <workItem from="1679032830229" duration="23000" />
+      <workItem from="1679035786879" duration="686000" />
+      <workItem from="1679386214124" duration="132000" />
+      <workItem from="1679456034295" duration="4000" />
+      <workItem from="1680225995506" duration="334000" />
+      <workItem from="1681182865615" duration="1248000" />
+      <workItem from="1681184307547" duration="619000" />
+      <workItem from="1681199136062" duration="320000" />
+      <workItem from="1681885278620" duration="735000" />
+      <workItem from="1681971777309" duration="33000" />
+      <workItem from="1681973913352" duration="15000" />
+      <workItem from="1681976871089" duration="667000" />
+      <workItem from="1682060465030" duration="33000" />
+      <workItem from="1682060569516" duration="862000" />
+      <workItem from="1682230830795" duration="162000" />
+      <workItem from="1682415772861" duration="94000" />
+      <workItem from="1683168363629" duration="19000" />
+      <workItem from="1683171291253" duration="21000" />
+      <workItem from="1683682121309" duration="377000" />
+      <workItem from="1683860043048" duration="289000" />
+      <workItem from="1687663125434" duration="140000" />
+      <workItem from="1690877446273" duration="53000" />
+      <workItem from="1690880777827" duration="28000" />
+      <workItem from="1690958249637" duration="276000" />
+      <workItem from="1690960841135" duration="17000" />
+      <workItem from="1690962023815" duration="210000" />
+      <workItem from="1692169824887" duration="24000" />
+      <workItem from="1692169854638" duration="114000" />
+      <workItem from="1692171753800" duration="140000" />
+      <workItem from="1692175176725" duration="102000" />
+      <workItem from="1692236330241" duration="3000" />
+      <workItem from="1692241996769" duration="26000" />
+    </task>
+    <task id="LOCAL-00001" summary="查看待办节点的候选用户">
+      <created>1678947451032</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678947451032</updated>
+    </task>
+    <task id="LOCAL-00002" summary="解决启动报错">
+      <created>1678949678024</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678949678024</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1">
+      <created>1678957342064</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678957342064</updated>
+    </task>
+    <task id="LOCAL-00004" summary="所有节点都查询可操作用户">
+      <created>1679020105025</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679020105025</updated>
+    </task>
+    <task id="LOCAL-00005" summary="新增一列候选人">
+      <created>1679021162078</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679021162086</updated>
+    </task>
+    <task id="LOCAL-00006" summary="候选人添加注释">
+      <created>1679032847022</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679032847022</updated>
+    </task>
+    <task id="LOCAL-00007" summary="取消工作流代码变更">
+      <created>1679035881026</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679035881026</updated>
+    </task>
+    <task id="LOCAL-00008" summary="16110需求">
+      <created>1679386344023</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679386344023</updated>
+    </task>
+    <task id="LOCAL-00009" summary="还原工作流代码">
+      <created>1680226328026</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1680226328026</updated>
+    </task>
+    <task id="LOCAL-00010" summary="工作流结转改动">
+      <created>1681184328028</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681184328028</updated>
+    </task>
+    <task id="LOCAL-00011" summary="工作流结转只结转有效单据的模板">
+      <created>1681199163034</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1681199163034</updated>
+    </task>
+    <task id="LOCAL-00012" summary="工作流查询待办用户时返回节点的配置信息，配置角色返回角色，配置用户返回用户">
+      <created>1681885415024</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681885415024</updated>
+    </task>
+    <task id="LOCAL-00013" summary="工作流 节点添加扩展属性和菜单关系">
+      <created>1681971807032</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1681971807032</updated>
+    </task>
+    <task id="LOCAL-00014" summary="去掉agency和division">
+      <created>1681973926022</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681973926022</updated>
+    </task>
+    <task id="LOCAL-00015" summary="back类型的连接线不在审核情况的考虑范围">
+      <created>1681976892033</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681976892033</updated>
+    </task>
+    <task id="LOCAL-00016" summary="工作流查看单据对应菜单调整">
+      <created>1682060495026</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682060495026</updated>
+    </task>
+    <task id="LOCAL-00017" summary="还原工作流">
+      <created>1682060822022</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1682060822022</updated>
+    </task>
+    <task id="LOCAL-00018" summary="工作流查询审核情况">
+      <created>1682230991028</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1682230991028</updated>
+    </task>
+    <task id="LOCAL-00019" summary="还原工作流">
+      <created>1682415863027</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1682415863027</updated>
+    </task>
+    <task id="LOCAL-00020" summary="查看工作流待办">
+      <created>1683168380032</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1683168380032</updated>
+    </task>
+    <task id="LOCAL-00021" summary="更改unify-service.xml">
+      <created>1683171310027</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1683171310027</updated>
+    </task>
+    <task id="LOCAL-00022" summary="业务发版，还原工作流">
+      <created>1683682353027</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1683682353027</updated>
+    </task>
+    <task id="LOCAL-00023" summary="工作流还原">
+      <created>1683682497027</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1683682497027</updated>
+    </task>
+    <task id="LOCAL-00024" summary="工作流添加菜单">
+      <created>1683860142033</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1683860142033</updated>
+    </task>
+    <task id="LOCAL-00025" summary="批处理报错问题">
+      <option name="closed" value="true" />
+      <created>1690877498029</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1690877498029</updated>
+    </task>
+    <task id="LOCAL-00026" summary="批处理超过1000条报错">
+      <option name="closed" value="true" />
+      <created>1690880803033</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1690880803033</updated>
+    </task>
+    <task id="LOCAL-00027" summary="删除批量报错">
+      <option name="closed" value="true" />
+      <created>1690958316030</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1690958316030</updated>
+    </task>
+    <task id="LOCAL-00028" summary="批量删除报错">
+      <option name="closed" value="true" />
+      <created>1690960856032</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1690960856032</updated>
+    </task>
+    <task id="LOCAL-00029" summary="批处理删除报错">
+      <option name="closed" value="true" />
+      <created>1690962049034</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1690962049034</updated>
+    </task>
+    <task id="LOCAL-00030" summary="添加接口日志输出">
+      <option name="closed" value="true" />
+      <created>1692169966023</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1692169966023</updated>
+    </task>
+    <task id="LOCAL-00031" summary="变更">
+      <option name="closed" value="true" />
+      <created>1692175230031</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1692175230031</updated>
+    </task>
+    <task id="LOCAL-00032" summary="使用xml方式注入切面">
+      <option name="closed" value="true" />
+      <created>1692242013031</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1692242013031</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="取消工作流代码变更" />
+    <MESSAGE value="16110需求" />
+    <MESSAGE value="还原工作流代码" />
+    <MESSAGE value="工作流结转改动" />
+    <MESSAGE value="工作流结转只结转有效单据的模板" />
+    <MESSAGE value="工作流查询待办用户时返回节点的配置信息，配置角色返回角色，配置用户返回用户" />
+    <MESSAGE value="工作流 节点添加扩展属性和菜单关系" />
+    <MESSAGE value="去掉agency和division" />
+    <MESSAGE value="back类型的连接线不在审核情况的考虑范围" />
+    <MESSAGE value="工作流查看单据对应菜单调整" />
+    <MESSAGE value="工作流查询审核情况" />
+    <MESSAGE value="还原工作流" />
+    <MESSAGE value="查看工作流待办" />
+    <MESSAGE value="更改unify-service.xml" />
+    <MESSAGE value="业务发版，还原工作流" />
+    <MESSAGE value="工作流还原" />
+    <MESSAGE value="工作流添加菜单" />
+    <MESSAGE value="批处理报错问题" />
+    <MESSAGE value="批处理超过1000条报错" />
+    <MESSAGE value="删除批量报错" />
+    <MESSAGE value="批量删除报错" />
+    <MESSAGE value="批处理删除报错" />
+    <MESSAGE value="添加接口日志输出" />
+    <MESSAGE value="变更" />
+    <MESSAGE value="使用xml方式注入切面" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用xml方式注入切面" />
+  </component>
+</project>

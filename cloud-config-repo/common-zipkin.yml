@@ -1,0 +1,15 @@
+spring:
+  #============================== ZIPKIN 调用链，开发时可注掉 ==================================
+  zipkin:
+    # zipkin的地址：通过真实IP地址访问
+    base-url: http://${ZIPKIN_SERVER:127.0.0.1}:${ZIPKIN_SERVER_PORT:9411}
+    #通过服务名访问
+    #base-url: http://chainmonitor/
+    enabled: true
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      #设置采样率，为了测试设置100%采集，设置为1.0
+      probability: 1.0  #zipkin采集率  0.1表示 10%采集率
